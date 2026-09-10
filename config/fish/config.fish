@@ -23,6 +23,18 @@ if test -f ~/.config/fish/alias.fish
     source ~/.config/fish/alias.fish
 end
 
+# The nix installer writes its shell hook into the sysconfdir of whichever fish
+# existed at install time, which here was homebrew's, at
+# /opt/homebrew/etc/fish/conf.d/nix.fish. This fish comes from the nix profile,
+# so its sysconfdir is inside the store and that hook is never read. Source the
+# profile directly instead. It is what puts `nix` itself on PATH, since nix
+# lives in /nix/var/nix/profiles/default/bin rather than ~/.nix-profile/bin, and
+# it also sets NIX_SSL_CERT_FILE and NIX_PROFILES. It guards internally against
+# running twice, so re-sourcing this file is safe.
+if test -f /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish
+    source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish
+end
+
 # fish_add_path is idempotent and silently skips directories that do not exist,
 # so re-sourcing this file never stacks duplicate entries, and a machine without
 # a given tool gets no stray entry. --global keeps these out of fish_variables,
