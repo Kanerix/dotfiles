@@ -3,14 +3,20 @@
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
-  outputs = { self, nixpkgs }:
+  outputs =
+    { self, nixpkgs }:
     let
-      systems = [ "aarch64-darwin" "x86_64-darwin" "aarch64-linux" "x86_64-linux" ];
-      forAllSystems = f:
-        nixpkgs.lib.genAttrs systems (system: f nixpkgs.legacyPackages.${system});
+      systems = [
+        "aarch64-darwin"
+        "x86_64-darwin"
+        "aarch64-linux"
+        "x86_64-linux"
+      ];
+      forAllSystems = f: nixpkgs.lib.genAttrs systems (system: f nixpkgs.legacyPackages.${system});
     in
     {
-      packages = forAllSystems (pkgs:
+      packages = forAllSystems (
+        pkgs:
         let
           # Grouped so a category can be dropped, or moved to a host-specific
           # profile, without untangling one long list.
@@ -103,7 +109,10 @@
 
           cliTools = pkgs.buildEnv {
             name = "cli-tools";
-            extraOutputsToInstall = [ "man" "doc" ];
+            extraOutputsToInstall = [
+              "man"
+              "doc"
+            ];
             paths =
               textAndData
               ++ filesAndArchives
@@ -119,6 +128,7 @@
         {
           cli-tools = cliTools;
           default = cliTools;
-        });
+        }
+      );
     };
 }
