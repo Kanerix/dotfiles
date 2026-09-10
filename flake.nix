@@ -104,7 +104,7 @@
           ];
 
           shellSession = with pkgs; [
-            fish # the shell itself, was coming from Homebrew (fish, fish_indent)
+            fish # the shell itself (fish, fish_indent)
             bash # macOS is stuck on 3.2 for GPLv3 reasons (bash, needs a #!/usr/bin/env bash shebang)
             skim # fzf (sk, sk-tmux)
             zoxide # cd (your config.fish inits it with --cmd=cd, so it *is* cd)

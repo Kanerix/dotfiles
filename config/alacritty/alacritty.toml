@@ -20,4 +20,4 @@ bold = { family = "RecMonoCasual Nerd Font Mono", style = "Regular" }
 bold_italic = { family = "RecMonoCasual Nerd Font Mono", style = "Regular" }
 
 [terminal]
-shell = "/opt/homebrew/bin/fish"
+shell = "/Users/daekjo/.nix-profile/bin/fish"
