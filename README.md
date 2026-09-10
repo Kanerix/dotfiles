@@ -6,10 +6,15 @@ entry instead of 28 separate ones.
 
 ## Install on a new machine
 
-Nix must be installed with `nix-command` and `flakes` enabled.
+`config/nix/nix.conf` enables `nix-command` and `flakes`, but `just link` is
+what puts it in place and `just` itself comes from this flake. So the first
+install has to pass the features on the command line, once:
 
     git clone <this repo> ~/Projects/dotfiles
-    nix profile install ~/Projects/dotfiles#cli-tools
+    nix --extra-experimental-features 'nix-command flakes' profile install ~/Projects/dotfiles#cli-tools
+    just link
+
+After `just link` the flag is no longer needed, here or in any other repo.
 
 The tools do not replace the originals. `grep` and `ls` still work, the new ones
 sit alongside them under their own names.
