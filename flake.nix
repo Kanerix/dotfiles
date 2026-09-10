@@ -129,6 +129,7 @@
             choose # cut, awk fields (choose)
             jaq # jq (jaq)
             jless # less, for JSON (jless)
+            xan # xsv, csvkit, csvlens (xan, xan view to browse a file)
             glow # markdown renderer (glow)
             difftastic # diff, syntax aware (difft)
             hexyl # xxd (hexyl)
