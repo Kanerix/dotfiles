@@ -30,23 +30,24 @@
         pkgs:
         let
           # Grouped so a category can be dropped, or moved to a host-specific
-          # profile, without untangling one long list.
+          # profile, without untangling one long list. Categories are in
+          # alphabetical order so there is an obvious place to add the next one.
           #
           # Comments read: what it replaces (what you actually type). The
           # command is often not the package name.
 
-          textAndData = with pkgs; [
-            ripgrep # grep (rg)
-            fd # find (fd)
-            sd # sed (sd)
-            sad # sed across many files, interactive (sad)
-            bat # cat (bat)
-            choose # cut, awk fields (choose)
-            jaq # jq (jaq)
-            jless # less, for JSON (jless)
-            glow # markdown renderer (glow)
-            difftastic # diff, syntax aware (difft)
-            hexyl # xxd (hexyl)
+          containers = with pkgs; [
+            lazydocker # docker ps, logs and exec in a TUI (lazydocker)
+            dive # image layer explorer, shows what each layer costs (dive)
+          ];
+
+          devWorkflow = with pkgs; [
+            just # make (just)
+            uv # pip, venv, pyenv, poetry (uv, uvx)
+            rustup # rust toolchains (rustup, plus cargo and rustc shims)
+            watchexec # entr (watchexec)
+            hyperfine # time, for benchmarking (hyperfine)
+            tokei # cloc (tokei)
           ];
 
           filesAndArchives = with pkgs; [
@@ -57,12 +58,23 @@
             trash-cli # rm, recoverable (trash-put, trash-list, trash-restore)
           ];
 
-          systemAndProcess = with pkgs; [
-            procs # ps (procs)
-            bottom # top (btm)
-            dust # du (dust)
-            duf # df (duf)
-            viddy # watch (viddy)
+          gitTools = with pkgs; [
+            git # was inherited from the host (git, ships git-credential-osxkeychain)
+            delta # git pager (no command, set it as core.pager in gitconfig)
+            gitui # git TUI (gitui)
+            lazygit # git TUI, the other one (lazygit)
+            git-cliff # changelog from conventional commits (git cliff)
+            gh # GitHub CLI (gh)
+            jujutsu # git-compatible VCS (jj)
+            gitleaks # secret scanning (gitleaks)
+          ];
+
+          media = with pkgs; [
+            # The headless build, deliberately: it is the exact derivation yazi
+            # already pulls in for previews, so this only links the binaries
+            # rather than adding a second ffmpeg. It still has videotoolbox,
+            # x264, x265 and aac; the only real loss is ffplay.
+            ffmpeg-headless # video and audio transcoding (ffmpeg, ffprobe)
           ];
 
           network = with pkgs; [
@@ -70,6 +82,21 @@
             gping # ping (gping)
             doggo # dig (doggo)
             bandwhich # iftop, per-process network usage (bandwhich)
+          ];
+
+          nixTooling = with pkgs; [
+            nixfmt # formatter (nixfmt)
+            nil # Nix LSP (nil, spoken to by the editor, not by hand)
+            statix # linter (statix check)
+            deadnix # dead code (deadnix)
+            nix-tree # closure explorer (nix-tree)
+            nvd # diff generations before switching (nvd diff)
+          ];
+
+          secrets = with pkgs; [
+            age # file encryption (age, age-keygen)
+            sops # encrypted config kept in-repo (sops)
+            _1password-cli # vault access from the shell (op)
           ];
 
           shellSession = with pkgs; [
@@ -85,52 +112,26 @@
             nix-direnv # no command, source its direnvrc from ~/.config/direnv/direnvrc
           ];
 
-          devWorkflow = with pkgs; [
-            just # make (just)
-            uv # pip, venv, pyenv, poetry (uv, uvx)
-            rustup # rust toolchains (rustup, plus cargo and rustc shims)
-            watchexec # entr (watchexec)
-            hyperfine # time, for benchmarking (hyperfine)
-            tokei # cloc (tokei)
+          systemAndProcess = with pkgs; [
+            procs # ps (procs)
+            bottom # top (btm)
+            dust # du (dust)
+            duf # df (duf)
+            viddy # watch (viddy)
           ];
 
-          gitTools = with pkgs; [
-            git # was inherited from the host (git, ships git-credential-osxkeychain)
-            delta # git pager (no command, set it as core.pager in gitconfig)
-            gitui # git TUI (gitui)
-            lazygit # git TUI, the other one (lazygit)
-            git-cliff # changelog from conventional commits (git cliff)
-            gh # GitHub CLI (gh)
-            jujutsu # git-compatible VCS (jj)
-            gitleaks # secret scanning (gitleaks)
-          ];
-
-          nixTooling = with pkgs; [
-            nixfmt # formatter (nixfmt)
-            nil # Nix LSP (nil, spoken to by the editor, not by hand)
-            statix # linter (statix check)
-            deadnix # dead code (deadnix)
-            nix-tree # closure explorer (nix-tree)
-            nvd # diff generations before switching (nvd diff)
-          ];
-
-          media = with pkgs; [
-            # The headless build, deliberately: it is the exact derivation yazi
-            # already pulls in for previews, so this only links the binaries
-            # rather than adding a second ffmpeg. It still has videotoolbox,
-            # x264, x265 and aac; the only real loss is ffplay.
-            ffmpeg-headless # video and audio transcoding (ffmpeg, ffprobe)
-          ];
-
-          containers = with pkgs; [
-            lazydocker # docker ps, logs and exec in a TUI (lazydocker)
-            dive # image layer explorer, shows what each layer costs (dive)
-          ];
-
-          secrets = with pkgs; [
-            age # file encryption (age, age-keygen)
-            sops # encrypted config kept in-repo (sops)
-            _1password-cli # vault access from the shell (op)
+          textAndData = with pkgs; [
+            ripgrep # grep (rg)
+            fd # find (fd)
+            sd # sed (sd)
+            sad # sed across many files, interactive (sad)
+            bat # cat (bat)
+            choose # cut, awk fields (choose)
+            jaq # jq (jaq)
+            jless # less, for JSON (jless)
+            glow # markdown renderer (glow)
+            difftastic # diff, syntax aware (difft)
+            hexyl # xxd (hexyl)
           ];
 
           cliTools = pkgs.buildEnv {
@@ -140,17 +141,17 @@
               "doc"
             ];
             paths =
-              textAndData
-              ++ filesAndArchives
-              ++ systemAndProcess
-              ++ network
-              ++ shellSession
+              containers
               ++ devWorkflow
+              ++ filesAndArchives
               ++ gitTools
-              ++ nixTooling
               ++ media
-              ++ containers
-              ++ secrets;
+              ++ network
+              ++ nixTooling
+              ++ secrets
+              ++ shellSession
+              ++ systemAndProcess
+              ++ textAndData;
           };
         in
         {
