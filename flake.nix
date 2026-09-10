@@ -43,6 +43,7 @@
 
           devWorkflow = with pkgs; [
             just # make (just)
+            devenv # per-project dev shells and services (devenv, pairs with direnv)
             uv # pip, venv, pyenv, poetry (uv, uvx)
             rustup # rust toolchains (rustup, plus cargo and rustc shims)
             watchexec # entr (watchexec)
