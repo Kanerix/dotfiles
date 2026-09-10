@@ -1,0 +1,12 @@
+result
+result-*
+.direnv/
+
+# macOS
+.DS_Store
+
+# Machine-local state that fish rewrites itself. Never track this.
+config/fish/fish_variables
+
+# Backups left behind by `just link`
+*.backup-*
