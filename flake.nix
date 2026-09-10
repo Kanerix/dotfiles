@@ -12,7 +12,18 @@
         "aarch64-linux"
         "x86_64-linux"
       ];
-      forAllSystems = f: nixpkgs.lib.genAttrs systems (system: f nixpkgs.legacyPackages.${system});
+      forAllSystems =
+        f:
+        nixpkgs.lib.genAttrs systems (
+          system:
+          f (
+            import nixpkgs {
+              inherit system;
+              # 1password-cli is unfree.
+              config.allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) [ "1password-cli" ];
+            }
+          )
+        );
     in
     {
       packages = forAllSystems (
@@ -77,6 +88,7 @@
           devWorkflow = with pkgs; [
             just # make (just)
             uv # pip, venv, pyenv, poetry (uv, uvx)
+            rustup # rust toolchains (rustup, plus cargo and rustc shims)
             watchexec # entr (watchexec)
             hyperfine # time, for benchmarking (hyperfine)
             tokei # cloc (tokei)
@@ -102,9 +114,23 @@
             nvd # diff generations before switching (nvd diff)
           ];
 
+          media = with pkgs; [
+            # The headless build, deliberately: it is the exact derivation yazi
+            # already pulls in for previews, so this only links the binaries
+            # rather than adding a second ffmpeg. It still has videotoolbox,
+            # x264, x265 and aac; the only real loss is ffplay.
+            ffmpeg-headless # video and audio transcoding (ffmpeg, ffprobe)
+          ];
+
+          containers = with pkgs; [
+            lazydocker # docker ps, logs and exec in a TUI (lazydocker)
+            dive # image layer explorer, shows what each layer costs (dive)
+          ];
+
           secrets = with pkgs; [
             age # file encryption (age, age-keygen)
             sops # encrypted config kept in-repo (sops)
+            _1password-cli # vault access from the shell (op)
           ];
 
           cliTools = pkgs.buildEnv {
@@ -122,6 +148,8 @@
               ++ devWorkflow
               ++ gitTools
               ++ nixTooling
+              ++ media
+              ++ containers
               ++ secrets;
           };
         in
