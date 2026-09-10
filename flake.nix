@@ -69,6 +69,10 @@
             gitleaks # secret scanning (gitleaks)
           ];
 
+          math = with pkgs; [
+            numbat # bc, units (numbat, bare numbat opens a REPL)
+          ];
+
           media = with pkgs; [
             # The headless build, deliberately: it is the exact derivation yazi
             # already pulls in for previews, so this only links the binaries
@@ -146,6 +150,7 @@
               ++ devWorkflow
               ++ filesAndArchives
               ++ gitTools
+              ++ math
               ++ media
               ++ network
               ++ nixTooling
