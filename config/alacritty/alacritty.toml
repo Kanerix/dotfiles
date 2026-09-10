@@ -18,12 +18,3 @@ normal = { family = "RecMonoCasual Nerd Font Mono", style = "Regular" }
 italic = { family = "RecMonoCasual Nerd Font Mono", style = "Regular" }
 bold = { family = "RecMonoCasual Nerd Font Mono", style = "Regular" }
 bold_italic = { family = "RecMonoCasual Nerd Font Mono", style = "Regular" }
-
-# No [terminal] shell setting on purpose. Alacritty falls back to $SHELL, and
-# the login shell is already nix fish. Setting it here would mean hardcoding an
-# absolute /Users/<name>/ path, and this file is shared across machines with
-# different usernames, so it breaks on whichever machine it was not written on.
-#
-# On a new machine, instead of editing this file:
-#     echo ~/.nix-profile/bin/fish | sudo tee -a /etc/shells
-#     chsh -s ~/.nix-profile/bin/fish
