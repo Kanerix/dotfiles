@@ -114,7 +114,7 @@
             zellij # tmux (zellij)
             tealdeer # tldr (tldr, run tldr --update once to fill the cache)
             direnv # per-project environments (direnv allow, then automatic)
-            nix-direnv # no command, source its direnvrc from ~/.config/direnv/direnvrc
+            nix-direnv # no command, sourced by config/direnv/direnvrc
           ];
 
           systemAndProcess = with pkgs; [
