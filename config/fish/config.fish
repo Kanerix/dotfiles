@@ -77,20 +77,6 @@ if command -q eza
     end
 end
 
-# yazi, leaving the shell in whatever directory you browsed to.
-# `builtin cd` because zoxide replaces cd below.
-if command -q yazi
-    function y --description 'yazi, then cd to where it left off'
-        set -l tmp (mktemp -t yazi-cwd.XXXXXX)
-        yazi $argv --cwd-file=$tmp
-        set -l cwd (command cat -- $tmp)
-        if test -n "$cwd"; and test "$cwd" != "$PWD"
-            builtin cd -- $cwd
-        end
-        command rm -f -- $tmp
-    end
-end
-
 # Safer rm, when trash-cli is around. Named separately rather than shadowing rm,
 # so muscle memory and scripts keep the real thing.
 if command -q trash-put
@@ -115,10 +101,6 @@ if status is-interactive
     else
         __source_if fzf --fish
     end
-
-    # atuin is deliberately last. Fuzzy finders bind ctrl-r as well, and the
-    # binding installed last is the one that wins.
-    __source_if atuin init fish
 
     # Completions are deliberately not generated here. Doing so costs one
     # subprocess per tool on every shell start, which dominates startup time.

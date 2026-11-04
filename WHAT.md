@@ -1,0 +1,67 @@
+- **1Password CLI (op)** — Password-vault access.
+- **age** — File encryption.
+- **bandwhich** — Per-process network usage.
+- **Bash** — POSIX-compatible shell.
+- **bat** — Syntax-highlighted file viewer.
+- **bottom (btm)** — System monitor.
+- **Bun (bun, bunx)** — JavaScript/TypeScript runtime, package manager and bundler.
+- **choose** — Field selection.
+- **deadnix** — Unused Nix code detection.
+- **delta** — Highlighted Git diffs.
+- **devenv** — Project development environments.
+- **difftastic (difft)** — Syntax-aware diffs.
+- **direnv** — Directory-specific environments.
+- **dive** — Container image layer explorer.
+- **doggo** — DNS lookup.
+- **duf** — Filesystem usage.
+- **dust** — Directory disk usage.
+- **eza** — File and directory listings.
+- **fd** — File search.
+- **FFmpeg (headless)** — Audio and video processing.
+- **Fish** — Interactive shell.
+- **Git** — Version control.
+- **git-cliff** — Changelog generation.
+- **GitHub CLI (gh)** — GitHub access.
+- **gitleaks** — Secret scanning.
+
+- **glow** — Markdown rendering.
+- **Go (go, gofmt)** — Go compiler, formatter and tooling.
+- **gping** — Ping graphs.
+- **hexyl** — Hex viewer.
+- **hyperfine** — Command benchmarking.
+- **jaq** — JSON filtering.
+- **jless** — Interactive JSON viewer.
+- **Jujutsu (jj)** — Git-compatible version control.
+- **just** — Project task runner.
+- **lazydocker** — Terminal Docker interface.
+
+- **nil** — Nix language server.
+- **nix-direnv** — Cached Nix environments for direnv.
+- **nix-tree** — Nix dependency explorer.
+- **nixfmt** — Nix formatter.
+- **Node.js (node, npm, npx)** — JavaScript runtime and package tooling.
+- **numbat** — Unit-aware calculator.
+- **nvd** — Nix generation comparison.
+- **ouch** — Archive compression and extraction.
+- **procs** — Process listings.
+- **Python (python, python3)** — Python interpreter; use uv for project environments.
+- **ripgrep (rg)** — Text search.
+- **rustup (rustup, cargo, rustc)** — Rust toolchain manager and shims; toolchains are installed separately.
+- **sad** — Interactive search and replace.
+- **sd** — Text substitution.
+- **skim (sk)** — Fuzzy finder.
+- **SOPS** — Encrypted configuration editing.
+- **Starship** — Shell prompt.
+- **statix** — Nix linter.
+- **tealdeer (tldr)** — Concise command reference.
+- **tokei** — Source code statistics.
+- **trash-cli** — Recoverable file deletion.
+- **uv** — Python package and environment manager.
+- **viddy** — Repeated command monitoring.
+- **watchexec** — File-change command runner.
+- **xan** — CSV processing and exploration.
+- **xcp** — File copying with progress.
+- **xh** — HTTP client.
+- **Zellij** — Terminal multiplexer.
+- **Zig** — Zig compiler and C/C++ cross-compilation.
+- **zoxide** — Directory navigation.

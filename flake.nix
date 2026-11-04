@@ -4,7 +4,7 @@
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
   outputs =
-    { self, nixpkgs }:
+    { nixpkgs, ... }:
     let
       systems = [
         "aarch64-darwin"
@@ -45,7 +45,6 @@
             just # make (just)
             devenv # per-project dev shells and services (devenv, pairs with direnv)
             uv # pip, venv, pyenv, poetry (uv, uvx)
-            rustup # rust toolchains (rustup, plus cargo and rustc shims)
             watchexec # entr (watchexec)
             hyperfine # time, for benchmarking (hyperfine)
             tokei # cloc (tokei)
@@ -53,7 +52,6 @@
 
           filesAndArchives = with pkgs; [
             eza # ls, tree (eza, also installs exa for compat)
-            yazi # file manager (yazi, ya manages plugins)
             ouch # tar, unzip, gzip (ouch)
             xcp # cp, with progress (xcp)
             trash-cli # rm, recoverable (trash-put, trash-list, trash-restore)
@@ -62,12 +60,20 @@
           gitTools = with pkgs; [
             git # was inherited from the host (git, ships git-credential-osxkeychain)
             delta # git pager (no command, set it as core.pager in gitconfig)
-            gitui # git TUI (gitui)
-            lazygit # git TUI, the other one (lazygit)
+
             git-cliff # changelog from conventional commits (git cliff)
             gh # GitHub CLI (gh)
             jujutsu # git-compatible VCS (jj)
             gitleaks # secret scanning (gitleaks)
+          ];
+
+          languages = with pkgs; [
+            bun # JavaScript/TypeScript runtime, package manager and bundler (bun, bunx)
+            nodejs # Node.js runtime and npm, for tools that require Node (node, npm, npx)
+            go # Go compiler and tooling (go, gofmt)
+            python3 # Python interpreter; uv handles project environments (python, python3)
+            rustup # Rust toolchains (rustup, cargo and rustc shims; install a toolchain separately)
+            zig # Zig compiler and C/C++ cross-compilation (zig)
           ];
 
           math = with pkgs; [
@@ -75,10 +81,7 @@
           ];
 
           media = with pkgs; [
-            # The headless build, deliberately: it is the exact derivation yazi
-            # already pulls in for previews, so this only links the binaries
-            # rather than adding a second ffmpeg. It still has videotoolbox,
-            # x264, x265 and aac; the only real loss is ffplay.
+            # Headless build for transcoding; ffplay is not included.
             ffmpeg-headless # video and audio transcoding (ffmpeg, ffprobe)
           ];
 
@@ -109,7 +112,6 @@
             bash # macOS is stuck on 3.2 for GPLv3 reasons (bash, needs a #!/usr/bin/env bash shebang)
             skim # fzf (sk, sk-tmux)
             zoxide # cd (your config.fish inits it with --cmd=cd, so it *is* cd)
-            atuin # shell history (atuin, plus ctrl-r once hooked)
             starship # shell prompt (no command, it renders the prompt)
             zellij # tmux (zellij)
             tealdeer # tldr (tldr, run tldr --update once to fill the cache)
@@ -151,6 +153,7 @@
               ++ devWorkflow
               ++ filesAndArchives
               ++ gitTools
+              ++ languages
               ++ math
               ++ media
               ++ network
