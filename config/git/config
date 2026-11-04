@@ -1,0 +1,31 @@
+[core]
+    pager = delta
+
+[user]
+    email = kas@lerpz.com
+    name = Kasper Jønsson
+    signingkey = BE750149D900D665
+
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+
+[color]
+    ui = auto
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true
+
+[merge]
+    conflictstyle = zdiff3
+
+[gpg]
+    program = gpg
+
+[commit]
+    gpgsign = true
