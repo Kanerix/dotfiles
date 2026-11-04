@@ -1,87 +1,196 @@
 # Dotfiles. `just --list` to see everything.
-#
-# Config files are symlinked from config/ into ~/.config rather than
-# generated, so they stay ordinary editable files. Individual files are
-# linked, not whole directories, so that machine-local state fish writes
-# itself (fish_variables) can sit alongside tracked config.
 
 config_dir := justfile_directory() / "config"
 target_dir := env('HOME') / ".config"
+skills_dir := justfile_directory() / "skills"
+skills_target_dir := env('HOME') / ".agents/skills"
 
 # Show available recipes
 default:
     @just --list
 
-# Symlink config/ into ~/.config, backing up any real file already there
+# Symlink config files and skill directories globally, backing up real entries
 link:
     #!/usr/bin/env bash
     set -euo pipefail
     stamp="$(date +%Y%m%d-%H%M%S)"
-    cd "{{ config_dir }}"
-    find . -type f | sed 's|^\./||' | sort | while read -r rel; do
-        src="{{ config_dir }}/$rel"
-        dst="{{ target_dir }}/$rel"
-        mkdir -p "$(dirname "$dst")"
-        if [ -L "$dst" ] && [ "$(readlink "$dst")" = "$src" ]; then
-            printf '  ok        %s\n' "$rel"
-            continue
-        fi
-        if [ -L "$dst" ]; then
-            printf '  relink    %s\n' "$rel"
-            rm "$dst"
-        elif [ -e "$dst" ]; then
-            printf '  backup    %s -> %s.backup-%s\n' "$rel" "$rel" "$stamp"
-            mv "$dst" "$dst.backup-$stamp"
-        else
-            printf '  new       %s\n' "$rel"
-        fi
-        ln -s "$src" "$dst"
+    for scope in config skills; do
+        case "$scope" in
+            config) source_dir="{{ config_dir }}"; destination_dir="{{ target_dir }}" ;;
+            skills) source_dir="{{ skills_dir }}"; destination_dir="{{ skills_target_dir }}" ;;
+        esac
+        printf '\n%s -> %s\n' "$scope" "$destination_dir"
+        cd "$source_dir"
+        {
+            if [ "$scope" = config ]; then
+                find . -type f ! -name '.DS_Store'
+            else
+                find . -mindepth 1 -maxdepth 1 -type d ! -name '.DS_Store'
+            fi
+        } | sed 's|^\./||' | sort | while read -r rel; do
+            src="$source_dir/$rel"
+            dst="$destination_dir/$rel"
+            mkdir -p "$(dirname "$dst")"
+            if [ -L "$dst" ] && [ "$(readlink "$dst")" = "$src" ]; then
+                printf '  ok        %s\n' "$rel"
+                continue
+            fi
+            if [ -L "$dst" ]; then
+                printf '  relink    %s\n' "$rel"
+                rm "$dst"
+            elif [ -e "$dst" ]; then
+                printf '  backup    %s -> %s.backup-%s\n' "$rel" "$rel" "$stamp"
+                mv "$dst" "$dst.backup-$stamp"
+            else
+                printf '  new       %s\n' "$rel"
+            fi
+            ln -s "$src" "$dst"
+        done
     done
 
 # Report what is linked, what is not, and what is missing
 status:
     #!/usr/bin/env bash
     set -euo pipefail
-    cd "{{ config_dir }}"
-    find . -type f | sed 's|^\./||' | sort | while read -r rel; do
-        src="{{ config_dir }}/$rel"
-        dst="{{ target_dir }}/$rel"
-        if [ -L "$dst" ] && [ "$(readlink "$dst")" = "$src" ]; then
-            printf '  linked    %s\n' "$rel"
-        elif [ -e "$dst" ]; then
-            printf '  UNLINKED  %s (real file in place, run just link)\n' "$rel"
-        else
-            printf '  missing   %s\n' "$rel"
-        fi
+    for scope in config skills; do
+        case "$scope" in
+            config) source_dir="{{ config_dir }}"; destination_dir="{{ target_dir }}" ;;
+            skills) source_dir="{{ skills_dir }}"; destination_dir="{{ skills_target_dir }}" ;;
+        esac
+        printf '\n%s -> %s\n' "$scope" "$destination_dir"
+        cd "$source_dir"
+        {
+            if [ "$scope" = config ]; then
+                find . -type f ! -name '.DS_Store'
+            else
+                find . -mindepth 1 -maxdepth 1 -type d ! -name '.DS_Store'
+            fi
+        } | sed 's|^\./||' | sort | while read -r rel; do
+            src="$source_dir/$rel"
+            dst="$destination_dir/$rel"
+            if [ -L "$dst" ] && [ "$(readlink "$dst")" = "$src" ]; then
+                printf '  linked    %s\n' "$rel"
+            elif [ -L "$dst" ]; then
+                printf '  UNLINKED  %s (symlink points elsewhere, run just link)\n' "$rel"
+            elif [ -e "$dst" ]; then
+                printf '  UNLINKED  %s (real file in place, run just link)\n' "$rel"
+            else
+                printf '  missing   %s\n' "$rel"
+            fi
+        done
     done
 
-# Remove only the symlinks that point into this repo. Backups are left alone.
+# Check links, shell environment and optional Rust setup without changing anything
+doctor: status
+    #!/usr/bin/env bash
+    set -euo pipefail
+    printf '\nShell (this process only; existing GUI launchers may differ)\n'
+    login_shell=""
+    case "$(uname -s)" in
+        Darwin)
+            login_shell="$(dscacheutil -q user -a uid "$(id -u)" 2>/dev/null | sed -n 's/^shell: //p')" || login_shell=""
+            ;;
+        Linux)
+            if command -v getent >/dev/null 2>&1; then
+                login_shell="$(getent passwd "$(id -u)" 2>/dev/null | cut -d: -f7)" || login_shell=""
+            fi
+            ;;
+    esac
+    if [ -z "$login_shell" ]; then
+        printf '  WARN      Could not read the account login shell\n'
+    elif [ ! -f "$login_shell" ] || [ ! -x "$login_shell" ]; then
+        printf '  WARN      Account shell is not an executable file: %s\n' "$login_shell"
+    else
+        printf '  ok        Account shell: %s\n' "$login_shell"
+    fi
+    # Bash initializes its own SHELL when unset; printenv checks only the exported value.
+    if inherited_shell="$(printenv SHELL)"; then
+        if [ ! -f "$inherited_shell" ] || [ ! -x "$inherited_shell" ]; then
+            printf '  WARN      Inherited SHELL is not an executable file: %s\n' "$inherited_shell"
+        else
+            printf '  ok        Inherited SHELL: %s\n' "$inherited_shell"
+        fi
+        if [ -n "$login_shell" ] && [ "$inherited_shell" != "$login_shell" ]; then
+            printf '  WARN      SHELL differs from the account shell; this may be intentional or a stale session\n'
+        fi
+    else
+        printf '  info      SHELL is unset; Alacritty can use the account login shell\n'
+    fi
+    printf '  info      After a shell change, log out and back in; restarting a launcher alone may retain stale state\n'
+    printf '\nRust (optional)\n'
+    if rustup_path="$(command -v rustup)" && [ -f "$rustup_path" ] && [ -x "$rustup_path" ]; then
+        rustup_home="${RUSTUP_HOME:-$HOME/.rustup}"
+        found_toolchain=false
+        for toolchain in "$rustup_home"/toolchains/*; do
+            if [ -d "$toolchain" ]; then
+                found_toolchain=true
+                break
+            fi
+        done
+        if [ "$found_toolchain" = true ]; then
+            printf '  ok        Installed toolchain directories found in %s/toolchains\n' "$rustup_home"
+        else
+            printf '  optional  No Rust toolchains found in %s/toolchains; install one when needed\n' "$rustup_home"
+        fi
+    else
+        printf '  optional  rustup is not available on PATH\n'
+    fi
+
+# Remove only exact owned symlinks in both roots. Backups are left alone.
 unlink:
     #!/usr/bin/env bash
     set -euo pipefail
-    cd "{{ config_dir }}"
-    find . -type f | sed 's|^\./||' | sort | while read -r rel; do
-        src="{{ config_dir }}/$rel"
-        dst="{{ target_dir }}/$rel"
-        if [ -L "$dst" ] && [ "$(readlink "$dst")" = "$src" ]; then
-            rm "$dst"
-            printf '  removed   %s\n' "$rel"
-        fi
+    for scope in config skills; do
+        case "$scope" in
+            config) source_dir="{{ config_dir }}"; destination_dir="{{ target_dir }}" ;;
+            skills) source_dir="{{ skills_dir }}"; destination_dir="{{ skills_target_dir }}" ;;
+        esac
+        printf '\n%s -> %s\n' "$scope" "$destination_dir"
+        cd "$source_dir"
+        {
+            if [ "$scope" = config ]; then
+                # Include legacy config .DS_Store links so they can still be removed.
+                find . -type f
+            else
+                find . -mindepth 1 -maxdepth 1 -type d ! -name '.DS_Store'
+            fi
+        } | sed 's|^\./||' | sort | while read -r rel; do
+            src="$source_dir/$rel"
+            dst="$destination_dir/$rel"
+            if [ -L "$dst" ] && [ "$(readlink "$dst")" = "$src" ]; then
+                rm "$dst"
+                printf '  removed   %s\n' "$rel"
+            fi
+        done
     done
 
-# Restore the most recent backup of every file, undoing a link
+# Restore the most recent backup of config files and skill directories
 restore:
     #!/usr/bin/env bash
     set -euo pipefail
-    cd "{{ config_dir }}"
-    find . -type f | sed 's|^\./||' | sort | while read -r rel; do
-        dst="{{ target_dir }}/$rel"
-        newest="$(ls -1t "$dst".backup-* 2>/dev/null | head -1 || true)"
-        if [ -n "$newest" ]; then
-            [ -L "$dst" ] && rm "$dst"
-            mv "$newest" "$dst"
-            printf '  restored  %s\n' "$rel"
-        fi
+    for scope in config skills; do
+        case "$scope" in
+            config) source_dir="{{ config_dir }}"; destination_dir="{{ target_dir }}" ;;
+            skills) source_dir="{{ skills_dir }}"; destination_dir="{{ skills_target_dir }}" ;;
+        esac
+        printf '\n%s -> %s\n' "$scope" "$destination_dir"
+        cd "$source_dir"
+        {
+            if [ "$scope" = config ]; then
+                find . -type f ! -name '.DS_Store'
+            else
+                find . -mindepth 1 -maxdepth 1 -type d ! -name '.DS_Store'
+            fi
+        } | sed 's|^\./||' | sort | while read -r rel; do
+            dst="$destination_dir/$rel"
+            # List directory backups themselves, not their contents.
+            newest="$(ls -1dt "$dst".backup-* 2>/dev/null | head -1 || true)"
+            if [ -n "$newest" ]; then
+                [ -L "$dst" ] && rm "$dst"
+                mv "$newest" "$dst"
+                printf '  restored  %s\n' "$rel"
+            fi
+        done
     done
 
 # Check the repo for committed credentials
