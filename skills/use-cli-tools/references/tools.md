@@ -36,6 +36,7 @@ Source: the dotfiles repository's macOS Homebrew `Brewfile`, including preserved
 | node / `node`, `npm`, `npx`           | Existing Node workflows; preserve the project's package manager and lockfile.                                                                                                                                        |
 | go / `go`, `gofmt`                    | Compile/test Go and format code deterministically.                                                                                                                                                                   |
 | python / `python3`                    | Small structured-data scripts and validation; preserve the project's existing environment manager. Use uv where the project supports it; keep project dependencies separate from Homebrew's interpreter.             |
+| ruby / `ruby`, `gem`, `bundle`        | Ruby execution and gem dependencies; preserve project Ruby versions and `Gemfile.lock`. Keg-only binaries use the `bin` directory under `brew --prefix ruby` on PATH.                                                |
 | rustup / `rustup`, `cargo`, `rustc`   | Rust toolchain management and compiler/build shims; a toolchain must be installed separately. Keg-only shims need the `bin` directory under `brew --prefix rustup` on PATH. Do not assume optional components exist. |
 | zig / `zig`                           | Build/test Zig and use project-supported cross-compilation workflows.                                                                                                                                                |
 | libpq / `psql`                        | Keg-only PostgreSQL client library/tools; check PATH and connection target before database operations.                                                                                                               |
@@ -136,6 +137,7 @@ Rust toolchain. Preserve these entries when updating the shared CLI inventory.
 | ---------------------------- | -------------------------------------------------------------------------------------------- |
 | age / `age`, `age-keygen`    | Authorized file encryption; key generation/decryption needs careful handling of secrets.     |
 | gnupg / `gpg`, `gpg-agent`   | Authorized OpenPGP encryption and signing; avoid exposing private keys or decrypted secrets. |
+| pinentry-mac / `pinentry-mac` | Native macOS GPG passphrase dialog; configure its Homebrew executable path in local `gpg-agent.conf`. Never collect passphrases through agent tools. |
 | sops / `sops`                | Edit encrypted configuration through approved workflows; avoid plaintext in logs or context. |
 | 1password-cli (cask) / `op`  | Authorized secret injection into processes; avoid printing vault values.                     |
 | fish / `fish`, `fish_indent` | Fish execution and formatting; do not assume interactive initialization or aliases.          |

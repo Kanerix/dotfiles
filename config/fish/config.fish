@@ -30,6 +30,11 @@ if command -q brew
         fish_add_path --global --path $brew_prefix/bin $brew_prefix/sbin
     end
 
+    set -l ruby_prefix (command brew --prefix ruby 2>/dev/null)
+    if test -n "$ruby_prefix"
+        fish_add_path --global --path $ruby_prefix/bin
+    end
+
     # Rustup is keg-only; these shims select separately installed toolchains.
     set -l rustup_prefix (command brew --prefix rustup 2>/dev/null)
     if test -n "$rustup_prefix"

@@ -58,6 +58,7 @@ brew "node" # Node.js runtime and npm (node, npm, npx)
 brew "pnpm" # JavaScript package manager (pnpm, pnpx)
 brew "go" # Go compiler and tooling (go, gofmt)
 brew "python" # Python interpreter; uv manages project environments (python3)
+brew "ruby" # Ruby interpreter and gem tooling, keg-only (ruby, gem, bundle)
 brew "rustup" # Rust toolchain manager, keg-only (rustup, cargo, rustc shims)
 brew "zig" # Zig compiler and C/C++ cross-compilation (zig)
 
@@ -82,6 +83,7 @@ brew "sherlock" # find public social accounts by username (sherlock)
 # Secrets
 brew "age" # file encryption (age, age-keygen)
 brew "gnupg" # OpenPGP encryption and signing (gpg, gpg-agent)
+brew "pinentry-mac" # native macOS passphrase dialog for GPG (pinentry-mac)
 brew "sops" # encrypted configuration (sops)
 cask "1password-cli" # vault access from the shell (op)
 

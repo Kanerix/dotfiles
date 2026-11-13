@@ -63,11 +63,13 @@ tracks available current releases, and Rust toolchains are installed separately.
 - **numbat** — Unit-aware calculator.
 - **ouch** — Archive compression and extraction.
 - **oxvg** — SVG optimization, minification and linting.
+- **pinentry-mac** — Native macOS passphrase dialog for GPG.
 - **pnpm (pnpm, pnpx)** — JavaScript package manager with a shared dependency store.
 - **procs** — Process listings.
 - **Python (python, python3)** — Python interpreter; use uv for project environments.
 - **Recursive Mono Nerd Font** — Terminal font (cask).
 - **ripgrep (rg)** — Text search.
+- **Ruby (ruby, gem, bundle)** — Ruby interpreter and package tooling; keg-only.
 - **Ruff (ruff)** — Python linter and formatter.
 - **rustup (rustup, cargo, rustc)** — Rust toolchain manager and shims; toolchains are installed separately.
 - **sad** — Interactive search and replace.
