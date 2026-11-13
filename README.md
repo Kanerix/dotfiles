@@ -122,11 +122,13 @@ install locations, override `skills_dir` and `skills_target_dir` with `just --se
 
 ## Language toolchains
 
-The flake includes Bun, Node.js (with npm/npx), Go, Python, Rust via rustup,
-and Zig. Bun handles JavaScript/TypeScript execution and bundling; Node remains
-available for tools that specifically require it. Use `uv` for isolated Python
-project environments rather than installing packages into Nix's read-only
-Python interpreter.
+The flake includes Bun, Node.js (with npm/npx), pnpm, Go, Python, Rust via
+rustup, and Zig. Bun handles JavaScript/TypeScript execution and bundling; Node
+remains available for tools that specifically require it. Use pnpm for projects
+that use `pnpm-lock.yaml`; Nix pins the tooling, while pnpm manages project
+dependencies outside the Nix store. Use `uv` for isolated Python project
+environments rather than installing packages into Nix's read-only Python
+interpreter.
 
 Rustup supplies `cargo` and `rustc` shims, not an installed compiler toolchain.
 For a default Rust setup, run once on each machine:

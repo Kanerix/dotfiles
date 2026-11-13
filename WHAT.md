@@ -43,6 +43,7 @@
 - **numbat** — Unit-aware calculator.
 - **nvd** — Nix generation comparison.
 - **ouch** — Archive compression and extraction.
+- **pnpm (pnpm, pnpx)** — JavaScript package manager with a shared dependency store.
 - **procs** — Process listings.
 - **Python (python, python3)** — Python interpreter; use uv for project environments.
 - **ripgrep (rg)** — Text search.

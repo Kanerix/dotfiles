@@ -70,6 +70,7 @@
           languages = with pkgs; [
             bun # JavaScript/TypeScript runtime, package manager and bundler (bun, bunx)
             nodejs # Node.js runtime and npm, for tools that require Node (node, npm, npx)
+            pnpm # JavaScript package manager with a shared dependency store (pnpm, pnpx)
             go # Go compiler and tooling (go, gofmt)
             python3 # Python interpreter; uv handles project environments (python, python3)
             rustup # Rust toolchains (rustup, cargo and rustc shims; install a toolchain separately)
