@@ -1,80 +1,80 @@
 [
-	{
-		"context": "Workspace",
-		"bindings": {
-			"ctrl-h": "workspace::ActivatePaneLeft",
-			"ctrl-l": "workspace::ActivatePaneRight",
-			"ctrl-k": "workspace::ActivatePaneUp",
-			"ctrl-j": "workspace::ActivatePaneDown"
-		}
-	},
-	{
-		"context": "EmptyPane || SharedScreen",
-		"bindings": {
-			"space space": "file_finder::Toggle",
-			"space f p": "projects::OpenRecent",
-			"space a c": "agent::ToggleFocus"
-		}
-	},
-	{
-		"context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu",
-		"bindings": {
-			"shift shift": "file_finder::Toggle",
-			"space t i": "editor::ToggleInlayHints",
-			"space c z": "workspace::ToggleCenteredLayout",
-			"space a c": "agent::ToggleFocus",
-			"space d": "editor::Cut",
-			"space y": "editor::Copy",
-			"space p": "editor::Paste"
-		}
-	},
-	{
-		"context": "Editor && vim_mode == normal && !VimWaiting && !menu",
-		"bindings": {
-			"ctrl-h": "workspace::ActivatePaneLeft",
-			"ctrl-l": "workspace::ActivatePaneRight",
-			"ctrl-k": "workspace::ActivatePaneUp",
-			"ctrl-j": "workspace::ActivatePaneDown",
-			"g d": "editor::GoToDefinition",
-			"g D": "editor::GoToDefinitionSplit",
-			"g i": "editor::GoToImplementation",
-			"g I": "editor::GoToImplementationSplit",
-			"g t": "editor::GoToTypeDefinition",
-			"g T": "editor::GoToTypeDefinitionSplit"
-		}
-	},
-	{
-		"context": "Editor && vim_mode == visual && !VimWaiting && !menu",
-		"bindings": {
-			"g c": "editor::ToggleComments"
-		}
-	},
-	{
-		"context": "ProjectPanel && not_editing",
-		"bindings": {
-			"a": "project_panel::NewFile",
-			"A": "project_panel::NewDirectory",
-			"r": "project_panel::Rename",
-			"d": "project_panel::Delete",
-			"x": "project_panel::Cut",
-			"c": "project_panel::Copy",
-			"p": "project_panel::Paste",
-			"o": "project_panel::OpenPermanent"
-		}
-	},
-	{
-		"context": "Dock",
-		"bindings": {
-			"ctrl-w h": "workspace::ActivatePaneLeft",
-			"ctrl-w l": "workspace::ActivatePaneRight",
-			"ctrl-w k": "workspace::ActivatePaneUp",
-			"ctrl-w j": "workspace::ActivatePaneDown"
-		}
-	},
     {
-    "context": "AgentPanel",
-    "bindings": {
-      "cmd-w": "workspace::ToggleRightDock"
+        "context": "Workspace",
+        "bindings": {
+            "ctrl-h": "workspace::ActivatePaneLeft",
+            "ctrl-l": "workspace::ActivatePaneRight",
+            "ctrl-k": "workspace::ActivatePaneUp",
+            "ctrl-j": "workspace::ActivatePaneDown"
+        }
+    },
+    {
+        "context": "EmptyPane || SharedScreen",
+        "bindings": {
+            "space space": "file_finder::Toggle",
+            "space f p": "projects::OpenRecent",
+            "space a c": "agent::ToggleFocus"
+        }
+    },
+    {
+        "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu",
+        "bindings": {
+            "shift shift": "file_finder::Toggle",
+            "space t i": "editor::ToggleInlayHints",
+            "space c z": "workspace::ToggleCenteredLayout",
+            "space a c": "agent::ToggleFocus",
+            "space d": "editor::Cut",
+            "space y": "editor::Copy",
+            "space p": "editor::Paste"
+        }
+    },
+    {
+        "context": "Editor && vim_mode == normal && !VimWaiting && !menu",
+        "bindings": {
+            "ctrl-h": "workspace::ActivatePaneLeft",
+            "ctrl-l": "workspace::ActivatePaneRight",
+            "ctrl-k": "workspace::ActivatePaneUp",
+            "ctrl-j": "workspace::ActivatePaneDown",
+            "g d": "editor::GoToDefinition",
+            "g D": "editor::GoToDefinitionSplit",
+            "g i": "editor::GoToImplementation",
+            "g I": "editor::GoToImplementationSplit",
+            "g t": "editor::GoToTypeDefinition",
+            "g T": "editor::GoToTypeDefinitionSplit"
+        }
+    },
+    {
+        "context": "Editor && vim_mode == visual && !VimWaiting && !menu",
+        "bindings": {
+            "g c": "editor::ToggleComments"
+        }
+    },
+    {
+        "context": "ProjectPanel && not_editing",
+        "bindings": {
+            "a": "project_panel::NewFile",
+            "A": "project_panel::NewDirectory",
+            "r": "project_panel::Rename",
+            "d": "project_panel::Delete",
+            "x": "project_panel::Cut",
+            "c": "project_panel::Copy",
+            "p": "project_panel::Paste",
+            "o": "project_panel::OpenPermanent"
+        }
+    },
+    {
+        "context": "Dock",
+        "bindings": {
+            "ctrl-w h": "workspace::ActivatePaneLeft",
+            "ctrl-w l": "workspace::ActivatePaneRight",
+            "ctrl-w k": "workspace::ActivatePaneUp",
+            "ctrl-w j": "workspace::ActivatePaneDown"
+        }
+    },
+    {
+        "context": "AgentPanel",
+        "bindings": {
+            "cmd-w": "workspace::ToggleRightDock"
+        }
     }
-  }
 ]

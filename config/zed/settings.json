@@ -1,270 +1,286 @@
 {
-  "cli_default_open_behavior": "existing_window",
-  "icon_theme": {
-    "mode": "dark",
-    "light": "Zed (Default)",
-    "dark": "Zed (Default)"
-  },
-  "helix_mode": false,
-  "confirm_quit": false,
-  "vim_mode": true,
-  "relative_line_numbers": "enabled",
-  "format_on_save": "off",
-  "ui_font_family": "RecMonoCasual Nerd Font Mono",
-  "ui_font_size": 17,
-  "agent_buffer_font_size": 17,
-  "buffer_font_family": "RecMonoCasual Nerd Font",
-  "buffer_font_size": 16,
-  "buffer_font_features": {
-    "calt": false,
-  },
-  "project_panel": {
-    "dock": "left",
-  },
-  "outline_panel": {
-    "dock": "left",
-  },
-  "collaboration_panel": {
-    "dock": "left",
-  },
-  "git_panel": {
-    "dock": "left",
-  },
-  "vim": {
-    "use_system_clipboard": "never",
-  },
-  "terminal": {
-    "font_family": "RecMonoCasual Nerd Font Mono",
-    "env": {
-      "EDITOR": "zed --wait",
+    "cli_default_open_behavior": "existing_window",
+    "icon_theme": {
+        "mode": "dark",
+        "light": "Zed (Default)",
+        "dark": "Zed (Default)"
     },
-    "shell": {
-      "program": "fish",
+    "helix_mode": false,
+    "confirm_quit": false,
+    "vim_mode": true,
+    "relative_line_numbers": "enabled",
+    "format_on_save": "off",
+    "ui_font_family": "RecMonoCasual Nerd Font Mono",
+    "ui_font_size": 17,
+    "agent_buffer_font_size": 17,
+    "buffer_font_family": "RecMonoCasual Nerd Font",
+    "buffer_font_size": 16,
+    "buffer_font_features": {
+        "calt": false
     },
-  },
-  "theme": {
-    "mode": "dark",
-    "light": "One Light",
-    "dark": "Ayu Dark",
-  },
-  "indent_guides": {
-    "enabled": true,
-    "coloring": "indent_aware",
-  },
-  "tab_size": 4,
-  "hard_tabs": false,
-  "languages": {
-    "Nix": {
-      "language_servers": ["nil", "!nixd"],
+    "project_panel": {
+        "dock": "left"
     },
-    "FSharp": {
-      "show_edit_predictions": false,
+    "outline_panel": {
+        "dock": "left"
     },
-    "Python": {
-      "language_servers": ["ty", "ruff"],
-      "formatter": {
-        "language_server": {
-          "name": "ruff",
+    "collaboration_panel": {
+        "dock": "left"
+    },
+    "git_panel": {
+        "dock": "left"
+    },
+    "vim": {
+        "use_system_clipboard": "never"
+    },
+    "terminal": {
+        "font_family": "RecMonoCasual Nerd Font Mono",
+        "env": {
+            "EDITOR": "zed --wait"
         },
-      },
-    },
-    "JavaScript": {
-      "language_servers": ["!eslint"],
-      "formatter": {
-        "language_server": {
-          "name": "biome",
-        },
-      },
-      "code_actions_on_format": {
-        "source.fixAll.biome": true,
-        "source.organizeImports.biome": true,
-      },
-    },
-    "TypeScript": {
-      "language_servers": ["!eslint"],
-      "formatter": {
-        "language_server": {
-          "name": "biome",
-        },
-      },
-      "code_actions_on_format": {
-        "source.fixAll.biome": true,
-        "source.organizeImports.biome": true,
-      },
-    },
-    "TSX": {
-      "language_servers": ["!eslint"],
-      "formatter": {
-        "language_server": {
-          "name": "biome",
-        },
-      },
-      "code_actions_on_format": {
-        "source.fixAll.biome": true,
-        "source.organizeImports.biome": true,
-      },
-    },
-    "Svelte": {
-      "language_servers": ["svelte-language-server", "biome"],
-      "formatter": {
-        "language_server": {
-          "name": "biome"
+        "shell": {
+            "program": "fish"
         }
-      },
-      "code_actions_on_format": {
-        "source.fixAll.biome": true,
-        "source.organizeImports.biome": true
-      }
     },
-    "JSON": {
-      "language_servers": ["!eslint"],
-      "formatter": {
-        "language_server": {
-          "name": "biome",
+    "theme": {
+        "mode": "dark",
+        "light": "One Light",
+        "dark": "Ayu Dark"
+    },
+    "indent_guides": {
+        "enabled": true,
+        "coloring": "indent_aware"
+    },
+    "tab_size": 4,
+    "hard_tabs": false,
+    "languages": {
+        "Nix": {
+            "language_servers": ["nil", "!nixd"]
         },
-      },
-    },
-    "JSONC": {
-      "language_servers": ["!eslint"],
-      "formatter": {
-        "language_server": {
-          "name": "biome",
+        "FSharp": {
+            "show_edit_predictions": false
         },
-      },
-    },
-    "YAML": {
-      "tab_size": 2,
-      "hard_tabs": false,
-    },
-    "CSS": {
-      "language_servers": ["!eslint"],
-      "formatter": {
-        "language_server": {
-          "name": "biome",
+        "Python": {
+            "language_servers": ["ty", "ruff"],
+            "formatter": {
+                "language_server": {
+                    "name": "ruff"
+                }
+            }
         },
-      },
-    },
-    "Go": {
-      "hard_tabs": true,
-      "language_servers": ["gopls", "golangci-lint-langserver"],
-    },
-  },
-  "lsp": {
-    "vtsls": {
-      "settings": {
-        "typescript": {
-          "updateImportsOnFileMove": {
-            "enabled": "always",
-          },
+        "JavaScript": {
+            "language_servers": ["!eslint"],
+            "formatter": {
+                "language_server": {
+                    "name": "biome"
+                }
+            },
+            "code_actions_on_format": {
+                "source.fixAll.biome": true,
+                "source.organizeImports.biome": true
+            }
         },
-        "javascript": {
-          "updateImportsOnFileMove": {
-            "enabled": "always",
-          },
+        "TypeScript": {
+            "language_servers": ["!eslint"],
+            "formatter": {
+                "language_server": {
+                    "name": "biome"
+                }
+            },
+            "code_actions_on_format": {
+                "source.fixAll.biome": true,
+                "source.organizeImports.biome": true
+            }
         },
-      },
-      "enable_lsp_tasks": true,
-    },
-    "tailwindcss-language-server": {
-      "settings": {
-        "classFunctions": ["cva", "cx"],
-        "experimental": {
-          "classRegex": ["[cls|className]\\s\\:\\=\\s\"([^\"]*)"],
+        "TSX": {
+            "language_servers": ["!eslint"],
+            "formatter": {
+                "language_server": {
+                    "name": "biome"
+                }
+            },
+            "code_actions_on_format": {
+                "source.fixAll.biome": true,
+                "source.organizeImports.biome": true
+            }
         },
-      },
-    },
-    "vscode-css-language-server": {
-      "settings": {
-        "css": {
-          "lint": {
-            "unknownAtRules": "ignore",
-          },
+        "Svelte": {
+            "language_servers": ["svelte-language-server", "biome"],
+            "formatter": {
+                "language_server": {
+                    "name": "biome"
+                }
+            },
+            "code_actions_on_format": {
+                "source.fixAll.biome": true,
+                "source.organizeImports.biome": true
+            }
         },
-      },
-    },
-    "rust-analyzer": {
-      "initialization_options": {
-        "rustfmt": {
-          "extraArgs": ["+nightly"],
+        "JSON": {
+            "language_servers": ["!eslint"],
+            "formatter": {
+                "external": {
+                    "command": "fish",
+                    "arguments": [
+                        "--no-config",
+                        "-c",
+                        "set -l config_dir ~/.config; if set -q XDG_CONFIG_HOME; and test -n \"$XDG_CONFIG_HOME\"; set config_dir \"$XDG_CONFIG_HOME\"; end; biome format --config-path \"$config_dir/biome.json\" --stdin-file-path \"$config_dir/format.jsonc\""
+                    ]
+                }
+            }
         },
-        "cargo": {
-          "allTargets": true,
-          "allFeatures": true,
+        "JSONC": {
+            "language_servers": ["!eslint"],
+            "formatter": {
+                "external": {
+                    "command": "fish",
+                    "arguments": [
+                        "--no-config",
+                        "-c",
+                        "set -l config_dir ~/.config; if set -q XDG_CONFIG_HOME; and test -n \"$XDG_CONFIG_HOME\"; set config_dir \"$XDG_CONFIG_HOME\"; end; biome format --config-path \"$config_dir/biome.json\" --stdin-file-path \"$config_dir/format.jsonc\""
+                    ]
+                }
+            }
         },
-      },
+        "YAML": {
+            "tab_size": 2,
+            "hard_tabs": false
+        },
+        "CSS": {
+            "language_servers": ["!eslint"],
+            "formatter": {
+                "language_server": {
+                    "name": "biome"
+                }
+            }
+        },
+        "Go": {
+            "hard_tabs": true,
+            "language_servers": ["gopls", "golangci-lint-langserver"]
+        }
     },
-    "clangd": {
-      "initialization_options": {
-        "fallbackFlags": ["-std=c++20"],
-      },
+    "lsp": {
+        "vtsls": {
+            "settings": {
+                "typescript": {
+                    "updateImportsOnFileMove": {
+                        "enabled": "always"
+                    }
+                },
+                "javascript": {
+                    "updateImportsOnFileMove": {
+                        "enabled": "always"
+                    }
+                }
+            },
+            "enable_lsp_tasks": true
+        },
+        "tailwindcss-language-server": {
+            "settings": {
+                "classFunctions": ["cva", "cx"],
+                "experimental": {
+                    "classRegex": ["[cls|className]\\s\\:\\=\\s\"([^\"]*)"]
+                }
+            }
+        },
+        "vscode-css-language-server": {
+            "settings": {
+                "css": {
+                    "lint": {
+                        "unknownAtRules": "ignore"
+                    }
+                }
+            }
+        },
+        "rust-analyzer": {
+            "initialization_options": {
+                "rustfmt": {
+                    "extraArgs": ["+nightly"]
+                },
+                "cargo": {
+                    "allTargets": true,
+                    "allFeatures": true
+                }
+            }
+        },
+        "clangd": {
+            "initialization_options": {
+                "fallbackFlags": ["-std=c++20"]
+            }
+        },
+        "golangci-lint-langserver": {
+            "binary": {
+                "path": "golangci-lint-langserver"
+            },
+            "initialization_options": {
+                "command": [
+                    "golangci-lint",
+                    "run",
+                    "--output.json.path",
+                    "stdout",
+                    "--show-stats=false",
+                    "--issues-exit-code=1"
+                ]
+            }
+        }
     },
-    "golangci-lint-langserver": {
-      "binary": {
-        "path": "golangci-lint-langserver",
-      },
-      "initialization_options": {
-        "command": [
-          "golangci-lint",
-          "run",
-          "--output.json.path",
-          "stdout",
-          "--show-stats=false",
-          "--issues-exit-code=1",
-        ],
-      },
+    "file_types": {
+        "Dockerfile": ["Dockerfile", "Dockerfile.*"],
+        "JSON": ["json", "jsonc", "*.code-snippets"]
     },
-  },
-  "file_types": {
-    "Dockerfile": ["Dockerfile", "Dockerfile.*"],
-    "JSON": ["json", "jsonc", "*.code-snippets"],
-  },
-  "disable_ai": false,
-  "edit_predictions": {
-    "mode": "eager",
-  },
-  "agent": {
-    "dock": "right",
-    "threads_sidebar": {
-      "position": "right"
+    "disable_ai": false,
+    "edit_predictions": {
+        "mode": "eager"
     },
-    "flexible": true,
-    "sandbox_permissions": {
-      "allow_unsandboxed": true,
-      "network_hosts": []
+    "agent": {
+        "dock": "right",
+        "threads_sidebar": {
+            "position": "right"
+        },
+        "flexible": true,
+        "sandbox_permissions": {
+            "allow_unsandboxed": true,
+            "network_hosts": []
+        },
+        "tool_permissions": {
+            "default": "allow"
+        },
+        "favorite_models": [],
+        "default_model": {
+            "enable_thinking": false,
+            "provider": "egmont",
+            "model": "gpt-6.1-sol"
+        },
+        "inline_assistant_model": {
+            "provider": "openai_compatible",
+            "model": "gpt-6.1-sol"
+        }
     },
-    "tool_permissions": {
-      "default": "allow",
+    "language_models": {
+        "openai_compatible": {
+            "egmont": {
+                "api_url": "https://ai.egmont.com/gateway/v1",
+                "available_models": [
+                    {
+                        "name": "gpt-6.1-sol",
+                        "max_tokens": 128000,
+                        "capabilities": {
+                            "tools": true,
+                            "images": true,
+                            "parallel_tool_calls": false,
+                            "prompt_cache_key": false
+                        }
+                    }
+                ]
+            }
+        }
     },
-    "favorite_models": [],
-    "default_model": {
-        "enable_thinking": false,
-        "provider": "egmont",
-        "model": "gpt-6.1-sol"
-    },
-    "inline_assistant_model": {
-        "provider": "openai_compatible",
-        "model": "gpt-6.1-sol"
+    "agent_servers": {
+        "codex-acp": {
+            "type": "registry"
+        },
+        "github-copilot-cli": {
+            "type": "registry"
+        }
     }
-  },
-  "language_models": {
-    "openai_compatible": {
-      "egmont": {
-        "api_url": "https://ai.egmont.com/gateway/v1",
-        "available_models": [
-          {
-            "name": "gpt-6.1-sol",
-            "max_tokens": 128000
-          }
-        ]
-      }
-    }
-  },
-  "agent_servers": {
-    "codex-acp": {
-      "type": "registry",
-    },
-    "github-copilot-cli": {
-      "type": "registry",
-    },
-  },
 }
