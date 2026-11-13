@@ -29,7 +29,7 @@ complete -c uv -n "__fish_uv_needs_command" -l python-preference -r -f -a "only-
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_needs_command" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_needs_command" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_needs_command" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -95,7 +95,7 @@ complete -c uv -n "__fish_uv_using_subcommand auth; and not __fish_seen_subcomma
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand auth; and not __fish_seen_subcommand_from login logout token dir helper" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand auth; and not __fish_seen_subcommand_from login logout token dir helper" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand auth; and not __fish_seen_subcommand_from login logout token dir helper" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -136,14 +136,14 @@ complete -c uv -n "__fish_uv_using_subcommand auth; and not __fish_seen_subcomma
 complete -c uv -n "__fish_uv_using_subcommand auth; and __fish_seen_subcommand_from login" -s u -l username -d 'The username to use for the service' -r -f
 complete -c uv -n "__fish_uv_using_subcommand auth; and __fish_seen_subcommand_from login" -l password -d 'The password to use for the service' -r -f
 complete -c uv -n "__fish_uv_using_subcommand auth; and __fish_seen_subcommand_from login" -s t -l token -d 'The token to use for the service' -r -f
-complete -c uv -n "__fish_uv_using_subcommand auth; and __fish_seen_subcommand_from login" -l keyring-provider -d 'The keyring provider to use for storage of credentials' -r -f -a "disabled\t'Do not use keyring for credential lookup'
+complete -c uv -n "__fish_uv_using_subcommand auth; and __fish_seen_subcommand_from login" -l keyring-provider -r -f -a "disabled\t'Do not use keyring for credential lookup'
 subprocess\t'Use the `keyring` command for credential lookup'"
 complete -c uv -n "__fish_uv_using_subcommand auth; and __fish_seen_subcommand_from login" -l cache-dir -d 'Path to the cache directory' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand auth; and __fish_seen_subcommand_from login" -l python-preference -r -f -a "only-managed\t'Only use managed Python installations; never use system Python installations'
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand auth; and __fish_seen_subcommand_from login" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand auth; and __fish_seen_subcommand_from login" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand auth; and __fish_seen_subcommand_from login" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -177,14 +177,14 @@ complete -c uv -n "__fish_uv_using_subcommand auth; and __fish_seen_subcommand_f
 complete -c uv -n "__fish_uv_using_subcommand auth; and __fish_seen_subcommand_from login" -l no-config -d 'Avoid discovering configuration files (`pyproject.toml`, `uv.toml`)'
 complete -c uv -n "__fish_uv_using_subcommand auth; and __fish_seen_subcommand_from login" -s h -l help -d 'Display the concise help for this command'
 complete -c uv -n "__fish_uv_using_subcommand auth; and __fish_seen_subcommand_from logout" -s u -l username -d 'The username to logout' -r -f
-complete -c uv -n "__fish_uv_using_subcommand auth; and __fish_seen_subcommand_from logout" -l keyring-provider -d 'The keyring provider to use for storage of credentials' -r -f -a "disabled\t'Do not use keyring for credential lookup'
+complete -c uv -n "__fish_uv_using_subcommand auth; and __fish_seen_subcommand_from logout" -l keyring-provider -r -f -a "disabled\t'Do not use keyring for credential lookup'
 subprocess\t'Use the `keyring` command for credential lookup'"
 complete -c uv -n "__fish_uv_using_subcommand auth; and __fish_seen_subcommand_from logout" -l cache-dir -d 'Path to the cache directory' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand auth; and __fish_seen_subcommand_from logout" -l python-preference -r -f -a "only-managed\t'Only use managed Python installations; never use system Python installations'
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand auth; and __fish_seen_subcommand_from logout" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand auth; and __fish_seen_subcommand_from logout" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand auth; and __fish_seen_subcommand_from logout" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -218,14 +218,14 @@ complete -c uv -n "__fish_uv_using_subcommand auth; and __fish_seen_subcommand_f
 complete -c uv -n "__fish_uv_using_subcommand auth; and __fish_seen_subcommand_from logout" -l no-config -d 'Avoid discovering configuration files (`pyproject.toml`, `uv.toml`)'
 complete -c uv -n "__fish_uv_using_subcommand auth; and __fish_seen_subcommand_from logout" -s h -l help -d 'Display the concise help for this command'
 complete -c uv -n "__fish_uv_using_subcommand auth; and __fish_seen_subcommand_from token" -s u -l username -d 'The username to lookup' -r -f
-complete -c uv -n "__fish_uv_using_subcommand auth; and __fish_seen_subcommand_from token" -l keyring-provider -d 'The keyring provider to use for reading credentials' -r -f -a "disabled\t'Do not use keyring for credential lookup'
+complete -c uv -n "__fish_uv_using_subcommand auth; and __fish_seen_subcommand_from token" -l keyring-provider -r -f -a "disabled\t'Do not use keyring for credential lookup'
 subprocess\t'Use the `keyring` command for credential lookup'"
 complete -c uv -n "__fish_uv_using_subcommand auth; and __fish_seen_subcommand_from token" -l cache-dir -d 'Path to the cache directory' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand auth; and __fish_seen_subcommand_from token" -l python-preference -r -f -a "only-managed\t'Only use managed Python installations; never use system Python installations'
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand auth; and __fish_seen_subcommand_from token" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand auth; and __fish_seen_subcommand_from token" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand auth; and __fish_seen_subcommand_from token" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -263,7 +263,7 @@ complete -c uv -n "__fish_uv_using_subcommand auth; and __fish_seen_subcommand_f
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand auth; and __fish_seen_subcommand_from dir" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand auth; and __fish_seen_subcommand_from dir" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand auth; and __fish_seen_subcommand_from dir" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -302,7 +302,7 @@ complete -c uv -n "__fish_uv_using_subcommand auth; and __fish_seen_subcommand_f
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand auth; and __fish_seen_subcommand_from helper" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand auth; and __fish_seen_subcommand_from helper" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand auth; and __fish_seen_subcommand_from helper" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -437,7 +437,7 @@ complete -c uv -n "__fish_uv_using_subcommand run" -l python-preference -r -f -a
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand run" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand run" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand run" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -486,6 +486,8 @@ complete -c uv -n "__fish_uv_using_subcommand run" -l no-build -d 'Don\'t build 
 complete -c uv -n "__fish_uv_using_subcommand run" -l build
 complete -c uv -n "__fish_uv_using_subcommand run" -l no-binary -d 'Don\'t install pre-built wheels'
 complete -c uv -n "__fish_uv_using_subcommand run" -l binary
+complete -c uv -n "__fish_uv_using_subcommand run" -l require-build-hashes -d 'Require hashes for all build dependencies'
+complete -c uv -n "__fish_uv_using_subcommand run" -l no-require-build-hashes -d 'Do not require hashes for every build dependency'
 complete -c uv -n "__fish_uv_using_subcommand run" -l refresh -d 'Refresh all cached data'
 complete -c uv -n "__fish_uv_using_subcommand run" -l no-refresh
 complete -c uv -n "__fish_uv_using_subcommand run" -l all-packages -d 'Run the command with all workspace members installed'
@@ -516,7 +518,7 @@ complete -c uv -n "__fish_uv_using_subcommand init" -l name -d 'The name of the 
 complete -c uv -n "__fish_uv_using_subcommand init" -l description -d 'Set the project description' -r -f
 complete -c uv -n "__fish_uv_using_subcommand init" -l vcs -d 'Initialize a version control system for the project' -r -f -a "git\t'Use Git for version control'
 none\t'Do not use any version control system'"
-complete -c uv -n "__fish_uv_using_subcommand init" -l build-backend -d 'Initialize a build-backend of choice for the project' -r -f -a "uv\t'Use uv as the project build backend'
+complete -c uv -n "__fish_uv_using_subcommand init" -l build-backend -d 'Initialize a build-backend of choice for the project [env: UV_INIT_BUILD_BACKEND=]' -r -f -a "uv\t'Use uv as the project build backend'
 hatch\t'Use [hatchling](https://pypi.org/project/hatchling) as the project build backend'
 flit\t'Use [flit-core](https://pypi.org/project/flit-core) as the project build backend'
 pdm\t'Use [pdm-backend](https://pypi.org/project/pdm-backend) as the project build backend'
@@ -533,7 +535,7 @@ complete -c uv -n "__fish_uv_using_subcommand init" -l python-preference -r -f -
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand init" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand init" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand init" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -580,7 +582,7 @@ complete -c uv -n "__fish_uv_using_subcommand init" -l no-installer-metadata -d 
 complete -c uv -n "__fish_uv_using_subcommand init" -l no-config -d 'Avoid discovering configuration files (`pyproject.toml`, `uv.toml`)'
 complete -c uv -n "__fish_uv_using_subcommand init" -s h -l help -d 'Display the concise help for this command'
 complete -c uv -n "__fish_uv_using_subcommand add" -s r -l requirements -d 'Add the packages listed in the given files' -r -F
-complete -c uv -n "__fish_uv_using_subcommand add" -s c -l constraints -d 'Constrain versions using the given requirements files' -r -F
+complete -c uv -n "__fish_uv_using_subcommand add" -s c -l constraints -d 'Constrain versions using the given requirements files [env: `UV_CONSTRAINT`=]' -r -F
 complete -c uv -n "__fish_uv_using_subcommand add" -s m -l marker -d 'Apply this marker to all added packages' -r -f
 complete -c uv -n "__fish_uv_using_subcommand add" -l optional -d 'Add the requirements to the package\'s optional dependencies for the specified extra' -r -f
 complete -c uv -n "__fish_uv_using_subcommand add" -l group -d 'Add the requirements to the specified dependency group' -r -f
@@ -640,7 +642,7 @@ complete -c uv -n "__fish_uv_using_subcommand add" -l python-preference -r -f -a
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand add" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand add" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand add" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -678,6 +680,8 @@ complete -c uv -n "__fish_uv_using_subcommand add" -l no-build -d 'Don\'t build 
 complete -c uv -n "__fish_uv_using_subcommand add" -l build
 complete -c uv -n "__fish_uv_using_subcommand add" -l no-binary -d 'Don\'t install pre-built wheels'
 complete -c uv -n "__fish_uv_using_subcommand add" -l binary
+complete -c uv -n "__fish_uv_using_subcommand add" -l require-build-hashes -d 'Require hashes for all build dependencies'
+complete -c uv -n "__fish_uv_using_subcommand add" -l no-require-build-hashes -d 'Do not require hashes for every build dependency'
 complete -c uv -n "__fish_uv_using_subcommand add" -l refresh -d 'Refresh all cached data'
 complete -c uv -n "__fish_uv_using_subcommand add" -l no-refresh
 complete -c uv -n "__fish_uv_using_subcommand add" -l workspace -d 'Add the dependency as a workspace member'
@@ -757,7 +761,7 @@ complete -c uv -n "__fish_uv_using_subcommand remove" -l python-preference -r -f
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand remove" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand remove" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand remove" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -791,6 +795,8 @@ complete -c uv -n "__fish_uv_using_subcommand remove" -l no-build -d 'Don\'t bui
 complete -c uv -n "__fish_uv_using_subcommand remove" -l build
 complete -c uv -n "__fish_uv_using_subcommand remove" -l no-binary -d 'Don\'t install pre-built wheels'
 complete -c uv -n "__fish_uv_using_subcommand remove" -l binary
+complete -c uv -n "__fish_uv_using_subcommand remove" -l require-build-hashes -d 'Require hashes for all build dependencies'
+complete -c uv -n "__fish_uv_using_subcommand remove" -l no-require-build-hashes -d 'Do not require hashes for every build dependency'
 complete -c uv -n "__fish_uv_using_subcommand remove" -l refresh -d 'Refresh all cached data'
 complete -c uv -n "__fish_uv_using_subcommand remove" -l no-refresh
 complete -c uv -n "__fish_uv_using_subcommand remove" -s n -l no-cache -d 'Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation'
@@ -870,7 +876,7 @@ complete -c uv -n "__fish_uv_using_subcommand version" -l python-preference -r -
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand version" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand version" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand version" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -905,6 +911,8 @@ complete -c uv -n "__fish_uv_using_subcommand version" -l no-build -d 'Don\'t bu
 complete -c uv -n "__fish_uv_using_subcommand version" -l build
 complete -c uv -n "__fish_uv_using_subcommand version" -l no-binary -d 'Don\'t install pre-built wheels'
 complete -c uv -n "__fish_uv_using_subcommand version" -l binary
+complete -c uv -n "__fish_uv_using_subcommand version" -l require-build-hashes -d 'Require hashes for all build dependencies'
+complete -c uv -n "__fish_uv_using_subcommand version" -l no-require-build-hashes -d 'Do not require hashes for every build dependency'
 complete -c uv -n "__fish_uv_using_subcommand version" -l refresh -d 'Refresh all cached data'
 complete -c uv -n "__fish_uv_using_subcommand version" -l no-refresh
 complete -c uv -n "__fish_uv_using_subcommand version" -s n -l no-cache -d 'Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation'
@@ -1030,7 +1038,7 @@ complete -c uv -n "__fish_uv_using_subcommand sync" -l python-preference -r -f -
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand sync" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand sync" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand sync" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -1080,6 +1088,8 @@ complete -c uv -n "__fish_uv_using_subcommand sync" -l no-build -d 'Don\'t build
 complete -c uv -n "__fish_uv_using_subcommand sync" -l build
 complete -c uv -n "__fish_uv_using_subcommand sync" -l no-binary -d 'Don\'t install pre-built wheels'
 complete -c uv -n "__fish_uv_using_subcommand sync" -l binary
+complete -c uv -n "__fish_uv_using_subcommand sync" -l require-build-hashes -d 'Require hashes for all build dependencies'
+complete -c uv -n "__fish_uv_using_subcommand sync" -l no-require-build-hashes -d 'Do not require hashes for every build dependency'
 complete -c uv -n "__fish_uv_using_subcommand sync" -l refresh -d 'Refresh all cached data'
 complete -c uv -n "__fish_uv_using_subcommand sync" -l no-refresh
 complete -c uv -n "__fish_uv_using_subcommand sync" -l all-packages -d 'Sync all packages in the workspace'
@@ -1150,7 +1160,7 @@ complete -c uv -n "__fish_uv_using_subcommand lock" -l python-preference -r -f -
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand lock" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand lock" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand lock" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -1179,6 +1189,8 @@ complete -c uv -n "__fish_uv_using_subcommand lock" -l no-build -d 'Don\'t build
 complete -c uv -n "__fish_uv_using_subcommand lock" -l build
 complete -c uv -n "__fish_uv_using_subcommand lock" -l no-binary -d 'Don\'t install pre-built wheels'
 complete -c uv -n "__fish_uv_using_subcommand lock" -l binary
+complete -c uv -n "__fish_uv_using_subcommand lock" -l require-build-hashes -d 'Require hashes for all build dependencies'
+complete -c uv -n "__fish_uv_using_subcommand lock" -l no-require-build-hashes -d 'Do not require hashes for every build dependency'
 complete -c uv -n "__fish_uv_using_subcommand lock" -l refresh -d 'Refresh all cached data'
 complete -c uv -n "__fish_uv_using_subcommand lock" -l no-refresh
 complete -c uv -n "__fish_uv_using_subcommand lock" -s n -l no-cache -d 'Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation'
@@ -1204,12 +1216,22 @@ complete -c uv -n "__fish_uv_using_subcommand lock" -l no-installer-metadata -d 
 complete -c uv -n "__fish_uv_using_subcommand lock" -l no-config -d 'Avoid discovering configuration files (`pyproject.toml`, `uv.toml`)'
 complete -c uv -n "__fish_uv_using_subcommand lock" -s h -l help -d 'Display the concise help for this command'
 complete -c uv -n "__fish_uv_using_subcommand upgrade" -l exclude -d 'Exclude the named package from upgrades' -r -f
+complete -c uv -n "__fish_uv_using_subcommand upgrade" -l index -d 'The indexes to use when resolving dependencies, in addition to the default index' -r
+complete -c uv -n "__fish_uv_using_subcommand upgrade" -l default-index -d 'The default package index (by default: <https://pypi.org/simple>)' -r
+complete -c uv -n "__fish_uv_using_subcommand upgrade" -s i -l index-url -d '(Deprecated: use `--default-index` instead) The URL of the Python package index (by default: <https://pypi.org/simple>)' -r
+complete -c uv -n "__fish_uv_using_subcommand upgrade" -l extra-index-url -d '(Deprecated: use `--index` instead) Extra URLs of package indexes to use, in addition to `--index-url`' -r
+complete -c uv -n "__fish_uv_using_subcommand upgrade" -s f -l find-links -d 'Locations to search for candidate distributions, in addition to those found in the registry indexes' -r
+complete -c uv -n "__fish_uv_using_subcommand upgrade" -l index-strategy -d 'The strategy to use when resolving against multiple index URLs' -r -f -a "first-index\t'Only use results from the first index that returns a match for a given package name'
+unsafe-first-match\t'Search for every package name across all indexes, exhausting the versions from the first index before moving on to the next'
+unsafe-best-match\t'Search for every package name across all indexes, preferring the "best" version found. If a package version is in multiple indexes, only look at the entry for the first index'"
+complete -c uv -n "__fish_uv_using_subcommand upgrade" -l keyring-provider -d 'Attempt to use `keyring` for authentication for index URLs' -r -f -a "disabled\t'Do not use keyring for credential lookup'
+subprocess\t'Use the `keyring` command for credential lookup'"
 complete -c uv -n "__fish_uv_using_subcommand upgrade" -l cache-dir -d 'Path to the cache directory' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand upgrade" -l python-preference -r -f -a "only-managed\t'Only use managed Python installations; never use system Python installations'
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand upgrade" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand upgrade" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand upgrade" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -1220,6 +1242,9 @@ complete -c uv -n "__fish_uv_using_subcommand upgrade" -l preview-features -d 'E
 complete -c uv -n "__fish_uv_using_subcommand upgrade" -l directory -d 'Change to the given directory prior to running the command' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand upgrade" -l project -d 'Discover a project in the given directory' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand upgrade" -l config-file -d 'The path to a `uv.toml` file to use for configuration' -r -F
+complete -c uv -n "__fish_uv_using_subcommand upgrade" -l no-index -d 'Ignore the registry index (e.g., PyPI), instead relying on direct URL dependencies and those provided via `--find-links`'
+complete -c uv -n "__fish_uv_using_subcommand upgrade" -l require-build-hashes -d 'Require hashes for all build dependencies'
+complete -c uv -n "__fish_uv_using_subcommand upgrade" -l no-require-build-hashes -d 'Do not require hashes for every build dependency'
 complete -c uv -n "__fish_uv_using_subcommand upgrade" -s n -l no-cache -d 'Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation'
 complete -c uv -n "__fish_uv_using_subcommand upgrade" -l managed-python -d 'Require use of uv-managed Python versions [env: UV_MANAGED_PYTHON=]'
 complete -c uv -n "__fish_uv_using_subcommand upgrade" -l no-managed-python -d 'Disable use of uv-managed Python versions [env: UV_NO_MANAGED_PYTHON=]'
@@ -1254,6 +1279,7 @@ complete -c uv -n "__fish_uv_using_subcommand export" -l no-group -d 'Disable th
 complete -c uv -n "__fish_uv_using_subcommand export" -l only-group -d 'Only include dependencies from the specified dependency group' -r -f
 complete -c uv -n "__fish_uv_using_subcommand export" -l no-editable-package -d 'Export the specified editable packages as non-editable' -r -f
 complete -c uv -n "__fish_uv_using_subcommand export" -s o -l output-file -d 'Write the exported requirements to the given file' -r -F
+complete -c uv -n "__fish_uv_using_subcommand export" -l batch -d 'Export multiple selections from a TOML manifest containing `[[export]]` entries' -r -F
 complete -c uv -n "__fish_uv_using_subcommand export" -l no-emit-package -d 'Do not emit the given package(s)' -r -f
 complete -c uv -n "__fish_uv_using_subcommand export" -l only-emit-package -d 'Only emit the given package(s)' -r -f
 complete -c uv -n "__fish_uv_using_subcommand export" -l index -d 'The indexes to use when resolving dependencies, in addition to the default index' -r
@@ -1299,7 +1325,7 @@ complete -c uv -n "__fish_uv_using_subcommand export" -l python-preference -r -f
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand export" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand export" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand export" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -1351,6 +1377,8 @@ complete -c uv -n "__fish_uv_using_subcommand export" -l no-build -d 'Don\'t bui
 complete -c uv -n "__fish_uv_using_subcommand export" -l build
 complete -c uv -n "__fish_uv_using_subcommand export" -l no-binary -d 'Don\'t install pre-built wheels'
 complete -c uv -n "__fish_uv_using_subcommand export" -l binary
+complete -c uv -n "__fish_uv_using_subcommand export" -l require-build-hashes -d 'Require hashes for all build dependencies'
+complete -c uv -n "__fish_uv_using_subcommand export" -l no-require-build-hashes -d 'Do not require hashes for every build dependency'
 complete -c uv -n "__fish_uv_using_subcommand export" -l refresh -d 'Refresh all cached data'
 complete -c uv -n "__fish_uv_using_subcommand export" -l no-refresh
 complete -c uv -n "__fish_uv_using_subcommand export" -s n -l no-cache -d 'Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation'
@@ -1472,7 +1500,7 @@ complete -c uv -n "__fish_uv_using_subcommand tree" -l python-preference -r -f -
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand tree" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand tree" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand tree" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -1501,6 +1529,8 @@ complete -c uv -n "__fish_uv_using_subcommand tree" -l no-build -d 'Don\'t build
 complete -c uv -n "__fish_uv_using_subcommand tree" -l build
 complete -c uv -n "__fish_uv_using_subcommand tree" -l no-binary -d 'Don\'t install pre-built wheels'
 complete -c uv -n "__fish_uv_using_subcommand tree" -l binary
+complete -c uv -n "__fish_uv_using_subcommand tree" -l require-build-hashes -d 'Require hashes for all build dependencies'
+complete -c uv -n "__fish_uv_using_subcommand tree" -l no-require-build-hashes -d 'Do not require hashes for every build dependency'
 complete -c uv -n "__fish_uv_using_subcommand tree" -l no-index -d 'Ignore the registry index (e.g., PyPI), instead relying on direct URL dependencies and those provided via `--find-links`'
 complete -c uv -n "__fish_uv_using_subcommand tree" -s U -l upgrade -d 'Allow package upgrades, ignoring pinned versions in any existing output file. Implies `--refresh`'
 complete -c uv -n "__fish_uv_using_subcommand tree" -l no-upgrade
@@ -1537,7 +1567,7 @@ complete -c uv -n "__fish_uv_using_subcommand format" -l python-preference -r -f
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand format" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand format" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand format" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -1625,7 +1655,7 @@ complete -c uv -n "__fish_uv_using_subcommand check" -l python-preference -r -f 
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand check" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand check" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand check" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -1670,6 +1700,8 @@ complete -c uv -n "__fish_uv_using_subcommand check" -l no-build -d 'Don\'t buil
 complete -c uv -n "__fish_uv_using_subcommand check" -l build
 complete -c uv -n "__fish_uv_using_subcommand check" -l no-binary -d 'Don\'t install pre-built wheels'
 complete -c uv -n "__fish_uv_using_subcommand check" -l binary
+complete -c uv -n "__fish_uv_using_subcommand check" -l require-build-hashes -d 'Require hashes for all build dependencies'
+complete -c uv -n "__fish_uv_using_subcommand check" -l no-require-build-hashes -d 'Do not require hashes for every build dependency'
 complete -c uv -n "__fish_uv_using_subcommand check" -l refresh -d 'Refresh all cached data'
 complete -c uv -n "__fish_uv_using_subcommand check" -l no-refresh
 complete -c uv -n "__fish_uv_using_subcommand check" -s n -l no-cache -d 'Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation'
@@ -1791,7 +1823,7 @@ complete -c uv -n "__fish_uv_using_subcommand audit" -l python-preference -r -f 
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand audit" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand audit" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand audit" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -1803,16 +1835,19 @@ complete -c uv -n "__fish_uv_using_subcommand audit" -l directory -d 'Change to 
 complete -c uv -n "__fish_uv_using_subcommand audit" -l project -d 'Discover a project in the given directory' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand audit" -l config-file -d 'The path to a `uv.toml` file to use for configuration' -r -F
 complete -c uv -n "__fish_uv_using_subcommand audit" -l no-dev -d 'Don\'t audit the development dependency group [env: UV_NO_DEV=]'
-complete -c uv -n "__fish_uv_using_subcommand audit" -l no-default-groups -d 'Don\'t audit the default dependency groups'
+complete -c uv -n "__fish_uv_using_subcommand audit" -l no-default-groups -d 'Don\'t audit dependency groups unless explicitly requested'
 complete -c uv -n "__fish_uv_using_subcommand audit" -l only-dev -d 'Only audit the development dependency group'
 complete -c uv -n "__fish_uv_using_subcommand audit" -l locked -d 'Assert that the `uv.lock` will remain unchanged [env: UV_LOCKED=]'
 complete -c uv -n "__fish_uv_using_subcommand audit" -l no-locked -d 'Disable locked mode, overriding `UV_LOCKED`'
 complete -c uv -n "__fish_uv_using_subcommand audit" -l frozen -d 'Audit the requirements without locking the project [env: UV_FROZEN=]'
 complete -c uv -n "__fish_uv_using_subcommand audit" -l no-frozen -d 'Disable frozen mode, overriding `UV_FROZEN`'
+complete -c uv -n "__fish_uv_using_subcommand audit" -l offline
 complete -c uv -n "__fish_uv_using_subcommand audit" -l no-build -d 'Don\'t build source distributions'
 complete -c uv -n "__fish_uv_using_subcommand audit" -l build
 complete -c uv -n "__fish_uv_using_subcommand audit" -l no-binary -d 'Don\'t install pre-built wheels'
 complete -c uv -n "__fish_uv_using_subcommand audit" -l binary
+complete -c uv -n "__fish_uv_using_subcommand audit" -l require-build-hashes -d 'Require hashes for all build dependencies'
+complete -c uv -n "__fish_uv_using_subcommand audit" -l no-require-build-hashes -d 'Do not require hashes for every build dependency'
 complete -c uv -n "__fish_uv_using_subcommand audit" -l no-index -d 'Ignore the registry index (e.g., PyPI), instead relying on direct URL dependencies and those provided via `--find-links`'
 complete -c uv -n "__fish_uv_using_subcommand audit" -s U -l upgrade -d 'Allow package upgrades, ignoring pinned versions in any existing output file. Implies `--refresh`'
 complete -c uv -n "__fish_uv_using_subcommand audit" -l no-upgrade
@@ -1832,7 +1867,6 @@ complete -c uv -n "__fish_uv_using_subcommand audit" -l native-tls -d '(Deprecat
 complete -c uv -n "__fish_uv_using_subcommand audit" -l no-native-tls
 complete -c uv -n "__fish_uv_using_subcommand audit" -l system-certs -d 'Whether to load TLS certificates from the platform\'s native certificate store [env: UV_SYSTEM_CERTS=]'
 complete -c uv -n "__fish_uv_using_subcommand audit" -l no-system-certs
-complete -c uv -n "__fish_uv_using_subcommand audit" -l offline -d 'Disable network access [env: UV_OFFLINE=]'
 complete -c uv -n "__fish_uv_using_subcommand audit" -l no-offline
 complete -c uv -n "__fish_uv_using_subcommand audit" -l preview -d 'Whether to enable all experimental preview features [env: UV_PREVIEW=]'
 complete -c uv -n "__fish_uv_using_subcommand audit" -l no-preview
@@ -1847,7 +1881,7 @@ complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcomma
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list audit uninstall update-shell dir" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list audit uninstall update-shell dir" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list audit uninstall update-shell dir" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -1893,9 +1927,9 @@ complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_f
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from run" -s w -l with -d 'Run with the given packages installed' -r -f
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from run" -l with-editable -d 'Run with the given packages installed in editable mode' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from run" -l with-requirements -d 'Run with the packages listed in the given files' -r -F
-complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from run" -s c -l constraints -d 'Constrain versions using the given requirements files' -r -F
-complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from run" -s b -l build-constraints -d 'Constrain build dependencies using the given requirements files when building source distributions' -r -F
-complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from run" -l overrides -d 'Override versions using the given requirements files' -r -F
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from run" -s c -l constraints -d 'Constrain versions using the given requirements files [env: `UV_CONSTRAINT`=]' -r -F
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from run" -s b -l build-constraints -d 'Constrain build dependencies using the given requirements files when building source distributions [env: `UV_BUILD_CONSTRAINT`=]' -r -F
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from run" -l overrides -d 'Override versions using the given requirements files [env: `UV_OVERRIDE`=]' -r -F
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from run" -l env-file -d 'Load environment variables from a `.env` file' -r -F
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from run" -l index -d 'The indexes to use when resolving dependencies, in addition to the default index' -r
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from run" -l default-index -d 'The default package index (by default: <https://pypi.org/simple>)' -r
@@ -2042,7 +2076,7 @@ complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_f
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from run" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from run" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from run" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -2070,6 +2104,8 @@ complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_f
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from run" -l build
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from run" -l no-binary -d 'Don\'t install pre-built wheels'
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from run" -l binary
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from run" -l require-build-hashes -d 'Require hashes for all build dependencies'
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from run" -l no-require-build-hashes -d 'Do not require hashes for every build dependency'
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from run" -l refresh -d 'Refresh all cached data'
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from run" -l no-refresh
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from run" -l lfs -d 'Whether to use Git LFS when adding a dependency from Git'
@@ -2099,9 +2135,9 @@ complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_f
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from uvx" -s w -l with -d 'Run with the given packages installed' -r -f
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from uvx" -l with-editable -d 'Run with the given packages installed in editable mode' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from uvx" -l with-requirements -d 'Run with the packages listed in the given files' -r -F
-complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from uvx" -s c -l constraints -d 'Constrain versions using the given requirements files' -r -F
-complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from uvx" -s b -l build-constraints -d 'Constrain build dependencies using the given requirements files when building source distributions' -r -F
-complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from uvx" -l overrides -d 'Override versions using the given requirements files' -r -F
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from uvx" -s c -l constraints -d 'Constrain versions using the given requirements files [env: `UV_CONSTRAINT`=]' -r -F
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from uvx" -s b -l build-constraints -d 'Constrain build dependencies using the given requirements files when building source distributions [env: `UV_BUILD_CONSTRAINT`=]' -r -F
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from uvx" -l overrides -d 'Override versions using the given requirements files [env: `UV_OVERRIDE`=]' -r -F
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from uvx" -l env-file -d 'Load environment variables from a `.env` file' -r -F
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from uvx" -l index -d 'The indexes to use when resolving dependencies, in addition to the default index' -r
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from uvx" -l default-index -d 'The default package index (by default: <https://pypi.org/simple>)' -r
@@ -2248,7 +2284,7 @@ complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_f
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from uvx" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from uvx" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from uvx" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -2276,6 +2312,8 @@ complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_f
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from uvx" -l build
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from uvx" -l no-binary -d 'Don\'t install pre-built wheels'
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from uvx" -l binary
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from uvx" -l require-build-hashes -d 'Require hashes for all build dependencies'
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from uvx" -l no-require-build-hashes -d 'Do not require hashes for every build dependency'
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from uvx" -l refresh -d 'Refresh all cached data'
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from uvx" -l no-refresh
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from uvx" -l lfs -d 'Whether to use Git LFS when adding a dependency from Git'
@@ -2307,10 +2345,10 @@ complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_f
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from install" -l with-requirements -d 'Run with the packages listed in the given files' -r -F
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from install" -l with-editable -d 'Include the given packages in editable mode' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from install" -l with-executables-from -d 'Install executables from the following packages' -r -f
-complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from install" -s c -l constraints -d 'Constrain versions using the given requirements files' -r -F
-complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from install" -l overrides -d 'Override versions using the given requirements files' -r -F
-complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from install" -l excludes -d 'Exclude packages from resolution using the given requirements files' -r -F
-complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from install" -s b -l build-constraints -d 'Constrain build dependencies using the given requirements files when building source distributions' -r -F
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from install" -s c -l constraints -d 'Constrain versions using the given requirements files [env: `UV_CONSTRAINT`=]' -r -F
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from install" -l overrides -d 'Override versions using the given requirements files [env: `UV_OVERRIDE`=]' -r -F
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from install" -l excludes -d 'Exclude packages from resolution using the given requirements files [env: `UV_EXCLUDE`=]' -r -F
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from install" -s b -l build-constraints -d 'Constrain build dependencies using the given requirements files when building source distributions [env: `UV_BUILD_CONSTRAINT`=]' -r -F
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from install" -l index -d 'The indexes to use when resolving dependencies, in addition to the default index' -r
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from install" -l default-index -d 'The default package index (by default: <https://pypi.org/simple>)' -r
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from install" -s i -l index-url -d '(Deprecated: use `--default-index` instead) The URL of the Python package index (by default: <https://pypi.org/simple>)' -r
@@ -2450,7 +2488,7 @@ complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_f
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from install" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from install" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from install" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -2477,6 +2515,8 @@ complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_f
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from install" -l build
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from install" -l no-binary -d 'Don\'t install pre-built wheels'
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from install" -l binary
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from install" -l require-build-hashes -d 'Require hashes for all build dependencies'
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from install" -l no-require-build-hashes -d 'Do not require hashes for every build dependency'
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from install" -l refresh -d 'Refresh all cached data'
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from install" -l no-refresh
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from install" -l force -d 'Force installation of the tool'
@@ -2591,7 +2631,7 @@ complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_f
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from upgrade" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from upgrade" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from upgrade" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -2617,6 +2657,8 @@ complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_f
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from upgrade" -l build
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from upgrade" -l no-binary -d 'Don\'t install pre-built wheels'
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from upgrade" -l binary
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from upgrade" -l require-build-hashes -d 'Require hashes for all build dependencies'
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from upgrade" -l no-require-build-hashes -d 'Do not require hashes for every build dependency'
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from upgrade" -s n -l no-cache -d 'Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation'
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from upgrade" -l managed-python -d 'Require use of uv-managed Python versions [env: UV_MANAGED_PYTHON=]'
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from upgrade" -l no-managed-python -d 'Disable use of uv-managed Python versions [env: UV_NO_MANAGED_PYTHON=]'
@@ -2646,7 +2688,7 @@ managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from list" -l cache-dir -d 'Path to the cache directory' -r -f -a "(__fish_complete_directories)"
-complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from list" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from list" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from list" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -2698,7 +2740,7 @@ complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_f
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -2710,6 +2752,7 @@ complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_f
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l project -d 'Discover a project in the given directory' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l config-file -d 'The path to a `uv.toml` file to use for configuration' -r -F
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l all -d 'Audit all installed tools'
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l offline
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -s n -l no-cache -d 'Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation'
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l managed-python -d 'Require use of uv-managed Python versions [env: UV_MANAGED_PYTHON=]'
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l no-managed-python -d 'Disable use of uv-managed Python versions [env: UV_NO_MANAGED_PYTHON=]'
@@ -2722,7 +2765,6 @@ complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_f
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l no-native-tls
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l system-certs -d 'Whether to load TLS certificates from the platform\'s native certificate store [env: UV_SYSTEM_CERTS=]'
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l no-system-certs
-complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l offline -d 'Disable network access [env: UV_OFFLINE=]'
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l no-offline
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l preview -d 'Whether to enable all experimental preview features [env: UV_PREVIEW=]'
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l no-preview
@@ -2737,7 +2779,7 @@ complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_f
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from uninstall" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from uninstall" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from uninstall" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -2776,7 +2818,7 @@ complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_f
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from update-shell" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from update-shell" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from update-shell" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -2814,7 +2856,7 @@ complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_f
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from dir" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from dir" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from dir" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -2853,7 +2895,7 @@ complete -c uv -n "__fish_uv_using_subcommand python; and not __fish_seen_subcom
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand python; and not __fish_seen_subcommand_from list install upgrade find pin dir uninstall update-shell" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand python; and not __fish_seen_subcommand_from list install upgrade find pin dir uninstall update-shell" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand python; and not __fish_seen_subcommand_from list install upgrade find pin dir uninstall update-shell" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -2902,7 +2944,7 @@ complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand_from list" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand_from list" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand_from list" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -2944,13 +2986,15 @@ complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand
 complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand_from install" -s i -l install-dir -d 'The directory to store the Python installation in' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand_from install" -l mirror -d 'Set the URL to use as the source for downloading Python installations' -r -f
 complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand_from install" -l pypy-mirror -d 'Set the URL to use as the source for downloading PyPy installations' -r -f
+complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand_from install" -l graalpy-mirror -d 'Set the URL to use as the source for downloading GraalPy installations' -r -f
+complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand_from install" -l pyodide-mirror -d 'Set the URL to use as the source for downloading Pyodide installations' -r -f
 complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand_from install" -l python-downloads-json-url -d 'URL pointing to JSON of custom Python installations' -r -f
 complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand_from install" -l cache-dir -d 'Path to the cache directory' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand_from install" -l python-preference -r -f -a "only-managed\t'Only use managed Python installations; never use system Python installations'
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand_from install" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand_from install" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand_from install" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -2996,13 +3040,15 @@ complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand
 complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand_from upgrade" -s i -l install-dir -d 'The directory Python installations are stored in' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand_from upgrade" -l mirror -d 'Set the URL to use as the source for downloading Python installations' -r -f
 complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand_from upgrade" -l pypy-mirror -d 'Set the URL to use as the source for downloading PyPy installations' -r -f
+complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand_from upgrade" -l graalpy-mirror -d 'Set the URL to use as the source for downloading GraalPy installations' -r -f
+complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand_from upgrade" -l pyodide-mirror -d 'Set the URL to use as the source for downloading Pyodide installations' -r -f
 complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand_from upgrade" -l python-downloads-json-url -d 'URL pointing to JSON of custom Python installations' -r -f
 complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand_from upgrade" -l cache-dir -d 'Path to the cache directory' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand_from upgrade" -l python-preference -r -f -a "only-managed\t'Only use managed Python installations; never use system Python installations'
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand_from upgrade" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand_from upgrade" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand_from upgrade" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -3045,7 +3091,7 @@ complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand_from find" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand_from find" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand_from find" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -3089,7 +3135,7 @@ complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand_from pin" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand_from pin" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand_from pin" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -3132,7 +3178,7 @@ complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand_from dir" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand_from dir" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand_from dir" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -3172,7 +3218,7 @@ complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand_from uninstall" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand_from uninstall" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand_from uninstall" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -3211,7 +3257,7 @@ complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand_from update-shell" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand_from update-shell" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand_from update-shell" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -3250,7 +3296,7 @@ complete -c uv -n "__fish_uv_using_subcommand pip; and not __fish_seen_subcomman
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand pip; and not __fish_seen_subcommand_from compile sync install uninstall freeze list show tree check debug" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand pip; and not __fish_seen_subcommand_from compile sync install uninstall freeze list show tree check debug" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand pip; and not __fish_seen_subcommand_from compile sync install uninstall freeze list show tree check debug" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -3293,10 +3339,10 @@ complete -c uv -n "__fish_uv_using_subcommand pip; and not __fish_seen_subcomman
 complete -c uv -n "__fish_uv_using_subcommand pip; and not __fish_seen_subcommand_from compile sync install uninstall freeze list show tree check debug" -f -a "tree" -d 'Display the dependency tree for an environment'
 complete -c uv -n "__fish_uv_using_subcommand pip; and not __fish_seen_subcommand_from compile sync install uninstall freeze list show tree check debug" -f -a "check" -d 'Verify installed packages have compatible dependencies'
 complete -c uv -n "__fish_uv_using_subcommand pip; and not __fish_seen_subcommand_from compile sync install uninstall freeze list show tree check debug" -f -a "debug" -d 'Display debug information (unsupported)'
-complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -s c -l constraints -d 'Constrain versions using the given requirements files' -r -F
-complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l overrides -d 'Override versions using the given requirements files' -r -F
-complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l excludes -d 'Exclude packages from resolution using the given requirements files' -r -F
-complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -s b -l build-constraints -d 'Constrain build dependencies using the given requirements files when building source distributions' -r -F
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -s c -l constraints -d 'Constrain versions using the given requirements files [env: `UV_CONSTRAINT`=]' -r -F
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l overrides -d 'Override versions using the given requirements files [env: `UV_OVERRIDE`=]' -r -F
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l excludes -d 'Exclude packages from resolution using the given requirements files [env: `UV_EXCLUDE`=]' -r -F
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -s b -l build-constraints -d 'Constrain build dependencies using the given requirements files when building source distributions [env: `UV_BUILD_CONSTRAINT`=]' -r -F
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l extra -d 'Include optional dependencies from the specified extra name; may be provided more than once' -r
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l group -d 'Install the specified dependency group from a `pyproject.toml`' -r
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l index -d 'The indexes to use when resolving dependencies, in addition to the default index' -r
@@ -3452,7 +3498,7 @@ complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_fr
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -3463,6 +3509,8 @@ complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_fr
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l directory -d 'Change to the given directory prior to running the command' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l project -d 'Discover a project in the given directory' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l config-file -d 'The path to a `uv.toml` file to use for configuration' -r -F
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l require-build-hashes -d 'Require hashes for all build dependencies'
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l no-require-build-hashes
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l all-extras -d 'Include all optional dependencies'
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l no-all-extras
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l no-index -d 'Ignore the registry index (e.g., PyPI), instead relying on direct URL dependencies and those provided via `--find-links`'
@@ -3532,8 +3580,8 @@ complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_fr
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l no-progress -d 'Hide all progress outputs [env: UV_NO_PROGRESS=]'
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l no-installer-metadata -d 'Skip writing `uv` installer metadata files (e.g., `INSTALLER`, `REQUESTED`, and `direct_url.json`) to site-packages `.dist-info` directories [env: UV_NO_INSTALLER_METADATA=]'
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -s h -l help -d 'Display the concise help for this command'
-complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -s c -l constraints -d 'Constrain versions using the given requirements files' -r -F
-complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -s b -l build-constraints -d 'Constrain build dependencies using the given requirements files when building source distributions' -r -F
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -s c -l constraints -d 'Constrain versions using the given requirements files [env: `UV_CONSTRAINT`=]' -r -F
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -s b -l build-constraints -d 'Constrain build dependencies using the given requirements files when building source distributions [env: `UV_BUILD_CONSTRAINT`=]' -r -F
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -l extra -d 'Include optional dependencies from the specified extra name; may be provided more than once' -r
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -l group -d 'Install the specified dependency group from a `pylock.toml` or `pyproject.toml`' -r
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -l index -d 'The indexes to use when resolving dependencies, in addition to the default index' -r
@@ -3609,6 +3657,8 @@ wasm32-pyodide2025\t'A wasm32 target using the Pyodide 2025 platform. Meant for 
 arm64-apple-ios\t'An ARM64 target for iOS device'
 arm64-apple-ios-simulator\t'An ARM64 target for iOS simulator'
 x86_64-apple-ios-simulator\t'An `x86_64` target for iOS simulator'"
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -l output-format -d 'Select the output format' -r -f -a "text\t'Display the result in a human-readable format'
+json\t'Display the result in JSON format'"
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -l torch-backend -d 'The backend to use when fetching packages in the PyTorch ecosystem (e.g., `cpu`, `cu126`, or `auto`)' -r -f -a "auto\t'Select the appropriate PyTorch index based on the operating system and CUDA driver version'
 cpu\t'Use the CPU-only PyTorch index'
 cu132\t'Use the PyTorch index for CUDA 13.2'
@@ -3669,7 +3719,7 @@ complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_fr
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -3696,6 +3746,8 @@ complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_fr
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -l no-require-hashes
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -l verify-hashes
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -l no-verify-hashes -d 'Disable validation of hashes in the requirements file'
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -l require-build-hashes -d 'Require hashes for all build dependencies'
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -l no-require-build-hashes
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -l system -d 'Install packages into the system Python environment'
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -l no-system
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -l break-system-packages -d 'Allow uv to modify an `EXTERNALLY-MANAGED` Python installation'
@@ -3707,6 +3759,7 @@ complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_fr
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -l strict -d 'Validate the Python environment after completing the installation, to detect packages with missing dependencies or other issues'
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -l no-strict
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -l dry-run -d 'Perform a dry run, i.e., don\'t actually install anything but resolve the dependencies and print the resulting plan'
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -l check -d 'Check whether the environment matches the requirements without modifying it'
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -s a -l ask
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -l user
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -l no-config
@@ -3734,10 +3787,10 @@ complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_fr
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -s r -l requirements -d 'Install the packages listed in the given files' -r -F
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -s e -l editable -d 'Install the editable package based on the provided local file path' -r
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -l no-editable-package -d 'Install the specified editable packages as non-editable' -r -f
-complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -s c -l constraints -d 'Constrain versions using the given requirements files' -r -F
-complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -l overrides -d 'Override versions using the given requirements files' -r -F
-complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -l excludes -d 'Exclude packages from resolution using the given requirements files' -r -F
-complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -s b -l build-constraints -d 'Constrain build dependencies using the given requirements files when building source distributions' -r -F
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -s c -l constraints -d 'Constrain versions using the given requirements files [env: `UV_CONSTRAINT`=]' -r -F
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -l overrides -d 'Override versions using the given requirements files [env: `UV_OVERRIDE`=]' -r -F
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -l excludes -d 'Exclude packages from resolution using the given requirements files [env: `UV_EXCLUDE`=]' -r -F
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -s b -l build-constraints -d 'Constrain build dependencies using the given requirements files when building source distributions [env: `UV_BUILD_CONSTRAINT`=]' -r -F
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -l extra -d 'Include optional dependencies from the specified extra name; may be provided more than once' -r
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -l group -d 'Install the specified dependency group from a `pylock.toml` or `pyproject.toml`' -r
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -l index -d 'The indexes to use when resolving dependencies, in addition to the default index' -r
@@ -3827,6 +3880,8 @@ wasm32-pyodide2025\t'A wasm32 target using the Pyodide 2025 platform. Meant for 
 arm64-apple-ios\t'An ARM64 target for iOS device'
 arm64-apple-ios-simulator\t'An ARM64 target for iOS simulator'
 x86_64-apple-ios-simulator\t'An `x86_64` target for iOS simulator'"
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -l output-format -d 'Select the output format' -r -f -a "text\t'Display the result in a human-readable format'
+json\t'Display the result in JSON format'"
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -l torch-backend -d 'The backend to use when fetching packages in the PyTorch ecosystem (e.g., `cpu`, `cu126`, or `auto`)' -r -f -a "auto\t'Select the appropriate PyTorch index based on the operating system and CUDA driver version'
 cpu\t'Use the CPU-only PyTorch index'
 cu132\t'Use the PyTorch index for CUDA 13.2'
@@ -3883,7 +3938,7 @@ complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_fr
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -3916,6 +3971,8 @@ complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_fr
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -l no-require-hashes
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -l verify-hashes
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -l no-verify-hashes -d 'Disable validation of hashes in the requirements file'
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -l require-build-hashes -d 'Require hashes for all build dependencies'
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -l no-require-build-hashes
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -l system -d 'Install packages into the system Python environment'
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -l no-system
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -l break-system-packages -d 'Allow uv to modify an `EXTERNALLY-MANAGED` Python installation'
@@ -3927,6 +3984,7 @@ complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_fr
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -l strict -d 'Validate the Python environment after completing the installation, to detect packages with missing dependencies or other issues'
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -l no-strict
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -l dry-run -d 'Perform a dry run, i.e., don\'t actually install anything but resolve the dependencies and print the resulting plan'
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -l check -d 'Check whether the environment satisfies the requirements without modifying it'
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -l disable-pip-version-check
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -l user
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -s n -l no-cache -d 'Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation'
@@ -3963,7 +4021,7 @@ complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_fr
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from uninstall" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from uninstall" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from uninstall" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -4014,7 +4072,7 @@ complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_fr
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from freeze" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from freeze" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from freeze" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -4078,7 +4136,7 @@ complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_fr
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from list" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from list" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from list" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -4130,7 +4188,7 @@ complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_fr
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from show" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from show" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from show" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -4191,7 +4249,7 @@ complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_fr
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from tree" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from tree" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from tree" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -4289,7 +4347,7 @@ complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_fr
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from check" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from check" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from check" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -4334,7 +4392,7 @@ complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_fr
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from debug" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from debug" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from debug" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -4391,7 +4449,7 @@ complete -c uv -n "__fish_uv_using_subcommand venv" -l python-preference -r -f -
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand venv" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand venv" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand venv" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -4444,7 +4502,7 @@ complete -c uv -n "__fish_uv_using_subcommand venv" -l no-config -d 'Avoid disco
 complete -c uv -n "__fish_uv_using_subcommand venv" -s h -l help -d 'Display the concise help for this command'
 complete -c uv -n "__fish_uv_using_subcommand build" -l package -d 'Build a specific package in the workspace' -r -f
 complete -c uv -n "__fish_uv_using_subcommand build" -s o -l out-dir -d 'The output directory to which distributions should be written' -r -f -a "(__fish_complete_directories)"
-complete -c uv -n "__fish_uv_using_subcommand build" -s b -l build-constraints -d 'Constrain build dependencies using the given requirements files when building distributions' -r -F
+complete -c uv -n "__fish_uv_using_subcommand build" -s b -l build-constraints -d 'Constrain build dependencies using the given requirements files when building distributions [env: `UV_BUILD_CONSTRAINT`=]' -r -F
 complete -c uv -n "__fish_uv_using_subcommand build" -s p -l python -d 'The Python interpreter to use for the build environment.' -r -f
 complete -c uv -n "__fish_uv_using_subcommand build" -l index -d 'The indexes to use when resolving dependencies, in addition to the default index' -r
 complete -c uv -n "__fish_uv_using_subcommand build" -l default-index -d 'The default package index (by default: <https://pypi.org/simple>)' -r
@@ -4487,7 +4545,7 @@ complete -c uv -n "__fish_uv_using_subcommand build" -l python-preference -r -f 
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand build" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand build" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand build" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -4498,6 +4556,7 @@ complete -c uv -n "__fish_uv_using_subcommand build" -l preview-features -d 'Ena
 complete -c uv -n "__fish_uv_using_subcommand build" -l directory -d 'Change to the given directory prior to running the command' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand build" -l project -d 'Discover a project in the given directory' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand build" -l config-file -d 'The path to a `uv.toml` file to use for configuration' -r -F
+complete -c uv -n "__fish_uv_using_subcommand build" -l skip-dependency-check -d 'Skip checking if build dependencies are satisfied when building without isolation'
 complete -c uv -n "__fish_uv_using_subcommand build" -l all-packages -d 'Builds all packages in the workspace'
 complete -c uv -n "__fish_uv_using_subcommand build" -l sdist -d 'Build a source distribution ("sdist") from the given directory'
 complete -c uv -n "__fish_uv_using_subcommand build" -l wheel -d 'Build a binary distribution ("wheel") from the given directory'
@@ -4523,6 +4582,8 @@ complete -c uv -n "__fish_uv_using_subcommand build" -l no-build -d 'Don\'t buil
 complete -c uv -n "__fish_uv_using_subcommand build" -l build
 complete -c uv -n "__fish_uv_using_subcommand build" -l no-binary -d 'Don\'t install pre-built wheels'
 complete -c uv -n "__fish_uv_using_subcommand build" -l binary
+complete -c uv -n "__fish_uv_using_subcommand build" -l require-build-hashes -d 'Require hashes for all build dependencies'
+complete -c uv -n "__fish_uv_using_subcommand build" -l no-require-build-hashes -d 'Do not require hashes for every build dependency'
 complete -c uv -n "__fish_uv_using_subcommand build" -l refresh -d 'Refresh all cached data'
 complete -c uv -n "__fish_uv_using_subcommand build" -l no-refresh
 complete -c uv -n "__fish_uv_using_subcommand build" -s n -l no-cache -d 'Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation'
@@ -4563,7 +4624,7 @@ complete -c uv -n "__fish_uv_using_subcommand publish" -l python-preference -r -
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand publish" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand publish" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand publish" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -4574,6 +4635,7 @@ complete -c uv -n "__fish_uv_using_subcommand publish" -l preview-features -d 'E
 complete -c uv -n "__fish_uv_using_subcommand publish" -l directory -d 'Change to the given directory prior to running the command' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand publish" -l project -d 'Discover a project in the given directory' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand publish" -l config-file -d 'The path to a `uv.toml` file to use for configuration' -r -F
+complete -c uv -n "__fish_uv_using_subcommand publish" -l offline
 complete -c uv -n "__fish_uv_using_subcommand publish" -l skip-existing
 complete -c uv -n "__fish_uv_using_subcommand publish" -l dry-run -d 'Perform a dry run without uploading files'
 complete -c uv -n "__fish_uv_using_subcommand publish" -l no-attestations -d 'Do not upload attestations for the published files'
@@ -4589,7 +4651,6 @@ complete -c uv -n "__fish_uv_using_subcommand publish" -l native-tls -d '(Deprec
 complete -c uv -n "__fish_uv_using_subcommand publish" -l no-native-tls
 complete -c uv -n "__fish_uv_using_subcommand publish" -l system-certs -d 'Whether to load TLS certificates from the platform\'s native certificate store [env: UV_SYSTEM_CERTS=]'
 complete -c uv -n "__fish_uv_using_subcommand publish" -l no-system-certs
-complete -c uv -n "__fish_uv_using_subcommand publish" -l offline -d 'Disable network access [env: UV_OFFLINE=]'
 complete -c uv -n "__fish_uv_using_subcommand publish" -l no-offline
 complete -c uv -n "__fish_uv_using_subcommand publish" -l preview -d 'Whether to enable all experimental preview features [env: UV_PREVIEW=]'
 complete -c uv -n "__fish_uv_using_subcommand publish" -l no-preview
@@ -4604,7 +4665,7 @@ complete -c uv -n "__fish_uv_using_subcommand workspace; and not __fish_seen_sub
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand workspace; and not __fish_seen_subcommand_from metadata dir list" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand workspace; and not __fish_seen_subcommand_from metadata dir list" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand workspace; and not __fish_seen_subcommand_from metadata dir list" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -4640,6 +4701,7 @@ complete -c uv -n "__fish_uv_using_subcommand workspace; and not __fish_seen_sub
 complete -c uv -n "__fish_uv_using_subcommand workspace; and not __fish_seen_subcommand_from metadata dir list" -f -a "metadata" -d 'View metadata about the current workspace'
 complete -c uv -n "__fish_uv_using_subcommand workspace; and not __fish_seen_subcommand_from metadata dir list" -f -a "dir" -d 'Display the path of a workspace member'
 complete -c uv -n "__fish_uv_using_subcommand workspace; and not __fish_seen_subcommand_from metadata dir list" -f -a "list" -d 'List the members of a workspace'
+complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -l output-version -d 'Request a specific version of the metadata schema' -r
 complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -l script -d 'View metadata for the specified PEP 723 Python script, rather than the current workspace' -r -F
 complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -l index -d 'The indexes to use when resolving dependencies, in addition to the default index' -r
 complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -l default-index -d 'The default package index (by default: <https://pypi.org/simple>)' -r
@@ -4683,7 +4745,7 @@ complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcomm
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -4698,7 +4760,6 @@ complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcomm
 complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -l no-locked -d 'Disable locked mode, overriding `UV_LOCKED`'
 complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -l frozen -d 'Assert that a `uv.lock` exists without checking if it is up-to-date [env: UV_FROZEN=]'
 complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -l no-frozen -d 'Disable frozen mode, overriding `UV_FROZEN`'
-complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -l dry-run -d 'Perform a dry run, without writing the lockfile'
 complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -l no-index -d 'Ignore the registry index (e.g., PyPI), instead relying on direct URL dependencies and those provided via `--find-links`'
 complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -s U -l upgrade -d 'Allow package upgrades, ignoring pinned versions in any existing output file. Implies `--refresh`'
 complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -l no-upgrade
@@ -4710,6 +4771,8 @@ complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcomm
 complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -l build
 complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -l no-binary -d 'Don\'t install pre-built wheels'
 complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -l binary
+complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -l require-build-hashes -d 'Require hashes for all build dependencies'
+complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -l no-require-build-hashes -d 'Do not require hashes for every build dependency'
 complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -l refresh -d 'Refresh all cached data'
 complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -l no-refresh
 complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -l sync -d 'Sync the environment to include module ownership metadata in the output'
@@ -4743,7 +4806,7 @@ complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcomm
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from dir" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from dir" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from dir" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -4781,7 +4844,7 @@ complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcomm
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from list" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from list" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from list" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -4821,7 +4884,7 @@ complete -c uv -n "__fish_uv_using_subcommand build-backend; and not __fish_seen
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand build-backend; and not __fish_seen_subcommand_from build-sdist build-wheel build-editable get-requires-for-build-sdist get-requires-for-build-wheel prepare-metadata-for-build-wheel get-requires-for-build-editable prepare-metadata-for-build-editable" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand build-backend; and not __fish_seen_subcommand_from build-sdist build-wheel build-editable get-requires-for-build-sdist get-requires-for-build-wheel prepare-metadata-for-build-wheel get-requires-for-build-editable prepare-metadata-for-build-editable" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand build-backend; and not __fish_seen_subcommand_from build-sdist build-wheel build-editable get-requires-for-build-sdist get-requires-for-build-wheel prepare-metadata-for-build-wheel get-requires-for-build-editable prepare-metadata-for-build-editable" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -4867,7 +4930,7 @@ complete -c uv -n "__fish_uv_using_subcommand build-backend; and __fish_seen_sub
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand build-backend; and __fish_seen_subcommand_from build-sdist" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand build-backend; and __fish_seen_subcommand_from build-sdist" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand build-backend; and __fish_seen_subcommand_from build-sdist" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -4906,7 +4969,7 @@ complete -c uv -n "__fish_uv_using_subcommand build-backend; and __fish_seen_sub
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand build-backend; and __fish_seen_subcommand_from build-wheel" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand build-backend; and __fish_seen_subcommand_from build-wheel" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand build-backend; and __fish_seen_subcommand_from build-wheel" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -4945,7 +5008,7 @@ complete -c uv -n "__fish_uv_using_subcommand build-backend; and __fish_seen_sub
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand build-backend; and __fish_seen_subcommand_from build-editable" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand build-backend; and __fish_seen_subcommand_from build-editable" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand build-backend; and __fish_seen_subcommand_from build-editable" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -4983,7 +5046,7 @@ complete -c uv -n "__fish_uv_using_subcommand build-backend; and __fish_seen_sub
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand build-backend; and __fish_seen_subcommand_from get-requires-for-build-sdist" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand build-backend; and __fish_seen_subcommand_from get-requires-for-build-sdist" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand build-backend; and __fish_seen_subcommand_from get-requires-for-build-sdist" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -5021,7 +5084,7 @@ complete -c uv -n "__fish_uv_using_subcommand build-backend; and __fish_seen_sub
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand build-backend; and __fish_seen_subcommand_from get-requires-for-build-wheel" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand build-backend; and __fish_seen_subcommand_from get-requires-for-build-wheel" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand build-backend; and __fish_seen_subcommand_from get-requires-for-build-wheel" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -5059,7 +5122,7 @@ complete -c uv -n "__fish_uv_using_subcommand build-backend; and __fish_seen_sub
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand build-backend; and __fish_seen_subcommand_from prepare-metadata-for-build-wheel" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand build-backend; and __fish_seen_subcommand_from prepare-metadata-for-build-wheel" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand build-backend; and __fish_seen_subcommand_from prepare-metadata-for-build-wheel" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -5097,7 +5160,7 @@ complete -c uv -n "__fish_uv_using_subcommand build-backend; and __fish_seen_sub
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand build-backend; and __fish_seen_subcommand_from get-requires-for-build-editable" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand build-backend; and __fish_seen_subcommand_from get-requires-for-build-editable" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand build-backend; and __fish_seen_subcommand_from get-requires-for-build-editable" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -5135,7 +5198,7 @@ complete -c uv -n "__fish_uv_using_subcommand build-backend; and __fish_seen_sub
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand build-backend; and __fish_seen_subcommand_from prepare-metadata-for-build-editable" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand build-backend; and __fish_seen_subcommand_from prepare-metadata-for-build-editable" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand build-backend; and __fish_seen_subcommand_from prepare-metadata-for-build-editable" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -5173,7 +5236,7 @@ complete -c uv -n "__fish_uv_using_subcommand cache; and not __fish_seen_subcomm
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand cache; and not __fish_seen_subcommand_from clean prune dir size" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand cache; and not __fish_seen_subcommand_from clean prune dir size" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand cache; and not __fish_seen_subcommand_from clean prune dir size" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -5215,7 +5278,7 @@ complete -c uv -n "__fish_uv_using_subcommand cache; and __fish_seen_subcommand_
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand cache; and __fish_seen_subcommand_from clean" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand cache; and __fish_seen_subcommand_from clean" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand cache; and __fish_seen_subcommand_from clean" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -5254,7 +5317,7 @@ complete -c uv -n "__fish_uv_using_subcommand cache; and __fish_seen_subcommand_
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand cache; and __fish_seen_subcommand_from prune" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand cache; and __fish_seen_subcommand_from prune" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand cache; and __fish_seen_subcommand_from prune" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -5294,7 +5357,7 @@ complete -c uv -n "__fish_uv_using_subcommand cache; and __fish_seen_subcommand_
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand cache; and __fish_seen_subcommand_from dir" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand cache; and __fish_seen_subcommand_from dir" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand cache; and __fish_seen_subcommand_from dir" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -5335,7 +5398,7 @@ complete -c uv -n "__fish_uv_using_subcommand cache; and __fish_seen_subcommand_
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand cache; and __fish_seen_subcommand_from size" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand cache; and __fish_seen_subcommand_from size" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand cache; and __fish_seen_subcommand_from size" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -5374,7 +5437,7 @@ complete -c uv -n "__fish_uv_using_subcommand self; and not __fish_seen_subcomma
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand self; and not __fish_seen_subcommand_from update version" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand self; and not __fish_seen_subcommand_from update version" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand self; and not __fish_seen_subcommand_from update version" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -5415,7 +5478,7 @@ complete -c uv -n "__fish_uv_using_subcommand self; and __fish_seen_subcommand_f
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand self; and __fish_seen_subcommand_from update" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand self; and __fish_seen_subcommand_from update" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand self; and __fish_seen_subcommand_from update" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -5456,7 +5519,7 @@ complete -c uv -n "__fish_uv_using_subcommand self; and __fish_seen_subcommand_f
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand self; and __fish_seen_subcommand_from version" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand self; and __fish_seen_subcommand_from version" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand self; and __fish_seen_subcommand_from version" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -5495,7 +5558,7 @@ complete -c uv -n "__fish_uv_using_subcommand clean" -l python-preference -r -f 
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand clean" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand clean" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand clean" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
@@ -5538,7 +5601,7 @@ complete -c uv -n "__fish_uv_using_subcommand generate-shell-completion" -l colo
 always\t'Enables colored output regardless of the detected environment'
 never\t'Disables colored output'"
 complete -c uv -n "__fish_uv_using_subcommand generate-shell-completion" -l config-file -r -F
-complete -c uv -n "__fish_uv_using_subcommand generate-shell-completion" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand generate-shell-completion" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand generate-shell-completion" -l allow-insecure-host -d 'Allow insecure connections to a host' -r -f
@@ -5573,7 +5636,7 @@ complete -c uv -n "__fish_uv_using_subcommand help" -l python-preference -r -f -
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand help" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand help" -l python-fetch -d 'Deprecated option for configuring automatic Python downloads' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
 complete -c uv -n "__fish_uv_using_subcommand help" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'

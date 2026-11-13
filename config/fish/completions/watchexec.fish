@@ -6,7 +6,8 @@ powershell\t''
 zsh\t''"
 complete -c watchexec -l shell -d 'Use a different shell' -r
 complete -c watchexec -s E -l env -d 'Add env vars to the command' -r
-complete -c watchexec -l wrap-process -d 'Configure how the process is wrapped' -r -f -a "group\t''
+complete -c watchexec -l wrap-process -d 'Configure how the process is wrapped' -r -f -a "auto\t''
+group\t''
 session\t''
 none\t''"
 complete -c watchexec -l stop-signal -d 'Signal to send to stop the command' -r
@@ -60,9 +61,10 @@ complete -c watchexec -s 1 -d 'Testing only: exit Watchexec after the first run 
 complete -c watchexec -s n -d 'Shorthand for \'--shell=none\''
 complete -c watchexec -l no-environment -d 'Deprecated shorthand for \'--emit-events=none\''
 complete -c watchexec -l no-process-group -d 'Don\'t use a process group'
+complete -c watchexec -s Q -l quote -d 'Set whether or not to quote the command symbols when passing them to the shell'
 complete -c watchexec -s r -l restart -d 'Restart the process if it\'s still running'
 complete -c watchexec -l stdin-quit -d 'Exit when stdin closes'
-complete -c watchexec -s I -l interactive -d 'Respond to keypresses to quit, restart, or pause'
+complete -c watchexec -s I -l interactive -d 'Respond to keypresses to quit, restart, stop, or pause'
 complete -c watchexec -l exit-on-error -d 'Exit when the command has an error'
 complete -c watchexec -s p -l postpone -d 'Wait until first change before running command'
 complete -c watchexec -l no-vcs-ignore -d 'Don\'t load gitignores'
@@ -72,6 +74,7 @@ complete -c watchexec -l no-default-ignore -d 'Don\'t use internal default ignor
 complete -c watchexec -l no-discover-ignore -d 'Don\'t discover ignore files at all'
 complete -c watchexec -l ignore-nothing -d 'Don\'t ignore anything at all'
 complete -c watchexec -l no-meta -d 'Don\'t emit fs events for metadata changes'
+complete -c watchexec -l no-follow-symlinks -d 'Don\'t follow directory symlinks when watching'
 complete -c watchexec -s v -l verbose -d 'Set diagnostic log level'
 complete -c watchexec -l print-events -d 'Print events that trigger actions'
 complete -c watchexec -l timings -d 'Print how long the command took to run'
