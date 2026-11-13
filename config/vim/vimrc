@@ -1,0 +1,48 @@
+set nocompatible
+scriptencoding utf-8
+
+filetype plugin indent on
+syntax enable
+
+set encoding=utf-8
+set number
+set ruler
+set showcmd
+set laststatus=2
+set cursorline
+set scrolloff=5
+set sidescrolloff=5
+set nowrap
+set wildmenu
+set wildmode=longest:full,full
+set hidden
+set backspace=indent,eol,start
+
+set incsearch
+set hlsearch
+set ignorecase
+set smartcase
+
+" Filetype plugins can override these defaults (for example, tabs in Makefiles).
+set expandtab
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set autoindent
+
+set splitbelow
+set splitright
+
+let mapleader = ' '
+" Keep clipboard behavior explicit so normal deletes do not replace copied text.
+if has('clipboard')
+    nnoremap <leader>y "+y
+    xnoremap <leader>y "+y
+    nnoremap <leader>p "+p
+endif
+nnoremap <leader>w :write<CR>
+nnoremap <leader><Space> :nohlsearch<CR>
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l

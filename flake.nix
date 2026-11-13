@@ -36,7 +36,14 @@
           # Comments read: what it replaces (what you actually type). The
           # command is often not the package name.
 
+          cloud = with pkgs; [
+            awscli2 # official AWS CLI v2 (aws)
+            azure-cli # official Azure CLI (az)
+          ];
+
           containers = with pkgs; [
+            kubectl # Kubernetes cluster management (kubectl)
+            kubernetes-helm # Kubernetes chart package manager (helm)
             lazydocker # docker ps, logs and exec in a TUI (lazydocker)
             dive # image layer explorer, shows what each layer costs (dive)
           ];
@@ -45,6 +52,7 @@
             just # make (just)
             devenv # per-project dev shells and services (devenv, pairs with direnv)
             uv # pip, venv, pyenv, poetry (uv, uvx)
+            ruff # Python linter and formatter (ruff)
             watchexec # entr (watchexec)
             hyperfine # time, for benchmarking (hyperfine)
             tokei # cloc (tokei)
@@ -84,9 +92,12 @@
           media = with pkgs; [
             # Headless build for transcoding; ffplay is not included.
             ffmpeg-headless # video and audio transcoding (ffmpeg, ffprobe)
+            yt-dlp # download video and audio from supported sites (yt-dlp)
+            exiftool # read and edit file metadata (exiftool)
           ];
 
           network = with pkgs; [
+            cloudflared # Cloudflare Tunnel client (cloudflared)
             xh # curl, httpie (xh, xhs defaults to https)
             gping # ping (gping)
             doggo # dig (doggo)
@@ -104,6 +115,7 @@
 
           secrets = with pkgs; [
             age # file encryption (age, age-keygen)
+            gnupg # OpenPGP encryption and signing (gpg, gpg-agent)
             sops # encrypted config kept in-repo (sops)
             _1password-cli # vault access from the shell (op)
           ];
@@ -111,6 +123,7 @@
           shellSession = with pkgs; [
             fish # the shell itself (fish, fish_indent)
             bash # macOS is stuck on 3.2 for GPLv3 reasons (bash, needs a #!/usr/bin/env bash shebang)
+            vim # terminal text editor with shared XDG configuration (vim)
             skim # fzf (sk, sk-tmux)
             zoxide # cd (your config.fish inits it with --cmd=cd, so it *is* cd)
             starship # shell prompt (no command, it renders the prompt)
@@ -123,7 +136,7 @@
           systemAndProcess = with pkgs; [
             procs # ps (procs)
             bottom # top (btm)
-            dust # du (dust)
+            dua # disk usage summaries and interactive exploration (dua, dua interactive)
             duf # df (duf)
             viddy # watch (viddy)
           ];
@@ -150,7 +163,8 @@
               "doc"
             ];
             paths =
-              containers
+              cloud
+              ++ containers
               ++ devWorkflow
               ++ filesAndArchives
               ++ gitTools

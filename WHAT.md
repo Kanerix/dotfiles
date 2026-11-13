@@ -1,11 +1,14 @@
 - **1Password CLI (op)** — Password-vault access.
 - **age** — File encryption.
+- **AWS CLI v2 (aws)** — Official AWS command-line interface.
+- **Azure CLI (az)** — Official Azure command-line interface.
 - **bandwhich** — Per-process network usage.
 - **Bash** — POSIX-compatible shell.
 - **bat** — Syntax-highlighted file viewer.
 - **bottom (btm)** — System monitor.
 - **Bun (bun, bunx)** — JavaScript/TypeScript runtime, package manager and bundler.
 - **choose** — Field selection.
+- **cloudflared** — Cloudflare Tunnel client.
 - **deadnix** — Unused Nix code detection.
 - **delta** — Highlighted Git diffs.
 - **devenv** — Project development environments.
@@ -13,8 +16,9 @@
 - **direnv** — Directory-specific environments.
 - **dive** — Container image layer explorer.
 - **doggo** — DNS lookup.
+- **dua** — Disk usage summaries and interactive exploration/cleanup.
 - **duf** — Filesystem usage.
-- **dust** — Directory disk usage.
+- **ExifTool (exiftool)** — Read and edit file metadata.
 - **eza** — File and directory listings.
 - **fd** — File search.
 - **FFmpeg (headless)** — Audio and video processing.
@@ -25,14 +29,17 @@
 - **gitleaks** — Secret scanning.
 
 - **glow** — Markdown rendering.
+- **GnuPG (gpg, gpg-agent)** — OpenPGP encryption, key management and signing.
 - **Go (go, gofmt)** — Go compiler, formatter and tooling.
 - **gping** — Ping graphs.
+- **Helm (helm)** — Kubernetes chart package manager.
 - **hexyl** — Hex viewer.
 - **hyperfine** — Command benchmarking.
 - **jaq** — JSON filtering.
 - **jless** — Interactive JSON viewer.
 - **Jujutsu (jj)** — Git-compatible version control.
 - **just** — Project task runner.
+- **Kubernetes CLI (kubectl)** — Kubernetes cluster management.
 - **lazydocker** — Terminal Docker interface.
 
 - **nil** — Nix language server.
@@ -47,6 +54,7 @@
 - **procs** — Process listings.
 - **Python (python, python3)** — Python interpreter; use uv for project environments.
 - **ripgrep (rg)** — Text search.
+- **Ruff (ruff)** — Python linter and formatter.
 - **rustup (rustup, cargo, rustc)** — Rust toolchain manager and shims; toolchains are installed separately.
 - **sad** — Interactive search and replace.
 - **sd** — Text substitution.
@@ -59,10 +67,12 @@
 - **trash-cli** — Recoverable file deletion.
 - **uv** — Python package and environment manager.
 - **viddy** — Repeated command monitoring.
+- **Vim (vim)** — Terminal text editor with shared configuration.
 - **watchexec** — File-change command runner.
 - **xan** — CSV processing and exploration.
 - **xcp** — File copying with progress.
 - **xh** — HTTP client.
+- **yt-dlp** — Video and audio downloader for supported sites.
 - **Zellij** — Terminal multiplexer.
 - **Zig** — Zig compiler and C/C++ cross-compilation.
 - **zoxide** — Directory navigation.

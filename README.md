@@ -92,6 +92,31 @@ Completions live in `config/fish/completions/`; refresh them with
 `just fish-completions` after tool upgrades, followed by `just link` for new
 files. Populate tealdeer's local help cache with `tldr --update`.
 
+## Vim integration
+
+The flake includes Vim. `just link` links `config/vim/vimrc` to
+`~/.config/vim/vimrc`, which current Vim versions load automatically. An existing
+`~/.vimrc`, `~/.vim/vimrc`, or `VIMINIT` takes precedence; review those locally if
+this configuration is not loaded. A custom `XDG_CONFIG_HOME` must match the
+link destination (override `target_dir` when invoking the linking recipes).
+Older host Vim versions may not support this path; use the Nix-provided Vim.
+Check the loaded configuration with `:echo $MYVIMRC`.
+
+The configuration uses built-in features only: syntax highlighting, filetype
+indentation, line numbers, case-smart incremental search, four-space indentation
+by default, and splits opening below/right. Filetype plugins can override the
+indentation defaults. Swap files remain enabled for crash recovery.
+
+- `Space w`: save the current file.
+- `Space Space`: clear search highlighting.
+- `Ctrl h/j/k/l`: move between splits.
+- `Space y` / `Space p`: copy to / paste from the system clipboard when supported
+  by the Vim build and host. Normal yanks and deletes keep Vim's default registers.
+
+To preview without installing or linking, run:
+
+    vim -u config/vim/vimrc
+
 ## Git integration
 
 `just link` links `config/git/config` to `~/.config/git/config`. Git reads it
