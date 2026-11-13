@@ -41,6 +41,7 @@ brew 'ouch' # archive compression and extraction (ouch)
 brew 'xcp' # copying with progress (xcp)
 brew 'trash-cli' # recoverable deletion (trash-put, trash-list, trash-restore)
 brew 'ddrescue' # data recovery from failing storage (ddrescue)
+brew 'testdisk' # partition and deleted-file recovery, includes PhotoRec (testdisk, photorec)
 
 # Fonts
 cask 'font-recursive-mono-nerd-font' # RecMonoCasual Nerd Font Mono and other Recursive variants

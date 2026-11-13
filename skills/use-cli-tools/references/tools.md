@@ -27,7 +27,7 @@ Source: the dotfiles repository's macOS Homebrew `Brewfile`, including preserved
 | zerobrewhq/tap/zerobrew / `zb`, `zbx` | Experimental alternative Homebrew package client; use alongside Homebrew, not as an automatic replacement for `brew`. Initialization can modify shell config; package operations require authorization.              |
 | just / `just`                         | Discover and reuse project recipes; inspect them before execution.                                                                                                                                                   |
 | ruff / `ruff`                         | Python linting and formatting; checks are read-only, while fixes and formatting modify files.                                                                                                                        |
-| biome / `biome` | JSON and web-language formatting and linting; use the project configuration. `biome format` checks without writing; `--write` modifies files. |
+| biome / `biome`                       | JSON and web-language formatting and linting; use the project configuration. `biome format` checks without writing; `--write` modifies files.                                                                        |
 | pnpm / `pnpm`, `pnpx`                 | Reuse project JavaScript dependency workflows and lockfiles; installs can execute lifecycle scripts.                                                                                                                 |
 | uv / `uv`, `uvx`                      | Fast Python environments and tool execution; prefer pinned project dependencies and account for downloads.                                                                                                           |
 | watchexec / `watchexec`               | Useful for human watch workflows; agents should normally run a single build/test instead.                                                                                                                            |
@@ -83,22 +83,23 @@ projects still depend on it.
 
 ## Files, system, and containers
 
-| Package / executable                                   | Agent use                                                                                                                        |
-| ------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------- |
-| eza / `eza`                                            | Small directory overviews with color disabled; fd is better for targeted discovery.                                              |
-| ouch / `ouch`                                          | Archive compression/extraction; inspect destination and overwrite behavior first.                                                |
-| xcp / `xcp`                                            | File copying when needed; progress output rarely helps agents and overwrites need care.                                          |
-| trash-cli / `trash-put`, `trash-list`, `trash-restore` | Recoverable deletion and recovery; do not delete without authorization.                                                          |
-| procs / `procs`                                        | Filter process inspection; select relevant processes rather than return full tables.                                             |
-| bottom / `btm`                                         | Interactive monitoring, primarily for humans.                                                                                    |
-| dua-cli / `dua`                                        | Scoped disk-usage summaries; `dua interactive` is for human exploration. Deletion requires authorization and does not use trash. |
-| duf / `duf`                                            | Filesystem capacity overview; choose machine-readable output if supported by the installed version.                              |
-| viddy / `viddy`                                        | Watch-style interface; avoid indefinite monitoring in one-shot agent terminals.                                                  |
-| lazydocker / `lazydocker`                              | Human container TUI; installation does not provide a Docker runtime.                                                             |
-| dive / `dive`                                          | Image-layer analysis; use documented noninteractive/CI mode when appropriate. Image access/runtime requirements are separate.    |
-| ddrescue / `ddrescue`                                  | Data recovery; device access and destination writes require explicit authorization.                                              |
-| kind / `kind`                                          | Local Kubernetes clusters; runtime setup and cluster mutations need authorization.                                               |
-| metalbear-co/mirrord/mirrord / `mirrord`               | Connect local processes to cloud environments; confirm context and traffic implications.                                         |
+| Package / executable                                   | Agent use                                                                                                                                  |
+| ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| eza / `eza`                                            | Small directory overviews with color disabled; fd is better for targeted discovery.                                                        |
+| ouch / `ouch`                                          | Archive compression/extraction; inspect destination and overwrite behavior first.                                                          |
+| xcp / `xcp`                                            | File copying when needed; progress output rarely helps agents and overwrites need care.                                                    |
+| trash-cli / `trash-put`, `trash-list`, `trash-restore` | Recoverable deletion and recovery; do not delete without authorization.                                                                    |
+| procs / `procs`                                        | Filter process inspection; select relevant processes rather than return full tables.                                                       |
+| bottom / `btm`                                         | Interactive monitoring, primarily for humans.                                                                                              |
+| dua-cli / `dua`                                        | Scoped disk-usage summaries; `dua interactive` is for human exploration. Deletion requires authorization and does not use trash.           |
+| duf / `duf`                                            | Filesystem capacity overview; choose machine-readable output if supported by the installed version.                                        |
+| viddy / `viddy`                                        | Watch-style interface; avoid indefinite monitoring in one-shot agent terminals.                                                            |
+| lazydocker / `lazydocker`                              | Human container TUI; installation does not provide a Docker runtime.                                                                       |
+| dive / `dive`                                          | Image-layer analysis; use documented noninteractive/CI mode when appropriate. Image access/runtime requirements are separate.              |
+| ddrescue / `ddrescue`                                  | Data recovery; device access and destination writes require explicit authorization.                                                        |
+| testdisk / `testdisk`, `photorec`                      | Partition and deleted-file recovery; device access and recovery writes require explicit authorisation. Recover files to a separate device. |
+| kind / `kind`                                          | Local Kubernetes clusters; runtime setup and cluster mutations need authorization.                                                         |
+| metalbear-co/mirrord/mirrord / `mirrord`               | Connect local processes to cloud environments; confirm context and traffic implications.                                                   |
 
 ## Networking, media, and math
 
@@ -134,18 +135,18 @@ Rust toolchain. Preserve these entries when updating the shared CLI inventory.
 
 ## Secrets and shell sessions
 
-| Package / executable         | Agent use                                                                                    |
-| ---------------------------- | -------------------------------------------------------------------------------------------- |
-| age / `age`, `age-keygen`    | Authorized file encryption; key generation/decryption needs careful handling of secrets.     |
-| gnupg / `gpg`, `gpg-agent`   | Authorized OpenPGP encryption and signing; avoid exposing private keys or decrypted secrets. |
+| Package / executable          | Agent use                                                                                                                                            |
+| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| age / `age`, `age-keygen`     | Authorized file encryption; key generation/decryption needs careful handling of secrets.                                                             |
+| gnupg / `gpg`, `gpg-agent`    | Authorized OpenPGP encryption and signing; avoid exposing private keys or decrypted secrets.                                                         |
 | pinentry-mac / `pinentry-mac` | Native macOS GPG passphrase dialog; configure its Homebrew executable path in local `gpg-agent.conf`. Never collect passphrases through agent tools. |
-| sops / `sops`                | Edit encrypted configuration through approved workflows; avoid plaintext in logs or context. |
-| 1password-cli (cask) / `op`  | Authorized secret injection into processes; avoid printing vault values.                     |
-| fish / `fish`, `fish_indent` | Fish execution and formatting; do not assume interactive initialization or aliases.          |
-| bash / `bash`                | Script execution when Bash is required; syntax differs from Fish.                            |
-| vim / `vim`                  | Human terminal editing; use isolated, noninteractive Ex mode for configuration checks.       |
-| sk / `sk`                    | Mostly interactive selection; use only a documented finite mode for automation.              |
-| zoxide / `zoxide`            | Human directory navigation; agents should use explicit known working directories.            |
-| starship / `starship`        | Prompt rendering; no meaningful token-saving role for agents.                                |
-| tealdeer / `tldr`            | Short command examples; cache population/update needs network access.                        |
-| direnv / `direnv`            | Project environment loading after reviewing and trusting its configuration.                  |
+| sops / `sops`                 | Edit encrypted configuration through approved workflows; avoid plaintext in logs or context.                                                         |
+| 1password-cli (cask) / `op`   | Authorized secret injection into processes; avoid printing vault values.                                                                             |
+| fish / `fish`, `fish_indent`  | Fish execution and formatting; do not assume interactive initialization or aliases.                                                                  |
+| bash / `bash`                 | Script execution when Bash is required; syntax differs from Fish.                                                                                    |
+| vim / `vim`                   | Human terminal editing; use isolated, noninteractive Ex mode for configuration checks.                                                               |
+| sk / `sk`                     | Mostly interactive selection; use only a documented finite mode for automation.                                                                      |
+| zoxide / `zoxide`             | Human directory navigation; agents should use explicit known working directories.                                                                    |
+| starship / `starship`         | Prompt rendering; no meaningful token-saving role for agents.                                                                                        |
+| tealdeer / `tldr`             | Short command examples; cache population/update needs network access.                                                                                |
+| direnv / `direnv`             | Project environment loading after reviewing and trusting its configuration.                                                                          |
