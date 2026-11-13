@@ -1,6 +1,6 @@
 [general]
 import = [
-    "~/.config/alacritty/themes/themes/deep_space.toml"
+    "~/.config/alacritty/themes/deep_space.toml"
 ]
 
 [env]
