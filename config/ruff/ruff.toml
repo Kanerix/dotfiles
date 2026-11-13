@@ -1,0 +1,14 @@
+extend-exclude = ["tests"]
+line-length = 100
+
+[lint]
+select = ["F", "PL", "UP", "D", "TD", "FIX", "RUF"]
+ignore = [
+    "E501", # line-too-long
+]
+
+[lint.pylint]
+max-args = 7
+
+[lint.pydocstyle]
+convention = "google"

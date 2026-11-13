@@ -23,6 +23,14 @@ if test -f ~/.config/fish/alias.fish
     source ~/.config/fish/alias.fish
 end
 
+set -l biome_config_dir ~/.config
+if set -q XDG_CONFIG_HOME; and test -n "$XDG_CONFIG_HOME"
+    set biome_config_dir "$XDG_CONFIG_HOME"
+end
+if test -f "$biome_config_dir/biome.json"; and not set -q BIOME_CONFIG_PATH
+    set -gx BIOME_CONFIG_PATH "$biome_config_dir/biome.json"
+end
+
 # Discover Homebrew paths rather than assuming an Apple Silicon or Intel prefix.
 if command -q brew
     set -l brew_prefix (command brew --prefix)

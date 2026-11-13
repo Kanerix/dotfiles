@@ -87,11 +87,13 @@ Keep private keys and credentials outside the repository.
 ## Formatters
 
 `just link` installs Ruff's user-level config and the shared Biome config.
-Start a new Fish session to activate `BIOME_CONFIG_PATH`. Review and move aside
-an obsolete `~/biome.json` or `~/biome.jsonc` if it conflicts with Biome.
+Zed's JSON and JSONC formatters invoke Biome with the shared config directly;
+no shell environment variable or Biome language server is required.
+Start a new Fish session to activate `BIOME_CONFIG_PATH` for CLI commands.
 
-Ruff uses project configurations before the user-level config. To let Biome
-use a project's configuration, unset `BIOME_CONFIG_PATH` in that environment.
+Ruff uses project configurations before the user-level config. Zed's JSON
+formatter always uses the shared config. For project-specific Biome formatting,
+configure that project's formatter separately.
 
 ## Optional setup
 
