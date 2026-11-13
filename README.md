@@ -84,6 +84,25 @@ git config --global gpg.ssh.allowedSignersFile ~/.ssh/allowed_signers
 
 Keep private keys and credentials outside the repository.
 
+## Package registry credentials
+
+The uv config selects the Egmont Python registry without embedding credentials.
+Use uv's credential store to log in once for future sessions:
+
+```sh
+uv auth login pypi.cybertron.egmont.com --username daekjo
+```
+
+Replace `daekjo` with your registry username if different. Enter the password
+when prompted rather than passing it on the command line. uv stores the
+credentials locally; its default credential store is plaintext. Keep that
+store private and outside the repository.
+
+Before linking an existing setup with credentials embedded in `uv.toml`, log
+in with the command above. Linking replaces the file with the shared config
+and retains the original as a local backup. The backup may contain
+credentials; keep it private.
+
 ## Formatters
 
 `just link` installs Ruff's user-level config and the shared Biome config.
