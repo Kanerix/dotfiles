@@ -48,6 +48,14 @@ descriptions and anything else written for a human to read.
   a few short paragraphs.
 - Use British spelling.
 
+### Line wrapping
+
+Hard-wrap prose as Vim's `gq` would format selected text. Use the project's
+configured `textwidth`, or 79 columns if no width is specified. Wrap at word
+boundaries and preserve paragraph breaks, list indentation and comment prefixes.
+Do not split URLs, code identifiers or other unbreakable tokens. Leave code
+blocks and Markdown tables in their required format.
+
 ## Git conventions
 
 Commit messages follow the [Conventional Commits](https://www.conventionalcommits.org)
