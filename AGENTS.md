@@ -10,6 +10,8 @@ Unless told otherwise, work as the developer persona in
 `.agents/personas/developer.md`. A persona covers how to work, this file covers
 the conventions and the tooling it works with.
 
+If personas folder does not exists, skip reading them. Don't notify the user.
+
 ## General rules
 
 Keep things simple. Solve the problem that was asked for, in the smallest way
@@ -105,6 +107,17 @@ Do not mark sections of a file with a comment, for example:
 Split the code into smaller functions, modules or files instead, and let the
 names carry the meaning the banner was trying to give.
 
+## Testing
+
+- Add tests only when the user explicitly asks for them. Do not add tests on
+  your own initiative.
+- When tests are requested, keep them simple. Use only the setup and assertions
+  needed to check the requested behaviour.
+- Split tests into focused cases with clear names. Each test should cover one
+  behaviour or scenario; do not combine unrelated checks into one large test.
+- Group related tests in the appropriate module or file. Split unrelated groups
+  so their purpose is clear, without adding unnecessary helpers or abstractions.
+
 ## Command line tools
 
 The environment provides faster replacements for the standard tools. Use them.
@@ -133,3 +146,15 @@ ast-grep --lang rust --pattern 'pub async fn handler($$$A) -> $R { $$$B }' svc/
 
 The pattern has to parse on its own, so match a whole item rather than a fragment
 such as a single argument.
+
+## README documentation
+
+- Write `README.md` for readers who have not seen any agent conversation or
+  repository change history. Describe the current setup and behaviour, not how
+  they changed.
+- Never assume knowledge of earlier decisions, previous configurations, or
+  completed work. Avoid wording such as "now", "still", "as before", or "the
+  former setup" when it depends on that history.
+- State prerequisites and instructions explicitly, or link to the relevant
+  documentation. Any migration guide must explain its starting configuration
+  and intended result without relying on conversation context.
