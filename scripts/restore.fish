@@ -37,18 +37,46 @@ for scope in config skills
     for entry in $entries
         set -l rel (string replace -r '^\./' '' -- "$entry")
         or exit $status
+        set -l src "$source_dir/$rel"
         set -l dst "$destination_dir/$rel"
+        set -l parent (command dirname "$dst")
+        or exit $status
+        while true
+            if test -L "$parent"
+                printf '  WARN      Refusing to traverse symlink parent %s; replace it with a real directory or choose another destination\n' "$parent" >&2
+                exit 1
+            end
+            set -l next_parent (command dirname "$parent")
+            or exit $status
+            if test "$next_parent" = "$parent"
+                break
+            end
+            set parent "$next_parent"
+        end
         set -l backups "$dst".backup-*
         if test (count $backups) -eq 0
             continue
         end
-        # List directory backups themselves, not their contents, newest mtime first.
-        set -l ordered (command ls -1dt -- $backups)
+        set -l backup_pattern '^'(string escape --style=regex -- "$dst.backup-")'[0-9]{8}-[0-9]{6}$'
+        set backups (string match --entire --regex "$backup_pattern" -- $backups)
+        if test (count $backups) -eq 0
+            continue
+        end
+        set -l ordered (printf '%s\n' $backups | command sort -r)
         or exit $status
         set -l newest "$ordered[1]"
         if test -L "$dst"
+            set -l target (command readlink "$dst")
+            or exit $status
+            if test "$target" != "$src"
+                printf '  WARN      Refusing to overwrite unrelated symlink %s; move it aside before restoring\n' "$dst" >&2
+                exit 1
+            end
             command rm "$dst"
             or exit $status
+        else if test -e "$dst"
+            printf '  WARN      Refusing to overwrite real entry %s; move it aside before restoring\n' "$dst" >&2
+            exit 1
         end
         command mv "$newest" "$dst"
         or exit $status

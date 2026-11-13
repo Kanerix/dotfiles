@@ -31,11 +31,14 @@ if test -f "$biome_config_dir/biome.json"; and not set -q BIOME_CONFIG_PATH
     set -gx BIOME_CONFIG_PATH "$biome_config_dir/biome.json"
 end
 
+fish_add_path --global --path ~/.cargo/bin
+set -l bun_prefix
+
 # Discover Homebrew paths rather than assuming an Apple Silicon or Intel prefix.
 if command -q brew
     set -l brew_prefix (command brew --prefix)
     if test -n "$brew_prefix"
-        fish_add_path --global --path $brew_prefix/bin $brew_prefix/sbin
+        fish_add_path --global --path --move $brew_prefix/bin $brew_prefix/sbin
     end
 
     set -l ruby_prefix (command brew --prefix ruby 2>/dev/null)
@@ -43,10 +46,13 @@ if command -q brew
         fish_add_path --global --path $ruby_prefix/bin
     end
 
+
+    set bun_prefix (command brew --prefix bun 2>/dev/null)
+
     # Rustup is keg-only; these shims select separately installed toolchains.
     set -l rustup_prefix (command brew --prefix rustup 2>/dev/null)
     if test -n "$rustup_prefix"
-        fish_add_path --global --path $rustup_prefix/bin
+        fish_add_path --global --path --move $rustup_prefix/bin
     end
 end
 
@@ -54,15 +60,24 @@ end
 # so re-sourcing this file never stacks duplicate entries, and a machine without
 # a given tool gets no stray entry. --global keeps these out of fish_variables,
 # which is machine-local state rather than configuration.
-set -gx BUN_INSTALL "$HOME/.bun"
-fish_add_path --global --path $BUN_INSTALL/bin
+if test -n "$bun_prefix"; and test -x "$bun_prefix/bin/bun"
+    set -gx BUN_INSTALL "$bun_prefix"
+    fish_add_path --global --path --move $BUN_INSTALL/bin
+else
+    set -gx BUN_INSTALL "$HOME/.bun"
+    fish_add_path --global --path $BUN_INSTALL/bin
+end
 fish_add_path --global --path ~/.local/bin
 
-# First editor found wins.
+# Use the first available editor for unset editor variables.
 for __candidate in nvim vim hx
     if command -q $__candidate
-        set -gx EDITOR $__candidate
-        set -gx VISUAL $__candidate
+        if not set -q EDITOR
+            set -gx EDITOR $__candidate
+        end
+        if not set -q VISUAL
+            set -gx VISUAL $__candidate
+        end
         break
     end
 end

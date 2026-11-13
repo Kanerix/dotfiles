@@ -44,6 +44,19 @@ for scope in config skills
         set -l dst "$destination_dir/$rel"
         set -l parent (command dirname "$dst")
         or exit $status
+        set -l checked_parent "$parent"
+        while true
+            if test -L "$checked_parent"
+                printf '  WARN      Refusing to traverse symlink parent %s; replace it with a real directory or choose another destination\n' "$checked_parent" >&2
+                exit 1
+            end
+            set -l next_parent (command dirname "$checked_parent")
+            or exit $status
+            if test "$next_parent" = "$checked_parent"
+                break
+            end
+            set checked_parent "$next_parent"
+        end
         command mkdir -p "$parent"
         or exit $status
         if test -L "$dst"

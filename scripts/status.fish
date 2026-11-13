@@ -19,6 +19,8 @@ function list_entries --argument-names scope
     end
 end
 
+set -l result 0
+
 for scope in config skills
     switch $scope
         case config
@@ -45,15 +47,20 @@ for scope in config skills
             if test "$target" = "$src"
                 printf '  linked    %s\n' "$rel"
             else
+                set result 1
                 printf '  UNLINKED  %s (symlink points elsewhere, run just link)\n' "$rel"
             end
             or exit $status
         else if test -e "$dst"
+            set result 1
             printf '  UNLINKED  %s (real file in place, run just link)\n' "$rel"
             or exit $status
         else
+            set result 1
             printf '  missing   %s\n' "$rel"
             or exit $status
         end
     end
 end
+
+exit $result

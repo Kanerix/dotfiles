@@ -18,6 +18,7 @@ brew 'metalbear-co/mirrord/mirrord', trusted: true # connect local processes to 
 
 # Desktop apps
 cask 'dbeaver-community' # database browser and SQL client (DBeaver)
+cask 'raycast' # app launcher and productivity tools (Raycast)
 cask 'zed' # code editor (Zed)
 
 # Development workflow
@@ -28,15 +29,18 @@ brew 'zerobrewhq/tap/zerobrew', trusted: true # experimental alternative Homebre
 brew 'uv' # Python packages and environments (uv, uvx)
 brew 'ruff' # Python linter and formatter (ruff)
 brew 'biome' # Web-language formatter and linter (biome)
+brew 'golangci-lint' # Go linter (golangci-lint)
+brew 'golangci-lint-langserver' # Go lint language server (golangci-lint-langserver)
 brew 'watchexec' # rerun commands on file changes (watchexec)
 brew 'hyperfine' # benchmark commands (hyperfine)
 brew 'tokei' # code statistics, replaces cloc (tokei)
-brew 'libpq' # PostgreSQL client library and tools, keg-only (psql)
+
 brew 'mkcert' # locally trusted development certificates (mkcert)
 brew 'nss' # certificate support for Firefox and other NSS clients
 
 # Files and archives
 brew 'eza' # ls and tree (eza)
+brew 'fselect' # file search with SQL-like queries (fselect)
 brew 'ouch' # archive compression and extraction (ouch)
 brew 'xcp' # copying with progress (xcp)
 brew 'trash-cli' # recoverable deletion (trash-put, trash-list, trash-restore)
@@ -48,6 +52,7 @@ cask 'font-recursive-mono-nerd-font' # RecMonoCasual Nerd Font Mono and other Re
 
 # Git tools
 brew 'git' # version control (git)
+brew 'git-lfs' # large-file storage for Git (git-lfs)
 brew 'git-delta' # highlighted Git pager (delta)
 brew 'git-cliff' # changelogs from conventional commits (git cliff)
 brew 'gh' # GitHub CLI (gh)
@@ -59,7 +64,8 @@ brew 'oven-sh/bun/bun', trusted: true # JavaScript/TypeScript runtime, packages 
 brew 'node' # Node.js runtime and npm (node, npm, npx)
 brew 'pnpm' # JavaScript package manager (pnpm, pnpx)
 brew 'go' # Go compiler and tooling (go, gofmt)
-brew 'python' # Python interpreter; uv manages project environments (python3)
+brew 'lua' # Lua interpreter (lua)
+brew 'python' # latest Python 3 interpreter; uv manages project environments (python3)
 brew 'ruby' # Ruby interpreter and gem tooling, keg-only (ruby, gem, bundle)
 brew 'rustup' # Rust toolchain manager, keg-only (rustup, cargo, rustc shims)
 brew 'zig' # Zig compiler and C/C++ cross-compilation (zig)
@@ -76,8 +82,10 @@ brew 'oxvg' # SVG optimisation and tooling (oxvg)
 # Network
 brew 'cloudflared' # Cloudflare Tunnel client (cloudflared)
 brew 'xh' # HTTP client, replaces curl/httpie (xh, xhs)
+brew 'wget' # file downloads and recursive retrieval (wget)
 brew 'gping' # graphical ping (gping)
 brew 'doggo' # DNS queries (doggo)
+brew 'nmap' # network discovery and port scanning (nmap)
 brew 'bandwhich' # per-process network usage (bandwhich)
 brew 'feroxbuster' # recursive web content discovery (feroxbuster)
 brew 'sherlock' # find public social accounts by username (sherlock)

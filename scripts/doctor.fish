@@ -1,5 +1,7 @@
 #!/usr/bin/env fish
 
+set -l result 0
+
 printf '\nShell (this process only; existing GUI launchers may differ)\n'
 set -l login_shell ''
 switch (command uname -s)
@@ -11,8 +13,10 @@ switch (command uname -s)
         end
 end
 if test -z "$login_shell"
+    set result 1
     printf '  WARN      Could not read the account login shell\n'
 else if not test -f "$login_shell"; or not test -x "$login_shell"
+    set result 1
     printf '  WARN      Account shell is not an executable file: %s\n' "$login_shell"
 else
     printf '  ok        Account shell: %s\n' "$login_shell"
@@ -22,11 +26,13 @@ end
 set -l inherited_shell (command printenv SHELL)
 if test $status -eq 0
     if not test -f "$inherited_shell"; or not test -x "$inherited_shell"
+        set result 1
         printf '  WARN      Inherited SHELL is not an executable file: %s\n' "$inherited_shell"
     else
         printf '  ok        Inherited SHELL: %s\n' "$inherited_shell"
     end
     if test -n "$login_shell"; and test "$inherited_shell" != "$login_shell"
+        set result 1
         printf '  WARN      SHELL differs from the account shell; this may be intentional or a stale session\n'
     end
 else
@@ -56,3 +62,5 @@ if test -f "$rustup_path"; and test -x "$rustup_path"
 else
     printf '  optional  rustup is not available on PATH\n'
 end
+
+exit $result

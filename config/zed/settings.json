@@ -194,9 +194,6 @@
         },
         "rust-analyzer": {
             "initialization_options": {
-                "rustfmt": {
-                    "extraArgs": ["+nightly"]
-                },
                 "cargo": {
                     "allTargets": true,
                     "allFeatures": true
@@ -249,10 +246,10 @@
         "default_model": {
             "enable_thinking": false,
             "provider": "egmont",
-            "model": "claude-opus-5-5-google-eu"
+            "model": "gpt-6.1-sol"
         },
         "inline_assistant_model": {
-            "provider": "openai_compatible",
+            "provider": "egmont",
             "model": "gpt-6.1-sol"
         }
     },

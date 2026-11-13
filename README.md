@@ -69,17 +69,15 @@ The Brewfile installs only its CLI.
 2. Generate or import an SSH key in 1Password.
 3. Add its public key to GitHub as both an **Authentication Key** and a
    **Signing Key**.
-4. Set your Git identity and signing key locally:
+4. Configure Git to use the 1Password app for SSH signing:
 
 ```fish
-git config --global user.name "Your Name"
-git config --global user.email "your-verified-github-email"
-git config --global user.signingkey "your-public-ssh-key"
-git config --global gpg.ssh.program /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+git config --file ~/.gitconfig gpg.ssh.program /Applications/1Password.app/Contents/MacOS/op-ssh-sign
 ```
 
-Use the actual 1Password app path if installed elsewhere. The shared Git config
-requires SSH authentication for GitHub and enables SSH commit signing.
+This command writes the app path to local `~/.gitconfig`, not the linked XDG
+config. Use the actual 1Password app path if installed elsewhere. The shared
+Git config requires SSH authentication for GitHub and enables SSH commit signing.
 
 For local signature verification, add a line to `~/.ssh/allowed_signers` for
 each commit email, using this format:
