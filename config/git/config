@@ -1,10 +1,13 @@
 [core]
     pager = delta
 
+[url "git@github.com:"]
+    insteadOf = https://github.com/
+
 [user]
     email = kas@lerpz.com
     name = Kasper Jønsson
-    signingkey = BE750149D900D665
+    signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFe0uvv1CMVATstZnqUhrlyMLXMppY0IZwyurnGnvEnR
 
 [filter "lfs"]
     clean = git-lfs clean -- %f
@@ -25,7 +28,7 @@
     conflictstyle = zdiff3
 
 [gpg]
-    program = gpg
+    format = ssh
 
 [commit]
     gpgsign = true
