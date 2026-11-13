@@ -1,0 +1,270 @@
+{
+  "cli_default_open_behavior": "existing_window",
+  "icon_theme": {
+    "mode": "dark",
+    "light": "Zed (Default)",
+    "dark": "Zed (Default)"
+  },
+  "helix_mode": false,
+  "confirm_quit": false,
+  "vim_mode": true,
+  "relative_line_numbers": "enabled",
+  "format_on_save": "off",
+  "ui_font_family": "RecMonoCasual Nerd Font Mono",
+  "ui_font_size": 17,
+  "agent_buffer_font_size": 17,
+  "buffer_font_family": "RecMonoCasual Nerd Font",
+  "buffer_font_size": 16,
+  "buffer_font_features": {
+    "calt": false,
+  },
+  "project_panel": {
+    "dock": "left",
+  },
+  "outline_panel": {
+    "dock": "left",
+  },
+  "collaboration_panel": {
+    "dock": "left",
+  },
+  "git_panel": {
+    "dock": "left",
+  },
+  "vim": {
+    "use_system_clipboard": "never",
+  },
+  "terminal": {
+    "font_family": "RecMonoCasual Nerd Font Mono",
+    "env": {
+      "EDITOR": "zed --wait",
+    },
+    "shell": {
+      "program": "fish",
+    },
+  },
+  "theme": {
+    "mode": "dark",
+    "light": "One Light",
+    "dark": "Ayu Dark",
+  },
+  "indent_guides": {
+    "enabled": true,
+    "coloring": "indent_aware",
+  },
+  "tab_size": 4,
+  "hard_tabs": false,
+  "languages": {
+    "Nix": {
+      "language_servers": ["nil", "!nixd"],
+    },
+    "FSharp": {
+      "show_edit_predictions": false,
+    },
+    "Python": {
+      "language_servers": ["ty", "ruff"],
+      "formatter": {
+        "language_server": {
+          "name": "ruff",
+        },
+      },
+    },
+    "JavaScript": {
+      "language_servers": ["!eslint"],
+      "formatter": {
+        "language_server": {
+          "name": "biome",
+        },
+      },
+      "code_actions_on_format": {
+        "source.fixAll.biome": true,
+        "source.organizeImports.biome": true,
+      },
+    },
+    "TypeScript": {
+      "language_servers": ["!eslint"],
+      "formatter": {
+        "language_server": {
+          "name": "biome",
+        },
+      },
+      "code_actions_on_format": {
+        "source.fixAll.biome": true,
+        "source.organizeImports.biome": true,
+      },
+    },
+    "TSX": {
+      "language_servers": ["!eslint"],
+      "formatter": {
+        "language_server": {
+          "name": "biome",
+        },
+      },
+      "code_actions_on_format": {
+        "source.fixAll.biome": true,
+        "source.organizeImports.biome": true,
+      },
+    },
+    "Svelte": {
+      "language_servers": ["svelte-language-server", "biome"],
+      "formatter": {
+        "language_server": {
+          "name": "biome"
+        }
+      },
+      "code_actions_on_format": {
+        "source.fixAll.biome": true,
+        "source.organizeImports.biome": true
+      }
+    },
+    "JSON": {
+      "language_servers": ["!eslint"],
+      "formatter": {
+        "language_server": {
+          "name": "biome",
+        },
+      },
+    },
+    "JSONC": {
+      "language_servers": ["!eslint"],
+      "formatter": {
+        "language_server": {
+          "name": "biome",
+        },
+      },
+    },
+    "YAML": {
+      "tab_size": 2,
+      "hard_tabs": false,
+    },
+    "CSS": {
+      "language_servers": ["!eslint"],
+      "formatter": {
+        "language_server": {
+          "name": "biome",
+        },
+      },
+    },
+    "Go": {
+      "hard_tabs": true,
+      "language_servers": ["gopls", "golangci-lint-langserver"],
+    },
+  },
+  "lsp": {
+    "vtsls": {
+      "settings": {
+        "typescript": {
+          "updateImportsOnFileMove": {
+            "enabled": "always",
+          },
+        },
+        "javascript": {
+          "updateImportsOnFileMove": {
+            "enabled": "always",
+          },
+        },
+      },
+      "enable_lsp_tasks": true,
+    },
+    "tailwindcss-language-server": {
+      "settings": {
+        "classFunctions": ["cva", "cx"],
+        "experimental": {
+          "classRegex": ["[cls|className]\\s\\:\\=\\s\"([^\"]*)"],
+        },
+      },
+    },
+    "vscode-css-language-server": {
+      "settings": {
+        "css": {
+          "lint": {
+            "unknownAtRules": "ignore",
+          },
+        },
+      },
+    },
+    "rust-analyzer": {
+      "initialization_options": {
+        "rustfmt": {
+          "extraArgs": ["+nightly"],
+        },
+        "cargo": {
+          "allTargets": true,
+          "allFeatures": true,
+        },
+      },
+    },
+    "clangd": {
+      "initialization_options": {
+        "fallbackFlags": ["-std=c++20"],
+      },
+    },
+    "golangci-lint-langserver": {
+      "binary": {
+        "path": "golangci-lint-langserver",
+      },
+      "initialization_options": {
+        "command": [
+          "golangci-lint",
+          "run",
+          "--output.json.path",
+          "stdout",
+          "--show-stats=false",
+          "--issues-exit-code=1",
+        ],
+      },
+    },
+  },
+  "file_types": {
+    "Dockerfile": ["Dockerfile", "Dockerfile.*"],
+    "JSON": ["json", "jsonc", "*.code-snippets"],
+  },
+  "disable_ai": false,
+  "edit_predictions": {
+    "mode": "eager",
+  },
+  "agent": {
+    "dock": "right",
+    "threads_sidebar": {
+      "position": "right"
+    },
+    "flexible": true,
+    "sandbox_permissions": {
+      "allow_unsandboxed": true,
+      "network_hosts": []
+    },
+    "tool_permissions": {
+      "default": "allow",
+    },
+    "favorite_models": [],
+    "default_model": {
+        "enable_thinking": false,
+        "provider": "egmont",
+        "model": "gpt-6.1-sol"
+    },
+    "inline_assistant_model": {
+        "provider": "openai_compatible",
+        "model": "gpt-6.1-sol"
+    }
+  },
+  "language_models": {
+    "openai_compatible": {
+      "egmont": {
+        "api_url": "https://ai.egmont.com/gateway/v1",
+        "available_models": [
+          {
+            "name": "gpt-6.1-sol",
+            "max_tokens": 128000
+          }
+        ]
+      }
+    }
+  },
+  "agent_servers": {
+    "codex-acp": {
+      "type": "registry",
+    },
+    "github-copilot-cli": {
+      "type": "registry",
+    },
+  },
+}

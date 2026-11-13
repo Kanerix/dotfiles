@@ -192,6 +192,23 @@ To preview without installing or linking, run:
 
     vim -u config/vim/vimrc
 
+## Zed integration
+
+The Brewfile includes the Zed editor cask. `just link` symlinks
+`config/zed/settings.json` and `config/zed/keymap.json` into `~/.config/zed/`,
+backing up existing files. Zed loads these JSON-with-comments files as user
+settings and keybindings. Edits to the linked files change the repository sources.
+
+The shared settings include fonts, Vim mode, language-server preferences, and a
+custom AI provider. Fonts, extensions, toolchains, and provider access must be
+available on each machine. The agent settings allow unsandboxed execution and
+default tool approval; review these permissions before using the configuration.
+Keep API keys, authentication, conversations, and machine-local backups outside
+Git. Other files in `~/.config/zed/` are not managed by this repository.
+
+Before linking, ensure `~/.config/zed/` is a local directory rather than a symlink
+to a cloud-synced folder; otherwise the workflow changes files inside that folder.
+
 ## Git integration
 
 `just link` links `config/git/config` to `~/.config/git/config`. Git reads it
