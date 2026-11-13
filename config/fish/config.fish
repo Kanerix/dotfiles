@@ -116,9 +116,6 @@ if status is-interactive
         __source_if fzf --fish
     end
 
-    # Completions are deliberately not generated here. Doing so costs one
-    # subprocess per tool on every shell start, which dominates startup time.
-    # They are pre-generated into completions/ instead, which fish autoloads
-    # lazily on the first tab-complete. Regenerate them after upgrading tools;
-    # see the repository README.
+    # Generate missing completions with just fish-completions, not at startup.
+    # Fish loads local and vendor completions when needed.
 end

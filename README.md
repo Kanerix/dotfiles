@@ -34,7 +34,19 @@ If you use a custom `XDG_CONFIG_HOME`, link to that directory instead:
 
 ```fish
 just --set target_dir "$XDG_CONFIG_HOME" link
+just --set target_dir "$XDG_CONFIG_HOME" fish-completions
 ```
+
+## Fish completions
+
+Fish loads completions supplied by Fish and Homebrew directly. Run
+`just fish-completions` after installing or upgrading tools to generate any
+remaining completions into `~/.config/fish/completions/`. Generated files
+are local, not tracked or symlinked by this repository.
+
+When replacing tracked completion snapshots, remove only the local symlinks
+that point into this repository's `config/fish/completions/` before running
+`just fish-completions`. Preserve local files and unrelated symlinks.
 
 ## Login shell
 

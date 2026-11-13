@@ -34,6 +34,6 @@ restore:
 scan:
     gitleaks dir . --no-banner --redact
 
-# Regenerate Fish completions after upgrading tools (never at shell startup)
+# Generate local Fish completions not supplied by Fish or Homebrew
 fish-completions:
-    @fish --no-config "{{ scripts_dir }}/fish-completions.fish" "{{ config_dir }}"
+    @fish --no-config "{{ scripts_dir }}/fish-completions.fish" "{{ target_dir }}"
