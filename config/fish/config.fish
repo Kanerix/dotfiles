@@ -23,16 +23,18 @@ if test -f ~/.config/fish/alias.fish
     source ~/.config/fish/alias.fish
 end
 
-# The nix installer writes its shell hook into the sysconfdir of whichever fish
-# existed at install time, which here was homebrew's, at
-# /opt/homebrew/etc/fish/conf.d/nix.fish. This fish comes from the nix profile,
-# so its sysconfdir is inside the store and that hook is never read. Source the
-# profile directly instead. It is what puts `nix` itself on PATH, since nix
-# lives in /nix/var/nix/profiles/default/bin rather than ~/.nix-profile/bin, and
-# it also sets NIX_SSL_CERT_FILE and NIX_PROFILES. It guards internally against
-# running twice, so re-sourcing this file is safe.
-if test -f /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish
-    source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish
+# Discover Homebrew paths rather than assuming an Apple Silicon or Intel prefix.
+if command -q brew
+    set -l brew_prefix (command brew --prefix)
+    if test -n "$brew_prefix"
+        fish_add_path --global --path $brew_prefix/bin $brew_prefix/sbin
+    end
+
+    # Rustup is keg-only; these shims select separately installed toolchains.
+    set -l rustup_prefix (command brew --prefix rustup 2>/dev/null)
+    if test -n "$rustup_prefix"
+        fish_add_path --global --path $rustup_prefix/bin
+    end
 end
 
 # fish_add_path is idempotent and silently skips directories that do not exist,
@@ -42,7 +44,6 @@ end
 set -gx BUN_INSTALL "$HOME/.bun"
 fish_add_path --global --path $BUN_INSTALL/bin
 fish_add_path --global --path ~/.local/bin
-fish_add_path --global --path ~/.nix-profile/bin
 
 # First editor found wins.
 for __candidate in nvim vim hx

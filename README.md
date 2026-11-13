@@ -1,20 +1,75 @@
 # dotfiles
 
-A Nix flake holding the CLI tools I want on every machine. The tools are wrapped
-in a single `buildEnv`, so they install, upgrade and roll back as one profile
-entry. See [WHAT.md](WHAT.md) for the complete tool list.
+Shared dotfiles and a macOS Homebrew `Brewfile` for the tools I want on each
+machine. The Brewfile includes formulas, casks, and Go/Cargo tools; Homebrew
+tracks current releases rather than a pinned bundle. See [WHAT.md](WHAT.md) for
+the complete tool list.
 
 ## Install on a new machine
 
-`config/nix/nix.conf` enables `nix-command` and `flakes`, but `just link` is
-what puts it in place and `just` itself comes from this flake. So the first
-install has to pass the features on the command line, once:
+Install Homebrew using its official macOS instructions and follow its shell
+setup instructions so `brew` is on PATH. From the repository directory, run:
 
-    git clone <this repo> ~/Projects/dotfiles
-    nix --extra-experimental-features 'nix-command flakes' profile install ~/Projects/dotfiles#cli-tools
+    brew bundle --file Brewfile
+    just fish-completions
     just link
 
-After `just link` the flag is no longer needed, here or in any other repo.
+The Cargo entries require a separately installed Rust toolchain; see
+[Language toolchains](#language-toolchains) before the first bundle install if
+Rust is not initialized. The existing Go entries are preserved; the private Go
+package may require repository authentication before installation can succeed.
+The bundle can install GUI apps and fonts as well as CLI tools.
+
+## Nix-backed project environments
+
+Homebrew supplies shared CLI tools; projects can still use Nix and devenv for
+reproducible development environments. Neither currently has an official
+Homebrew formula or cask, so the Brewfile records them as comments rather than
+invalid install entries. Keep an existing Nix installation when projects use
+`use devenv`, `use nix`, or `use flake` in `.envrc`.
+
+For a new machine, follow the Nix installer instructions in the
+[devenv setup guide](https://devenv.sh/getting-started/), then install devenv:
+
+    nix profile install nixpkgs#devenv
+
+The profile command requires Nix's `nix-command` and `flakes` experimental
+features. Do not run a second installer over an existing Nix installation.
+Devenv supplies project packages from `devenv.nix`; they do not all need to be
+installed globally through Homebrew. Review `.envrc` before approving it with
+`direnv allow`. Keep Homebrew Fish as the login shell even when retaining Nix.
+
+## Migrate an existing Nix installation
+
+Only uninstall Nix after migrating any projects that still depend on it.
+
+1. Install Homebrew and run `brew bundle --file Brewfile` **before removing Nix**.
+   Initialize Rust and any required private Go authentication first. Verify that
+   the Homebrew tools work, then run `just fish-completions` and `just link`.
+2. Change the account login shell to Homebrew's Fish before uninstalling Nix.
+   Use the path under `brew --prefix` (normally `/opt/homebrew/bin/fish` on Apple
+   Silicon or `/usr/local/bin/fish` on Intel), register it in `/etc/shells` if
+   required, and select it with `chsh`. Do not keep a Nix profile/store shell path.
+3. Log out of the desktop session and back in. Check both the account shell and
+   inherited `SHELL`, including GUI launchers; see the Alacritty cautions below.
+4. Only after the replacement is working, follow the uninstall instructions from
+   the **original Nix installer** used on this host. Installer-specific cleanup
+   differs; this repository supplies no destructive uninstall script.
+
+`just link` does not remove old owned links whose repository sources have been
+removed. During migration, inspect these entries and their symlink targets:
+
+- `~/.config/nix/nix.conf`
+- `~/.config/direnv/direnvrc`
+- `~/.config/fish/completions/devenv.fish`
+
+Remove an entry only after verifying that it is an obsolete symlink pointing to
+its removed source in this repository. Leave real user files and links to other
+sources untouched; do not delete the containing directories. This is manual,
+host-local cleanup, not something the linking workflow performs automatically.
+
+Changing these repository files does not uninstall Nix, remove host packages,
+or perform that symlink cleanup.
 
 The tools install alongside the host commands. The linked Fish configuration
 wraps `ls` and `tree` with eza and `cd` with zoxide; `grep` and `rm` stay unchanged.
@@ -30,8 +85,8 @@ Scripts are invoked with `bash` and do not require executable permissions.
 
 ## Update
 
-    nix flake update
-    nix profile upgrade cli-tools
+    brew update
+    brew bundle --file Brewfile
     just fish-completions
     just link
 
@@ -39,28 +94,37 @@ Regenerate Fish completions after upgrading tools, then run `just link` to link
 any newly generated files. Fish autoloads these completions lazily rather than
 generating them at every shell startup.
 
-Commit the changed `flake.lock` and regenerated completions afterwards. The lock
-file is what keeps machines on identical versions, so pull it on the others
-before upgrading and linking there.
+Review changes to the Brewfile and regenerated completions before committing.
+Homebrew installs/upgrades to available current versions: there is no shared
+version lock and no Nix-style atomic bundle rollback. Reverting the Brewfile does
+not restore previously installed package versions. `just restore` restores
+configuration backups, not package versions.
 
-## Roll back
+## zerobrew
 
-    nix profile rollback
+The Brewfile includes [zerobrew](https://github.com/zerobrewhq/zerobrew) from its
+`zerobrewhq/tap` Homebrew tap, providing `zb` and `zbx`. It is experimental;
+keep using ordinary `brew` for this repository's setup and update workflows.
+Installing it does not migrate packages or replace `brew`.
+
+If you choose to initialize it, `zb init` can modify your shell configuration;
+`zb init --no-modify-path` leaves shell configuration unchanged. Review any
+initialization changes rather than letting it edit symlinked shared config.
 
 ## Login shell and Alacritty startup
 
-The flake installs Fish on macOS and Linux (Apple Silicon/ARM64 and x86_64).
-`just link` only symlinks configuration; neither step changes the account's
-login shell. To use Fish as the login shell, find the installed executable with
-`command -v fish`, register its path in `/etc/shells` if required by the host,
-and select it with the host's login-shell setup (`chsh`). For Nix installs, use
-the stable profile path rather than resolving it to a versioned `/nix/store`
-path. This is machine-local setup, not a path to put in the shared config.
+The Brewfile installs Fish on macOS (Apple Silicon and Intel). `just link` only
+symlinks configuration; neither step changes the account's login shell. To use
+Fish as the login shell, find Homebrew's executable under `brew --prefix` and
+verify it works. `command -v fish` may still find an older installation during
+migration. Register the Homebrew path in `/etc/shells` if required by the host,
+and select it with the host's login-shell setup (`chsh`). This is machine-local
+setup, not a path to put in the shared config.
 
 Alacritty intentionally has no `terminal.shell` override. In 0.15.1 it uses the
 inherited `SHELL`, falling back to the account's login shell only when `SHELL`
 is unset—not when it points to a missing executable. After moving Fish between
-installations (for example, Homebrew to Nix), an old launcher environment can
+installations (for example, Nix to Homebrew), an old launcher environment can
 therefore make Alacritty flash open and close even though the account shell is
 already correct.
 
@@ -87,13 +151,13 @@ Integrations are guarded so missing tools are skipped:
 
 - Interactive sessions initialize Starship, zoxide (`cd`), direnv and skim key
   bindings.
-- The direnv configuration sources nix-direnv from the Nix profile and loads
-  devenv's integration on demand. Project environments still need explicit
-  approval with `direnv allow`.
+- Project environments use plain direnv and still need explicit approval with
+  `direnv allow`; review each project's environment configuration first.
 - `ls` and `tree` use eza; `del` uses recoverable trash without replacing `rm`.
-- The Nix daemon environment and existing user binary directories are added to
-  the environment. The first available editor is selected from `nvim`, `vim`
-  and `hx`; bat becomes the man-page pager when `col` is also available.
+- Homebrew and existing user binary directories, including `~/.local/bin`, are
+  added to PATH. Homebrew's keg-only rustup uses the `bin` directory under
+  `brew --prefix rustup`. The first available editor is selected from `nvim`,
+  `vim` and `hx`; bat becomes the man-page pager when `col` is also available.
 - If separately installed, fnm initializes Node environments and fzf supplies
   fuzzy-finder bindings when skim is absent.
 
@@ -103,12 +167,12 @@ files. Populate tealdeer's local help cache with `tldr --update`.
 
 ## Vim integration
 
-The flake includes Vim. `just link` links `config/vim/vimrc` to
+The Brewfile includes Vim. `just link` links `config/vim/vimrc` to
 `~/.config/vim/vimrc`, which current Vim versions load automatically. An existing
 `~/.vimrc`, `~/.vim/vimrc`, or `VIMINIT` takes precedence; review those locally if
 this configuration is not loaded. A custom `XDG_CONFIG_HOME` must match the
 link destination (override `target_dir` when invoking the linking recipes).
-Older host Vim versions may not support this path; use the Nix-provided Vim.
+Older host Vim versions may not support this path; use the Homebrew-provided Vim.
 Check the loaded configuration with `:echo $MYVIMRC`.
 
 The configuration uses built-in features only: syntax highlighting, filetype
@@ -141,7 +205,7 @@ Store authentication and host-specific overrides locally.
 
 `just link` also symlinks each directory under `skills/` into
 `~/.agents/skills/`. The `use-cli-tools` skill helps agents choose the CLI tools
-in this flake for focused searches, compact data output, and repeatable workflows.
+in this Brewfile for focused searches, compact data output, and repeatable workflows.
 Its source is [skills/use-cli-tools/SKILL.md](skills/use-cli-tools/SKILL.md).
 
 `~/.agents/skills/` is a shared global skill location supported by Zed and other
@@ -156,24 +220,35 @@ install locations, override `skills_dir` and `skills_target_dir` with `just --se
 
 ## Language toolchains
 
-The flake includes Bun, Node.js (with npm/npx), pnpm, Go, Python, Rust via
-rustup, and Zig. Bun handles JavaScript/TypeScript execution and bundling; Node
-remains available for tools that specifically require it. Use pnpm for projects
-that use `pnpm-lock.yaml`; Nix pins the tooling, while pnpm manages project
-dependencies outside the Nix store. Use `uv` for isolated Python project
-environments rather than installing packages into Nix's read-only Python
-interpreter.
+The Brewfile includes Bun (via the `oven-sh/bun` tap), Node.js (with npm/npx),
+pnpm, Go, Python, Rust via rustup, and Zig. Bun handles JavaScript/TypeScript
+execution and bundling; Node remains available for tools that specifically
+require it. Use pnpm for projects that use `pnpm-lock.yaml` and `uv` for isolated
+Python project environments. Homebrew supplies unpinned current tooling; pnpm
+and uv manage project dependencies separately.
 
-Rustup supplies `cargo` and `rustc` shims, not an installed compiler toolchain.
-For a default Rust setup, run once on each machine:
+Keep npm global installs in a writable user prefix rather than Homebrew's tree:
+
+    npm config set prefix ~/.local
+    mkdir -p ~/.local/lib/node_modules
+
+Fish already adds `~/.local/bin` to PATH. Preserve project package managers and
+lockfiles rather than switching them to match the host tools.
+
+Homebrew's `rustup` is keg-only. Add its shims to PATH using the `bin` directory
+under `brew --prefix rustup` (the linked Fish configuration handles this), not a
+hardcoded Homebrew prefix. Rustup supplies `cargo` and `rustc` shims, not an
+installed compiler toolchain. For a default Rust setup, run once on each machine
+before installing the Brewfile's Cargo entries:
 
     rustup default stable
     rustup component add rustfmt clippy rust-analyzer
 
-Rust toolchain downloads are managed by rustup, outside the flake lock. Other
-included language versions follow `flake.lock`. Use project-specific devenv or
-Nix development shells when a project needs a different version or native build
-dependencies.
+Rust toolchain downloads are managed separately by rustup, outside Homebrew.
+Follow each project's `rust-toolchain.toml` when present. The existing Cargo
+entries in the Brewfile are kept; they need a working compiler toolchain.
+Use project-specific version/environment managers when different language
+versions or native build dependencies are required.
 
 ## Optional per-machine setup
 
@@ -200,7 +275,15 @@ launcher environment described above.
 
 ## Adding a tool
 
-Add it to the appropriate package group in `flake.nix` and to [WHAT.md](WHAT.md),
-then upgrade the profile and refresh completions and links as above.
-`nix build --dry-run .#cli-tools` checks evaluation and reports what would be
-built or fetched.
+Add it to the appropriate category in `Brewfile` and to [WHAT.md](WHAT.md), then
+install and refresh completions and links as above. Keep categories alphabetical,
+packages logically grouped, and inline comments describing purpose and executable
+names when they differ. Preserve existing dumped formulas, casks, Go and Cargo
+entries rather than replacing them with only the shared CLI list.
+
+Homebrew names can differ from Nix names: `awscli` supplies `aws`, `git-delta`
+supplies `delta`, `helm` supplies `helm`, `node` supplies Node.js, `python` supplies
+Python, and `dua-cli` supplies `dua`. Use `ffmpeg` rather than the former headless
+package, `1password-cli` as a cask, and Bun from the `oven-sh/bun` tap.
+`brew bundle check --file Brewfile` checks whether declared dependencies are
+installed; it is not an installation or a guarantee that every entry can build.

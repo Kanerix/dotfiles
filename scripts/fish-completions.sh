@@ -20,12 +20,15 @@ gen() {
         printf '  FAILED  %s (flag may have changed upstream)\n' "$name"
     fi
 }
-# Some packages ship a completion file rather than a generator. fish only
-# scans the vendor dir inside its own store path, never the profile's, so
-# the file has to be copied in to be seen.
+# Some packages ship a completion file rather than a generator.
 vendor() {
     name="$1"
-    src="$HOME/.nix-profile/share/fish/vendor_completions.d/$name.fish"
+    if ! command -v brew >/dev/null 2>&1; then
+        printf '  skip    %s (Homebrew is not available)\n' "$name"
+        return
+    fi
+    prefix="$(brew --prefix)"
+    src="$prefix/share/fish/vendor_completions.d/$name.fish"
     if [ ! -f "$src" ]; then
         printf '  skip    %s (not installed here)\n' "$name"
         return
@@ -50,4 +53,4 @@ gen glow glow completion fish
 gen doggo doggo completions fish
 gen procs procs --gen-completion-out fish
 gen zellij zellij setup --generate-completion fish
-vendor devenv
+vendor bun

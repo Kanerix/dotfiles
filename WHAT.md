@@ -1,68 +1,85 @@
-- **1Password CLI (op)** — Password-vault access.
+Tool inventory for the macOS Homebrew `Brewfile`, including preserved Go/Cargo
+entries and GUI casks. Packages are not guaranteed to be installed; Homebrew
+tracks available current releases, and Rust toolchains are installed separately.
+
+- **1Password CLI (op)** — Password-vault access (`1password-cli` cask).
 - **age** — File encryption.
+- **ast-grep (ast-grep, sg)** — Syntax-aware code search, linting and rewriting.
 - **AWS CLI v2 (aws)** — Official AWS command-line interface.
-- **Azure CLI (az)** — Official Azure command-line interface.
+- **aztfexport** — Export existing Azure resources for Terraform management.
+- **Azure CLI (az)** — Official Azure command-line interface (`azure-cli` cask).
+- **Azure Functions Core Tools (func)** — Local Azure Functions development.
 - **bandwhich** — Per-process network usage.
 - **Bash** — POSIX-compatible shell.
 - **bat** — Syntax-highlighted file viewer.
 - **bottom (btm)** — System monitor.
-- **Bun (bun, bunx)** — JavaScript/TypeScript runtime, package manager and bundler.
-- **choose** — Field selection.
+- **Bun (bun, bunx)** — JavaScript/TypeScript runtime, package manager and bundler (`oven-sh/bun` tap).
+- **cargo-machete** — Find unused Cargo dependencies.
+- **cargo-watch** — Run Cargo commands when files change.
+- **choose** — Field selection (`choose-rust` formula).
 - **cloudflared** — Cloudflare Tunnel client.
-- **deadnix** — Unused Nix code detection.
-- **delta** — Highlighted Git diffs.
-- **devenv** — Project development environments.
+- **daix** — Preserved private Go package; installation may require authentication.
+- **DBeaver Community** — GUI database and SQL client (cask).
+- **ddrescue** — Data recovery.
+- **delta** — Highlighted Git diffs (`git-delta` formula).
+
 - **difftastic (difft)** — Syntax-aware diffs.
 - **direnv** — Directory-specific environments.
 - **dive** — Container image layer explorer.
 - **doggo** — DNS lookup.
-- **dua** — Disk usage summaries and interactive exploration/cleanup.
+- **dua** — Disk usage summaries and interactive exploration/cleanup (`dua-cli` formula).
 - **duf** — Filesystem usage.
 - **ExifTool (exiftool)** — Read and edit file metadata.
 - **eza** — File and directory listings.
 - **fd** — File search.
-- **FFmpeg (headless)** — Audio and video processing.
+- **feroxbuster** — Recursive web content discovery; use only on authorized targets.
+- **FFmpeg (ffmpeg, ffprobe)** — Audio/video processing and metadata inspection.
 - **Fish** — Interactive shell.
 - **Git** — Version control.
 - **git-cliff** — Changelog generation.
 - **GitHub CLI (gh)** — GitHub access.
 - **gitleaks** — Secret scanning.
-
 - **glow** — Markdown rendering.
 - **GnuPG (gpg, gpg-agent)** — OpenPGP encryption, key management and signing.
 - **Go (go, gofmt)** — Go compiler, formatter and tooling.
+- **golangci-lint-langserver** — Go lint integration for language-server clients.
 - **gping** — Ping graphs.
 - **Helm (helm)** — Kubernetes chart package manager.
+- **Hetzner Cloud CLI (hcloud)** — Manage Hetzner Cloud resources.
 - **hexyl** — Hex viewer.
 - **hyperfine** — Command benchmarking.
 - **jaq** — JSON filtering.
 - **jless** — Interactive JSON viewer.
 - **Jujutsu (jj)** — Git-compatible version control.
 - **just** — Project task runner.
+- **kind** — Local Kubernetes clusters using containers; requires a container runtime.
 - **Kubernetes CLI (kubectl)** — Kubernetes cluster management.
 - **lazydocker** — Terminal Docker interface.
-
-- **nil** — Nix language server.
-- **nix-direnv** — Cached Nix environments for direnv.
-- **nix-tree** — Nix dependency explorer.
-- **nixfmt** — Nix formatter.
+- **libpq** — PostgreSQL client library and tools.
+- **mirrord** — Connect a local process to a cloud environment.
+- **mkcert** — Locally trusted development certificates.
 - **Node.js (node, npm, npx)** — JavaScript runtime and package tooling.
+- **NSS** — Network Security Services libraries and tools.
 - **numbat** — Unit-aware calculator.
-- **nvd** — Nix generation comparison.
 - **ouch** — Archive compression and extraction.
+- **oxvg** — SVG optimization, minification and linting.
 - **pnpm (pnpm, pnpx)** — JavaScript package manager with a shared dependency store.
 - **procs** — Process listings.
 - **Python (python, python3)** — Python interpreter; use uv for project environments.
+- **Recursive Mono Nerd Font** — Terminal font (cask).
 - **ripgrep (rg)** — Text search.
 - **Ruff (ruff)** — Python linter and formatter.
 - **rustup (rustup, cargo, rustc)** — Rust toolchain manager and shims; toolchains are installed separately.
 - **sad** — Interactive search and replace.
 - **sd** — Text substitution.
-- **skim (sk)** — Fuzzy finder.
+- **Sherlock** — Find social-media accounts by username; respect privacy and authorization.
+- **skim (sk)** — Fuzzy finder (`sk` formula).
 - **SOPS** — Encrypted configuration editing.
+- **sqlx-cli** — SQLx database and migration tooling (Cargo entry).
 - **Starship** — Shell prompt.
-- **statix** — Nix linter.
+- **surrealkit** — Preserved Cargo package.
 - **tealdeer (tldr)** — Concise command reference.
+- **Terraform** — Infrastructure as code (`hashicorp/tap/terraform`).
 - **tokei** — Source code statistics.
 - **trash-cli** — Recoverable file deletion.
 - **uv** — Python package and environment manager.
@@ -73,6 +90,12 @@
 - **xcp** — File copying with progress.
 - **xh** — HTTP client.
 - **yt-dlp** — Video and audio downloader for supported sites.
-- **Zellij** — Terminal multiplexer.
+
+- **zerobrew (zb, zbx)** — Experimental alternative Homebrew package client (`zerobrewhq/tap`); use alongside Homebrew.
 - **Zig** — Zig compiler and C/C++ cross-compilation.
 - **zoxide** — Directory navigation.
+
+## Separately installed project-environment tools
+
+- **devenv** — Nix-backed development environments; installed through Nix, not Homebrew.
+- **Nix (nix)** — Reproducible package and environment manager; installed using its macOS installer, not Homebrew.

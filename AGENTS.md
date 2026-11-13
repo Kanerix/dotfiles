@@ -3,39 +3,47 @@
 ## Purpose and scope
 
 This repository maintains shared dotfiles and CLI tools for the owner's computers.
-It uses a Nix flake and symlinked configuration, not a NixOS or Home Manager setup.
-Keep changes small, portable, and consistent with the existing patterns.
+It uses a macOS Homebrew Brewfile and symlinked configuration.
+Keep changes small and consistent with the existing patterns; support both
+Apple Silicon and Intel macOS without hardcoding a Homebrew prefix.
 
 ## Repository map
 
-- `flake.nix`: CLI packages grouped by category and combined into one `buildEnv`.
-  Both `packages.<system>.cli-tools` and `default` refer to this bundle.
-- `flake.lock`: pinned `nixpkgs` revision shared across machines.
+- `Brewfile`: Homebrew formulas and casks grouped by category, plus preserved
+  Go and Cargo entries. Versions track available current releases, not a lockfile.
 - `config/`: files linked into `~/.config/`, preserving relative paths. Includes
-  Fish, Git, Nix, direnv, Alacritty, and Starship configuration.
+  Fish, Git, direnv, Alacritty, Vim, and Starship configuration.
 - `config/fish/completions/`: checked-in completion files, loaded lazily by Fish.
 - `skills/`: agent skill directories linked into `~/.agents/skills/`.
 - `justfile`: concise command interface for repository workflows and secret scanning.
 - `scripts/`: Bash implementations for linking, diagnostics, and completion generation;
   invoked by `just` with explicit path arguments.
-- `README.md`: setup, update, rollback, and integration documentation.
+- `README.md`: setup, migration, update, and integration documentation.
 - `WHAT.md`: alphabetically ordered tool inventory.
 
-## Nix packages
+## Homebrew packages
 
-- Preserve support for `aarch64-darwin`, `x86_64-darwin`, `aarch64-linux`, and
-  `x86_64-linux`. Avoid unguarded platform-specific packages or assumptions.
-- Add tools to the appropriate existing category in `flake.nix`. Categories are
+- Add tools to the appropriate existing category in `Brewfile`. Categories are
   alphabetical; package entries are grouped logically, not necessarily sorted.
 - Follow the inline-comment style: describe the purpose or replacement and the
   actual executable names when they differ from the package name.
-- Update `WHAT.md` when adding or removing a tool. Update `README.md` when setup,
-  behavior, or workflows change; do not duplicate the full inventory there.
-- Use the existing lockfile unless a dependency update is requested or required.
-  Do not run `nix flake update` merely to add a package.
-- Keep the unfree allowlist narrow; it currently permits only `1password-cli`.
-- Nix supplies tooling; pnpm and uv manage project dependencies outside the Nix
-  store. Rustup supplies shims and manages separately installed Rust toolchains.
+- Preserve existing dumped extra formulas, casks, Go and Cargo entries. Do not
+  replace the manifest with only the former shared CLI bundle.
+- Use Homebrew names: `awscli`, `git-delta`, `helm`, `node`, `python`, `rustup`,
+  `ffmpeg`, and `dua-cli`; `1password-cli` is a cask. Bun uses the `oven-sh/bun`
+  tap. Verify formula/cask names when changing entries.
+- Update `WHAT.md` and `skills/use-cli-tools/references/tools.md` when adding or
+  removing a tool. Update `README.md` when setup, behavior, or workflows change;
+  do not duplicate the full inventory there.
+- Homebrew tracks unpinned current releases; there is no Nix-style bundle rollback.
+  Respect project lockfiles separately and do not update host packages merely to
+  edit or validate the Brewfile.
+- Homebrew supplies tooling; pnpm and uv manage project dependencies separately.
+  Use `~/.local` for npm global installs (`npm config set prefix ~/.local` and
+  `mkdir -p ~/.local/lib/node_modules`); Fish already adds `~/.local/bin` to PATH.
+- Rustup is keg-only: use the `bin` directory under `brew --prefix rustup` for
+  shims. Rust toolchains are installed separately; Cargo entries need one. The
+  private Go package may require authentication; do not authenticate unasked.
 
 ## Configuration and shell conventions
 
@@ -56,8 +64,8 @@ Keep changes small, portable, and consistent with the existing patterns.
 - Alacritty intentionally has no shell override. For startup failures, first
   inspect the account shell and inherited `SHELL`; see `README.md` before changing
   shell configuration to work around a stale GUI launcher environment.
-- Keep machine-local/generated state ignored: `fish_variables`, `.direnv/`, Nix
-  `result` links, `.DS_Store`, and `*.backup-*`.
+- Keep machine-local/generated state ignored: `fish_variables`, `.direnv/`,
+  `.DS_Store`, and `*.backup-*`.
 
 ## Workflows and safety
 
@@ -68,11 +76,15 @@ Keep changes small, portable, and consistent with the existing patterns.
 - `just link` links config files and skill directories, backing up real entries;
   it can replace links that point elsewhere. `just unlink` removes only exact
   owned links. `just restore` restores the most recent backups.
-- Do not run link/unlink/restore, profile upgrades or rollbacks, login-shell
+- Do not run package installs/updates/uninstalls, link/unlink/restore, login-shell
   changes, authentication, or toolchain installation without user authorization.
-- The normal requested update sequence is `nix flake update`,
-  `nix profile upgrade cli-tools`, `just fish-completions`, then `just link`.
-  Review changed lockfile and completion files before committing.
+- Setup is `brew bundle --file Brewfile`, `just fish-completions`, then `just link`.
+  The normal requested update sequence adds `brew update` first. Review changed
+  Brewfile and completion files before committing.
+- Migration must install the Homebrew bundle first, then change the login shell
+  to Homebrew Fish and refresh the desktop session before removing Nix. Use the
+  original installer's uninstall instructions, not generic destructive scripts.
+  Repository migration does not uninstall anything on the host.
 - Never commit, stage files, or discard existing work unless explicitly asked.
 
 ## Validation
@@ -80,10 +92,9 @@ Keep changes small, portable, and consistent with the existing patterns.
 Use focused checks appropriate to the files changed, checking tool availability
 first. There is no application test suite; do not install tools just for checks.
 
-- Nix formatting: `nixfmt --check flake.nix`.
-- Package evaluation: `nix build --dry-run --no-write-lock-file .#cli-tools`.
-  This is a host-system dry run, not a full build or verification of all platforms.
-- Nix linting when relevant: `statix check .` and `deadnix --fail .`.
+- Brewfile dependency check: `brew bundle check --file Brewfile` when Homebrew is
+  available. Missing dependencies are not a reason to install tools unasked;
+  this checks installed dependencies, not buildability or version reproducibility.
 - Fish changes: `fish --no-execute <changed-file>` for syntax and
   `fish_indent --check <changed-file>` for formatting. Avoid sourcing live config
   merely to validate syntax.
@@ -94,6 +105,5 @@ first. There is no application test suite; do not install tools just for checks.
 - Whitespace: `git diff --check`.
 - Credential scanning when relevant: `just scan` (uses gitleaks with redaction).
 
-Report which checks actually ran and any failures or unavailable tools. A dry run
-is not an installation, and successful host evaluation is not cross-platform
-validation.
+Report which checks actually ran and any failures or unavailable tools.
+Dependency checks are not installations or validation of another machine.
