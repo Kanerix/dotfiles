@@ -91,6 +91,7 @@ tracks available current releases, and Rust toolchains are installed separately.
 - **xh** — HTTP client.
 - **yt-dlp** — Video and audio downloader for supported sites.
 
+- **Zed** — Code editor (`zed` cask).
 - **zerobrew (zb, zbx)** — Experimental alternative Homebrew package client (`zerobrewhq/tap`); use alongside Homebrew.
 - **Zig** — Zig compiler and C/C++ cross-compilation.
 - **zoxide** — Directory navigation.

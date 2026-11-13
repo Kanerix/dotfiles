@@ -18,6 +18,7 @@ brew "metalbear-co/mirrord/mirrord", trusted: true # connect local processes to 
 
 # Desktop apps
 cask "dbeaver-community" # database browser and SQL client (DBeaver)
+cask "zed" # code editor (Zed)
 
 # Development workflow
 # Nix (nix) and devenv are installed separately, not available as Homebrew packages.
