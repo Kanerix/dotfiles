@@ -77,11 +77,13 @@ wraps `ls` and `tree` with eza and `cd` with zoxide; `grep` and `rm` stay unchan
 ## Repository workflows
 
 `just --list` lists the available commands. The `justfile` is a concise interface;
-Bash implementations live in `scripts/`. Keep using `just link`, `just status`,
+Fish implementations live in `scripts/`. Keep using `just link`, `just status`,
 `just doctor`, `just unlink`, `just restore`, and `just fish-completions` as before.
 The `config_dir`, `target_dir`, `skills_dir`, and `skills_target_dir` overrides
 remain available via `just --set` for isolated tests or alternate destinations.
-Scripts are invoked with `bash` and do not require executable permissions.
+Scripts are invoked with `fish --no-config` and do not require executable
+permissions. Install Fish through the Brewfile first and ensure it is on PATH;
+script execution does not load your personal Fish configuration.
 
 ## Update
 

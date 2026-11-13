@@ -16,7 +16,7 @@ Apple Silicon and Intel macOS without hardcoding a Homebrew prefix.
 - `config/fish/completions/`: checked-in completion files, loaded lazily by Fish.
 - `skills/`: agent skill directories linked into `~/.agents/skills/`.
 - `justfile`: concise command interface for repository workflows and secret scanning.
-- `scripts/`: Bash implementations for linking, diagnostics, and completion generation;
+- `scripts/`: Fish implementations for linking, diagnostics, and completion generation;
   invoked by `just` with explicit path arguments.
 - `README.md`: setup, migration, update, and integration documentation.
 - `WHAT.md`: alphabetically ordered tool inventory.
@@ -98,8 +98,9 @@ first. There is no application test suite; do not install tools just for checks.
 - Fish changes: `fish --no-execute <changed-file>` for syntax and
   `fish_indent --check <changed-file>` for formatting. Avoid sourcing live config
   merely to validate syntax.
-- Bash scripts: `bash -n scripts/<changed-script>.sh` for syntax; use ShellCheck
-  when available. Scripts are invoked with `bash`, so executable bits are optional.
+- Workflow scripts: use the Fish syntax and formatting checks above. Recipes
+  invoke `fish --no-config`, so executable bits are optional and personal Fish
+  configuration is not loaded. Preserve explicit command/pipeline failure checks.
 - Justfile changes: `just --list` for parsing; test filesystem-mutating recipes
   only with isolated paths via the existing `just --set` overrides.
 - Whitespace: `git diff --check`.
