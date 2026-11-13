@@ -1,7 +1,7 @@
 # dotfiles
 
 Shared dotfiles and a macOS Homebrew `Brewfile` for the tools I want on each
-machine. The Brewfile includes formulas, casks, and Go/Cargo tools; Homebrew
+machine. The Brewfile includes formulas, casks, and Cargo tools; Homebrew
 tracks current releases rather than a pinned bundle. See [WHAT.md](WHAT.md) for
 the complete tool list.
 
@@ -16,17 +16,15 @@ setup instructions so `brew` is on PATH. From the repository directory, run:
 
 The Cargo entries require a separately installed Rust toolchain; see
 [Language toolchains](#language-toolchains) before the first bundle install if
-Rust is not initialized. The existing Go entries are preserved; the private Go
-package may require repository authentication before installation can succeed.
-The bundle can install GUI apps and fonts as well as CLI tools.
+Rust is not initialized. The bundle installs GUI apps and fonts as well as CLI
+tools.
 
 ## Nix-backed project environments
 
-Homebrew supplies shared CLI tools; projects can still use Nix and devenv for
-reproducible development environments. Neither currently has an official
-Homebrew formula or cask, so the Brewfile records them as comments rather than
-invalid install entries. Keep an existing Nix installation when projects use
-`use devenv`, `use nix`, or `use flake` in `.envrc`.
+Homebrew supplies shared CLI tools. Projects that use `use devenv`, `use nix`,
+or `use flake` in `.envrc` also require Nix. Devenv defines project packages and
+services in `devenv.nix`. Nix and devenv are separate prerequisites and are not
+installed by this repository's Brewfile.
 
 For a new machine, follow the Nix installer instructions in the
 [devenv setup guide](https://devenv.sh/getting-started/), then install devenv:
@@ -37,53 +35,8 @@ The profile command requires Nix's `nix-command` and `flakes` experimental
 features. Do not run a second installer over an existing Nix installation.
 Devenv supplies project packages from `devenv.nix`; they do not all need to be
 installed globally through Homebrew. Review `.envrc` before approving it with
-`direnv allow`. Keep Homebrew Fish as the login shell even when retaining Nix.
-
-## Migrate an existing Nix installation
-
-Only uninstall Nix after migrating any projects that still depend on it.
-
-1. Install Homebrew and run `brew bundle --file Brewfile` **before removing Nix**.
-   Initialize Rust and any required private Go authentication first. Verify that
-   the Homebrew tools work, then run `just fish-completions` and `just link`.
-2. Change the account login shell to Homebrew's Fish before uninstalling Nix.
-   Use the path under `brew --prefix` (normally `/opt/homebrew/bin/fish` on Apple
-   Silicon or `/usr/local/bin/fish` on Intel), register it in `/etc/shells` if
-   required, and select it with `chsh`. Do not keep a Nix profile/store shell path.
-3. Log out of the desktop session and back in. Check both the account shell and
-   inherited `SHELL`, including GUI launchers; see the Alacritty cautions below.
-4. Only after the replacement is working, follow the uninstall instructions from
-   the **original Nix installer** used on this host. Installer-specific cleanup
-   differs; this repository supplies no destructive uninstall script.
-
-`just link` does not remove old owned links whose repository sources have been
-removed. During migration, inspect these entries and their symlink targets:
-
-- `~/.config/nix/nix.conf`
-- `~/.config/direnv/direnvrc`
-- `~/.config/fish/completions/devenv.fish`
-
-Remove an entry only after verifying that it is an obsolete symlink pointing to
-its removed source in this repository. Leave real user files and links to other
-sources untouched; do not delete the containing directories. This is manual,
-host-local cleanup, not something the linking workflow performs automatically.
-
-Changing these repository files does not uninstall Nix, remove host packages,
-or perform that symlink cleanup.
-
-The tools install alongside the host commands. The linked Fish configuration
-wraps `ls` and `tree` with eza and `cd` with zoxide; `grep` and `rm` stay unchanged.
-
-## Repository workflows
-
-`just --list` lists the available commands. The `justfile` is a concise interface;
-Fish implementations live in `scripts/`. Keep using `just link`, `just status`,
-`just doctor`, `just unlink`, `just restore`, and `just fish-completions` as before.
-The `config_dir`, `target_dir`, `skills_dir`, and `skills_target_dir` overrides
-remain available via `just --set` for isolated tests or alternate destinations.
-Scripts are invoked with `fish --no-config` and do not require executable
-permissions. Install Fish through the Brewfile first and ensure it is on PATH;
-script execution does not load your personal Fish configuration.
+`direnv allow`. Use Homebrew Fish as the login shell; Nix can supply project
+tools independently.
 
 ## Update
 
@@ -98,8 +51,8 @@ generating them at every shell startup.
 
 Review changes to the Brewfile and regenerated completions before committing.
 Homebrew installs/upgrades to available current versions: there is no shared
-version lock and no Nix-style atomic bundle rollback. Reverting the Brewfile does
-not restore previously installed package versions. `just restore` restores
+version lock or atomic bundle rollback. Reverting the Brewfile does not restore
+previously installed package versions. `just restore` restores
 configuration backups, not package versions.
 
 ## zerobrew
@@ -140,9 +93,9 @@ does not refresh an existing launcher's environment. If the problem persists
 after a fresh login, check the launcher's inherited `SHELL` and any host-local
 environment overrides before changing the shared config.
 
-Do not replace this with `program = "fish"` unless the launcher's `PATH` can
-find Fish. Alacritty 0.15.1 passes an explicit shell program directly to process
-creation: `~` and `$HOME` are **not expanded** there, unlike `~/` in config
+If configuring an explicit Alacritty shell, use `program = "fish"` only when the
+launcher's `PATH` can find Fish. Alacritty 0.15.1 passes an explicit shell program
+directly to process creation: `~` and `$HOME` are **not expanded** there, unlike `~/` in config
 imports. Fish's startup PATH setup runs only after Fish has been located and
 started. See the versioned [shell selection and process creation source](https://github.com/alacritty/alacritty/blob/v0.15.1/alacritty_terminal/src/tty/unix.rs).
 
@@ -153,15 +106,37 @@ Integrations are guarded so missing tools are skipped:
 
 - Interactive sessions initialize Starship, zoxide (`cd`), direnv and skim key
   bindings.
-- Project environments use plain direnv and still need explicit approval with
+- Direnv loads project environments after explicit approval with
   `direnv allow`; review each project's environment configuration first.
-- `ls` and `tree` use eza; `del` uses recoverable trash without replacing `rm`.
+- `ls` and `tree` use eza; `del` uses recoverable trash. `grep` and `rm` are
+  unchanged.
 - Homebrew and existing user binary directories, including `~/.local/bin`, are
   added to PATH. Homebrew's keg-only rustup uses the `bin` directory under
   `brew --prefix rustup`. The first available editor is selected from `nvim`,
   `vim` and `hx`; bat becomes the man-page pager when `col` is also available.
 - If separately installed, fnm initializes Node environments and fzf supplies
   fuzzy-finder bindings when skim is absent.
+
+### Load dotenv files
+
+The autoloaded `load-env` function exports assignments from a file into the
+current Fish session and its child processes:
+
+    load-env           # load .env from the current directory
+    load-env .env.test
+    load-env .env.prod
+
+It accepts one optional file path. Existing variables with matching names are
+overwritten; variables absent from the file are left unchanged. It supports
+`NAME=value`, optional `export`, empty values, single- or double-quoted values,
+and comments. Inline comments must follow whitespace outside quotes. Values are
+literal: variable expansion, command execution, escape decoding, and multiline
+values are not supported. Invalid assignments report a file and line number
+without printing values, and parsing completes before any variables are set.
+Only load files you trust: variables such as `PATH` can affect later commands.
+
+The function lives in `config/fish/functions/load-env.fish`. Run `just link` to
+link this new file into `~/.config/fish/functions/`; Fish then loads it on demand.
 
 Completions live in `config/fish/completions/`; refresh them with
 `just fish-completions` after tool upgrades, followed by `just link` for new
@@ -217,8 +192,121 @@ automatically; no shell initialization is needed. It sets `core.pager=delta`,
 highlighted diffs and navigation. Settings in `~/.gitconfig` override these
 shared defaults.
 
+The shared configuration rewrites `https://github.com/` URLs to `git@github.com:`.
+For example, `git clone https://github.com/OWNER/REPOSITORY.git` connects over SSH.
+This applies to matching clone, fetch, push, and submodule URLs, including existing
+remotes; stored URLs are not changed. Other hosts are unaffected. GitHub SSH
+access must be configured even when cloning public repositories.
+
 Keep credentials and machine-specific signing paths out of the shared config.
 Store authentication and host-specific overrides locally.
+
+### GitHub authentication with 1Password SSH (recommended)
+
+Use SSH remotes with the 1Password SSH agent to keep private keys in your vault
+and approve Git access through 1Password instead of the macOS Keychain Git
+credential helper. This requires the 1Password desktop app; the Brewfile's
+`1password-cli` cask installs only the CLI.
+
+1.  **Enable the SSH agent.** In the 1Password desktop app, open **Settings >
+    Developer** and enable **Use the SSH agent**. Follow the app's configuration
+    instructions, adding its `IdentityAgent` setting to your local `~/.ssh/config`.
+    Use the socket path shown by the app and preserve existing SSH configuration.
+    See [1Password's SSH agent setup guide](https://developer.1password.com/docs/ssh/get-started/).
+2.  **Add an SSH key to 1Password.** Choose **New Item > SSH Key** and generate an
+    Ed25519 key, or import an existing key. Copy the **public key**, never the
+    private key.
+3.  **Register the public key with GitHub.** Open **Settings > SSH and GPG keys >
+    New SSH key**, select **Authentication Key**, paste the public key, and save.
+    Confirm it appears in GitHub's list of authentication keys.
+4.  **Check the repository remote.** With the shared Git configuration linked,
+    GitHub HTTPS remotes automatically use SSH. Run `git remote -v` to inspect the
+    effective URLs. To store an explicit SSH URL instead, replace `OWNER` and
+    `REPOSITORY` with the GitHub account or organization and repository name:
+
+        git remote -v
+        git remote set-url origin git@github.com:OWNER/REPOSITORY.git
+        git remote -v
+
+    Confirm both fetch and push URLs use SSH. No per-repository URL change is
+    needed for GitHub HTTPS URLs covered by the shared rewrite.
+
+5.  **Verify authentication.** Run:
+
+        ssh -T git@github.com
+        git fetch origin
+
+    On the first connection, verify GitHub's host-key fingerprint against
+    [GitHub's published fingerprints](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints)
+    before accepting it. A successful SSH test identifies your GitHub username
+    and says GitHub does not provide shell access; this test normally exits with
+    status 1 despite successful authentication. `git fetch origin` should succeed.
+
+1Password may request approval through Touch ID, Apple Watch, or another unlock
+method, depending on your hardware and settings. An already authorized session
+may not prompt again for every Git command.
+
+The `osxkeychain` credential helper applies to HTTPS, not SSH. There is no need
+to disable it or delete cached HTTPS credentials when switching a remote to SSH;
+other HTTPS remotes may still need them. This setup changes authentication for
+fetch and push, not commit signing. SSH commit signing is configured separately.
+
+### Commit signing with 1Password SSH
+
+The shared Git configuration enables SSH commit signing with the owner's public
+SSH key. The matching private key must be available in the 1Password desktop app.
+Machines using a different key must override `user.signingkey` locally with the
+public key from their 1Password SSH Key item.
+
+Configure the signing executable locally. For the standard macOS app location:
+
+    git config --global gpg.ssh.program /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+
+Use the actual app location if it differs. `commit.gpgsign=true` enables signing
+for SSH as well as GPG. The SSH agent handles remote authentication; `op-ssh-sign`
+handles commit signing and requests approval through 1Password when needed.
+
+Register the public key in GitHub under **Settings > SSH and GPG keys > New SSH
+key**, choosing **Signing Key**. An authentication key must also be registered
+as a signing key to verify commits. Use a verified GitHub email for commits.
+
+For local verification, add a line to `~/.ssh/allowed_signers` containing your
+commit email, `namespaces=\"git\"`, and the public key, separated by spaces. Add
+entries for each email you use with that key. Preserve existing trusted entries,
+and configure the file locally:
+
+    git config --global gpg.ssh.allowedSignersFile ~/.ssh/allowed_signers
+    git log -1 --show-signature
+
+Public keys are safe to store in configuration; private keys and authentication
+stay in 1Password. Existing GPG-signed commits remain valid and still require GPG
+for local verification. The following GPG setup is optional for GPG operations,
+not required for SSH commit signing.
+
+### GPG signing with a macOS passphrase dialog
+
+The Brewfile includes `pinentry-mac` so GPG can request a passphrase through a
+native dialog instead of a terminal prompt. This is useful for signed commits
+started by editors or coding agents. It does not change your signing key or
+configure 1Password SSH authentication.
+
+After installing the bundle, configure the GPG agent locally. In Fish:
+
+    set -l pinentry_path (brew --prefix pinentry-mac)/bin/pinentry-mac
+    printf 'pinentry-program %s\n' "$pinentry_path"
+
+Add the printed line to `gpg-agent.conf` in your GPG home directory (normally
+`~/.gnupg/`; `gpgconf --list-dirs homedir` reports the active location). Replace
+any existing `pinentry-program` setting rather than adding duplicates, and
+preserve other options. Keep this machine-specific file outside the repository.
+Reload the agent configuration:
+
+    gpgconf --reload gpg-agent
+
+The next signing operation that needs a passphrase should open a macOS dialog.
+Enter the passphrase there, never in chat. GPG's passphrase cache can expire, so
+later prompts are normal; GUI pinentry removes the need to unlock the key
+manually in a terminal for editor-initiated commits.
 
 ## AI agent skills
 
@@ -240,7 +328,7 @@ install locations, override `skills_dir` and `skills_target_dir` with `just --se
 ## Language toolchains
 
 The Brewfile includes Bun (via the `oven-sh/bun` tap), Node.js (with npm/npx),
-pnpm, Go, Python, Rust via rustup, and Zig. Bun handles JavaScript/TypeScript
+pnpm, Go, Python, Ruby, Rust via rustup, and Zig. Bun handles JavaScript/TypeScript
 execution and bundling; Node remains available for tools that specifically
 require it. Use pnpm for projects that use `pnpm-lock.yaml` and `uv` for isolated
 Python project environments. Homebrew supplies unpinned current tooling; pnpm
@@ -254,6 +342,15 @@ Keep npm global installs in a writable user prefix rather than Homebrew's tree:
 Fish already adds `~/.local/bin` to PATH. Preserve project package managers and
 lockfiles rather than switching them to match the host tools.
 
+Homebrew's `ruby` formula tracks its current stable Ruby release. The linked Fish
+configuration adds the keg-only `bin` directory under `brew --prefix ruby` to
+PATH, making it the default Ruby for new Fish sessions without replacing macOS's
+system Ruby. Homebrew uses its own Ruby runtime independently. Follow each
+project's Ruby version requirements and preserve `Gemfile.lock`; globally
+upgrading Ruby does not guarantee compatibility with every project. Executables
+installed by `gem` may need an additional PATH entry; use the directory reported
+by `brew info ruby` for the installed version rather than hardcoding a version.
+
 Homebrew's `rustup` is keg-only. Add its shims to PATH using the `bin` directory
 under `brew --prefix rustup` (the linked Fish configuration handles this), not a
 hardcoded Homebrew prefix. Rustup supplies `cargo` and `rustc` shims, not an
@@ -264,8 +361,8 @@ before installing the Brewfile's Cargo entries:
     rustup component add rustfmt clippy rust-analyzer
 
 Rust toolchain downloads are managed separately by rustup, outside Homebrew.
-Follow each project's `rust-toolchain.toml` when present. The existing Cargo
-entries in the Brewfile are kept; they need a working compiler toolchain.
+Follow each project's `rust-toolchain.toml` when present. The Brewfile's Cargo
+packages require a working compiler toolchain.
 Use project-specific version/environment managers when different language
 versions or native build dependencies are required.
 
@@ -294,15 +391,18 @@ launcher environment described above.
 
 ## Adding a tool
 
-Add it to the appropriate category in `Brewfile` and to [WHAT.md](WHAT.md), then
-install and refresh completions and links as above. Keep categories alphabetical,
-packages logically grouped, and inline comments describing purpose and executable
-names when they differ. Preserve existing dumped formulas, casks, Go and Cargo
-entries rather than replacing them with only the shared CLI list.
+Add it to the appropriate category in `Brewfile` and to [WHAT.md](WHAT.md). For
+CLI tools, also update [the agent tool reference](skills/use-cli-tools/references/tools.md).
+Keep categories alphabetical, packages logically grouped, and inline comments
+describing purpose and executable names when they differ. Verify the Homebrew
+formula or cask name; for example, `gnupg` supplies `gpg`, `git-delta` supplies
+`delta`, and `dua-cli` supplies `dua`.
 
-Homebrew names can differ from Nix names: `awscli` supplies `aws`, `git-delta`
-supplies `delta`, `helm` supplies `helm`, `node` supplies Node.js, `python` supplies
-Python, and `dua-cli` supplies `dua`. Use `ffmpeg` rather than the former headless
-package, `1password-cli` as a cask, and Bun from the `oven-sh/bun` tap.
+Install the tool and refresh completions and links:
+
+    brew bundle --file Brewfile
+    just fish-completions
+    just link
+
 `brew bundle check --file Brewfile` checks whether declared dependencies are
-installed; it is not an installation or a guarantee that every entry can build.
+installed; it does not install anything or guarantee that every entry can build.

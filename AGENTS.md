@@ -1,110 +1,135 @@
-# Repository guidance
+# lerpz.com - Agent Specification
 
-## Purpose and scope
+This is a general-purpose mono repository for the Lerpz organisation.
 
-This repository maintains shared dotfiles and CLI tools for the owner's computers.
-It uses a macOS Homebrew Brewfile and symlinked configuration.
-Keep changes small and consistent with the existing patterns; support both
-Apple Silicon and Intel macOS without hardcoding a Homebrew prefix.
+## Personas
 
-## Repository map
+ALWAYS READ YOUR PERSONA IF YOU HAVEN'T YET.
 
-- `Brewfile`: Homebrew formulas and casks grouped by category, plus preserved
-  Go and Cargo entries. Versions track available current releases, not a lockfile.
-- `config/`: files linked into `~/.config/`, preserving relative paths. Includes
-  Fish, Git, direnv, Alacritty, Vim, and Starship configuration.
-- `config/fish/completions/`: checked-in completion files, loaded lazily by Fish.
-- `skills/`: agent skill directories linked into `~/.agents/skills/`.
-- `justfile`: concise command interface for repository workflows and secret scanning.
-- `scripts/`: Fish implementations for linking, diagnostics, and completion generation;
-  invoked by `just` with explicit path arguments.
-- `README.md`: setup, migration, update, and integration documentation.
-- `WHAT.md`: alphabetically ordered tool inventory.
+Unless told otherwise, work as the developer persona in
+`.agents/personas/developer.md`. A persona covers how to work, this file covers
+the conventions and the tooling it works with.
 
-## Homebrew packages
+## General rules
 
-- Add tools to the appropriate existing category in `Brewfile`. Categories are
-  alphabetical; package entries are grouped logically, not necessarily sorted.
-- Follow the inline-comment style: describe the purpose or replacement and the
-  actual executable names when they differ from the package name.
-- Preserve existing dumped extra formulas, casks, Go and Cargo entries. Do not
-  replace the manifest with only the former shared CLI bundle.
-- Use Homebrew names: `awscli`, `git-delta`, `helm`, `node`, `python`, `rustup`,
-  `ffmpeg`, and `dua-cli`; `1password-cli` is a cask. Bun uses the `oven-sh/bun`
-  tap. Verify formula/cask names when changing entries.
-- Update `WHAT.md` and `skills/use-cli-tools/references/tools.md` when adding or
-  removing a tool. Update `README.md` when setup, behavior, or workflows change;
-  do not duplicate the full inventory there.
-- Homebrew tracks unpinned current releases; there is no Nix-style bundle rollback.
-  Respect project lockfiles separately and do not update host packages merely to
-  edit or validate the Brewfile.
-- Homebrew supplies tooling; pnpm and uv manage project dependencies separately.
-  Use `~/.local` for npm global installs (`npm config set prefix ~/.local` and
-  `mkdir -p ~/.local/lib/node_modules`); Fish already adds `~/.local/bin` to PATH.
-- Rustup is keg-only: use the `bin` directory under `brew --prefix rustup` for
-  shims. Rust toolchains are installed separately; Cargo entries need one. The
-  private Go package may require authentication; do not authenticate unasked.
+Keep things simple. Solve the problem that was asked for, in the smallest way
+that fits the code around it.
 
-## Configuration and shell conventions
+- Do not build for requirements that do not exist yet. No extra abstraction
+  layers, configuration options or generic helpers added on the assumption that
+  something will need them later.
+- Prefer the boring solution. A plain function beats a trait, a macro or a
+  generic parameter unless there is a concrete reason for the latter.
+- Change as little as possible. Do not rename, reformat or restructure code that
+  is unrelated to the task.
+- Reuse what is already in the repository before reaching for a new dependency,
+  pattern or file.
+- If something cannot be done simply, say so and explain the trade-off rather
+  than hiding the complexity in clever code.
+- Leave working code behind, not scaffolding. Finish one thing properly instead
+  of half-doing several.
 
-- Edit repository sources rather than copies or links under the user's home.
-  Existing links mean source edits may immediately affect the live configuration.
-- Guard optional Fish integrations with command/file availability checks. Keep
-  prompt and interactive bindings inside `if status is-interactive`; environment
-  setup needed by noninteractive commands belongs outside that block.
-- Keep PATH changes idempotent. Use the existing `fish_add_path --global --path`
-  pattern instead of persisting shared settings in universal variables.
-- Do not generate completions at shell startup. When applicable, extend
-  `just fish-completions` using its existing generator or vendor-file helpers.
-  Regenerate only when needed and review the output for unrelated changes.
-- Preserve host `grep` and `rm`; the current wrappers use eza for `ls`/`tree`,
-  zoxide for `cd`, and a separate `del` command for recoverable deletion.
-- Do not introduce user-specific absolute paths, credentials, or signing keys.
-  Fonts, themes, authentication, and account login-shell selection are host setup.
-- Alacritty intentionally has no shell override. For startup failures, first
-  inspect the account shell and inherited `SHELL`; see `README.md` before changing
-  shell configuration to work around a stale GUI launcher environment.
-- Keep machine-local/generated state ignored: `fish_variables`, `.direnv/`,
-  `.DS_Store`, and `*.backup-*`.
+## Writing
 
-## Workflows and safety
+This applies to commit messages, documentation, comments, pull request
+descriptions and anything else written for a human to read.
 
-- Read the relevant recipes and their `scripts/` implementations before running
-  them. `just --list` lists workflows. Preserve the `just --set` path overrides.
-- `just status` and `just doctor` are read-only, advisory checks. Doctor warnings
-  do not fail the recipe and cannot rule out stale GUI launcher environments.
-- `just link` links config files and skill directories, backing up real entries;
-  it can replace links that point elsewhere. `just unlink` removes only exact
-  owned links. `just restore` restores the most recent backups.
-- Do not run package installs/updates/uninstalls, link/unlink/restore, login-shell
-  changes, authentication, or toolchain installation without user authorization.
-- Setup is `brew bundle --file Brewfile`, `just fish-completions`, then `just link`.
-  The normal requested update sequence adds `brew update` first. Review changed
-  Brewfile and completion files before committing.
-- Migration must install the Homebrew bundle first, then change the login shell
-  to Homebrew Fish and refresh the desktop session before removing Nix. Use the
-  original installer's uninstall instructions, not generic destructive scripts.
-  Repository migration does not uninstall anything on the host.
-- Never commit, stage files, or discard existing work unless explicitly asked.
+- Do not use em dashes or en dashes. Use a comma, a full stop, or rewrite the
+  sentence.
+- Write short, direct sentences in plain language, and say each thing once.
+- Cut filler words such as "simply", "just", "seamlessly", "robust", "powerful"
+  and "leverage".
+- Drop the summary that repeats what was already said, and the closing sentence
+  that adds nothing.
+- Avoid the patterns that read as machine written, such as "it is not just X, it
+  is Y", lists of three adjectives, and headings or bold text sprinkled through
+  a few short paragraphs.
+- Use British spelling.
 
-## Validation
+## Git conventions
 
-Use focused checks appropriate to the files changed, checking tool availability
-first. There is no application test suite; do not install tools just for checks.
+Commit messages follow the [Conventional Commits](https://www.conventionalcommits.org)
+specification and should be written in the imperative mood, as recommended by Git.
 
-- Brewfile dependency check: `brew bundle check --file Brewfile` when Homebrew is
-  available. Missing dependencies are not a reason to install tools unasked;
-  this checks installed dependencies, not buildability or version reproducibility.
-- Fish changes: `fish --no-execute <changed-file>` for syntax and
-  `fish_indent --check <changed-file>` for formatting. Avoid sourcing live config
-  merely to validate syntax.
-- Workflow scripts: use the Fish syntax and formatting checks above. Recipes
-  invoke `fish --no-config`, so executable bits are optional and personal Fish
-  configuration is not loaded. Preserve explicit command/pipeline failure checks.
-- Justfile changes: `just --list` for parsing; test filesystem-mutating recipes
-  only with isolated paths via the existing `just --set` overrides.
-- Whitespace: `git diff --check`.
-- Credential scanning when relevant: `just scan` (uses gitleaks with redaction).
+Never commit on your own. Finish the work, report what changed, and let the user
+decide when it gets committed. The same goes for staging, amending, and pushing.
 
-Report which checks actually ran and any failures or unavailable tools.
-Dependency checks are not installations or validation of another machine.
+Drafting the message is a different matter, and it is welcome and encouraged.
+When you finish a change, offer a commit message the user can take or edit. A
+good draft saves them the work of reconstructing what you did.
+
+Keep commit messages short and plain. No emoji. Write a subject line and stop
+there. A body is the exception, not the default. Add one only when the change is
+unusable without a reason the subject cannot hold, and keep it to a sentence or
+two. If one message needs a paragraph to cover everything, the commit is
+probably two commits.
+
+## Comments
+
+Prefer self-explanatory code over comments. Before writing a comment, try to make
+it unnecessary. Use descriptive names for variables, functions, parameters and
+types, extract a named function or constant, or restructure the code so the
+intent is obvious.
+
+Write a comment only when it explains something the code cannot, such as:
+
+- Why a non-obvious approach was chosen, or why the obvious one does not work.
+- Constraints, trade-offs, invariants and assumptions that are not visible locally.
+- References to external context, such as a specification, ticket or upstream bug.
+- Warnings about surprising behaviour or subtle edge cases.
+
+Do not write comments that:
+
+- Restate what the code already says.
+- Narrate a change or its history. That belongs in the commit message.
+- Assume the machine the code runs on, such as installed CLI tools, absolute
+  paths or a particular operating system.
+
+Documentation comments on public APIs are encouraged and are not covered by the
+rules above, but they should explain purpose, behaviour and caveats rather than
+repeat the signature. Follow the language's documentation conventions and keep
+existing comments up to date when the surrounding code changes.
+
+## Structure
+
+Use the language's own structure to separate code, not comments. A file that
+needs a banner to explain where one part ends and the next begins is a file that
+wants to be split up.
+
+Do not mark sections of a file with a comment, for example:
+
+```
+// ---------------------- Stuff here ----------------------
+```
+
+Split the code into smaller functions, modules or files instead, and let the
+names carry the meaning the banner was trying to give.
+
+## Command line tools
+
+The environment provides faster replacements for the standard tools. Use them.
+They respect `.gitignore`, so they skip `target/`, `node_modules/` and
+`.svelte-kit/` without being told. The classic tools crawl those directories and
+will waste time.
+
+| Instead of   | Use        | Notes                                                            |
+| ------------ | ---------- | ---------------------------------------------------------------- |
+| `grep -r`    | `rg`       | Filter by language with `rg -t rust`, `rg -t ts`, `rg -t svelte` |
+| `find -name` | `fd`       | `fd -e rs`, `fd handler svc/api`                                 |
+| `sed -i`     | `sd`       | Literal by default, so no regex escaping for a plain rename      |
+| `jq`         | `jaq`      | For the OpenAPI spec and the `.sqlx` cache entries               |
+| `rg -U`      | `ast-grep` | Match by syntax tree. Rust and TS, no Svelte grammar             |
+
+Search with `rg` before you search with anything else. Pair it with `sd` for a
+mechanical rename, such as `rg -l OldName | xargs sd OldName NewName`, and read
+the diff afterwards. Do not use a bulk replace for anything that needs judgement.
+
+Reach for `ast-grep` when the shape matters more than the text, such as every
+handler signature or every `.unwrap()` call:
+
+```sh
+ast-grep --lang rust --pattern 'pub async fn handler($$$A) -> $R { $$$B }' svc/
+```
+
+The pattern has to parse on its own, so match a whole item rather than a fragment
+such as a single argument.
