@@ -1,7 +1,14 @@
 ---
 name: create-pull-request
-description: Create GitHub pull requests using the gh CLI. Use this skill whenever the user asks to create, open, submit, or raise a PR or pull request for their changes, including draft PRs and requests to write a PR title and description. Do not use it for reviewing, merging, or closing existing PRs, or for creating issues.
-compatibility: Requires Git, the GitHub CLI (gh), an authenticated GitHub account, and access to the target repository.
+description: >-
+    Create GitHub pull requests using the gh CLI. Use this skill whenever the
+    user asks to create, open, submit, or raise a PR or pull request for their
+    changes, including draft PRs and requests to write a PR title and description.
+    Do not use it for reviewing, merging, or closing existing PRs, or for creating
+    issues.
+compatibility: >-
+    Requires Git, the GitHub CLI (gh), an authenticated GitHub account, and access
+    to the target repository.
 ---
 
 # Create a pull request
