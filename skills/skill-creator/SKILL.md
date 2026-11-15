@@ -1,11 +1,11 @@
 ---
 name: skill-creator
 description: >-
-  Create new skills, modify and improve existing skills, and measure skill
-  performance. Use when users want to create a skill from scratch, edit or
-  optimise an existing skill, run evals to test a skill, benchmark skill
-  performance with variance analysis, or optimise a skill's description for
-  better triggering accuracy.
+    Create new skills, modify and improve existing skills, and measure skill
+    performance. Use when users want to create a skill from scratch, edit or
+    optimise an existing skill, run evals to test a skill, benchmark skill
+    performance with variance analysis, or optimise a skill's description for
+    better triggering accuracy.
 ---
 
 # Skill Creator
@@ -321,8 +321,7 @@ Once all runs finish:
     VIEWER_PID=$!
     ```
 
-    From iteration
- 2 onwards, also pass
+    From iteration 2 onwards, also pass
     `--previous-workspace <workspace>/iteration-<N-1>`.
 
     In Cowork or headless environments, use `--static <output_path>` to write a
@@ -602,8 +601,7 @@ When updating an existing skill:
 - "Submit All Reviews" downloads `feedback.json` rather than saving it through
   a server. Read the downloaded file, requesting access if needed.
 - Use `package_skill.py` when Python and a filesystem are available.
-- Description optimisation with `run_loop.py` and `run_eval.py` uses `claude
-  -p`
+- Description optimisation with `run_loop.py` and `run_eval.py` uses `claude -p`
   through a subprocess rather than a browser. Run it only after finishing the
   skill and getting the user's approval.
 - For existing skills, follow the update guidance in the Claude.ai section.
