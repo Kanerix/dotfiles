@@ -134,6 +134,7 @@ brew 'jaq' # JSON filtering, replaces jq (jaq)
 brew 'jless' # interactive JSON browser (jless)
 brew 'xan' # CSV processing and browsing (xan)
 brew 'glow' # Markdown rendering (glow)
+brew 'typst' # document typesetting (typst)
 brew 'difftastic' # syntax-aware diffs (difft)
 brew 'hexyl' # binary viewer (hexyl)
 
